@@ -14,9 +14,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
 Auth::routes();
+Route::get('logout', function(){
+    Auth::logout();
+    return redirect('login');
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'user'], function () {
+    Route::get('register', function() { return view('auth.register'); });
+    Route::post('create', 'UserController@create');
+    Route::post('update/{id}', 'UserController@update');
+    Route::post('delete/{id}', 'UserController@delete');
+    Route::get('listrole', 'UserController@listrole');
+    Route::get('listpangkat', 'UserController@listpangkat');
+
+});
