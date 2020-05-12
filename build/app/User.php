@@ -29,7 +29,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public $incrementing = false;
+    protected $keyType = 'string';
+
+    public $timestamps = false;
 
     private $have_role;
 

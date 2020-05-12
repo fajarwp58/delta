@@ -26,11 +26,7 @@ Route::get('logout', function(){
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'user'], function () {
-    Route::get('register', function() { return view('auth.register'); });
+    Route::get('register', 'UserController@register');
     Route::post('create', 'UserController@create');
-    Route::post('update/{id}', 'UserController@update');
-    Route::post('delete/{id}', 'UserController@delete');
     Route::get('listrole', 'UserController@listrole');
-    Route::get('listpangkat', 'UserController@listpangkat');
-
 });

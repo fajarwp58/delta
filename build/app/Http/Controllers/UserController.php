@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Role;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -15,6 +18,22 @@ class UserController extends Controller
             'username' => ['required', 'string', 'max:255', 'unique:user'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
+    }
+
+    public function register(){
+        // Available alpha caracters
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        // generate a pin based on 2 * 7 digits + a random character
+        $pin = mt_rand(1000, 9999)
+            . $characters[rand(0, strlen($characters) - 1)];
+
+        // shuffle the result
+        $AWAL = 'US';
+
+        $id = $AWAL .'-'.str_shuffle($pin);
+
+        return view('auth.register',['id'=>$id]);
     }
 
     public function data()
@@ -44,6 +63,7 @@ class UserController extends Controller
 
 
          $user->save();
+         return redirect('login');
         }
     }
 
@@ -62,10 +82,10 @@ class UserController extends Controller
 
     // }
 
-    // public function listrole(){
-    //     $role = Role::whereIn('role_id',[2,3])
-    //     ->get();
-    //     return json_encode($role);
-    // }
+    public function listrole(){
+        $role = Role::whereIn('role_id',['R01','R02'])
+        ->get();
+        return json_encode($role);
+    }
 
 }
