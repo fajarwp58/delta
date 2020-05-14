@@ -43,7 +43,7 @@ class User extends Authenticatable
     {
         $this->have_role = $this->getUserRole();
 
-        if($this->have_role->nama == ['admin','dokter','pasien']) {
+        if($this->have_role->nama == ['Admin','Dokter','Pasien']) {
             return true;
         }
         if(is_array($roles)){

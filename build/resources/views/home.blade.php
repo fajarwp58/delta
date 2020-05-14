@@ -19,9 +19,7 @@
         <div class="widget-rounded-circle card-box">
             <div class="row">
                 <div class="col-6">
-                    <div class="avatar-lg rounded-circle bg-soft-pink border-pink border">
-                        <i class="fe-heart font-22 avatar-title text-pink"></i>
-                    </div>
+                        <i data-feather="activity" ></i>
                 </div>
                 <div class="col-6">
                     <div class="text-right">
@@ -37,9 +35,7 @@
         <div class="widget-rounded-circle card-box">
             <div class="row">
                 <div class="col-6">
-                    <div class="avatar-lg rounded-circle bg-soft-blue border-blue border">
-                        <i class="fe-shopping-cart font-22 avatar-title text-blue"></i>
-                    </div>
+                    <i data-feather="activity" ></i>
                 </div>
                 <div class="col-6">
                     <div class="text-right">
@@ -55,9 +51,7 @@
         <div class="widget-rounded-circle card-box">
             <div class="row">
                 <div class="col-6">
-                    <div class="avatar-lg rounded-circle bg-soft-success border-success border">
-                        <i class="fe-bar-chart-line- font-22 avatar-title text-success"></i>
-                    </div>
+                    <i data-feather="activity" ></i>
                 </div>
                 <div class="col-6">
                     <div class="text-right">
@@ -73,9 +67,7 @@
         <div class="widget-rounded-circle card-box">
             <div class="row">
                 <div class="col-6">
-                    <div class="avatar-lg rounded-circle bg-soft-warning border-warning border">
-                        <i class="fe-eye font-22 avatar-title text-warning"></i>
-                    </div>
+                    <i data-feather="activity" ></i>
                 </div>
                 <div class="col-6">
                     <div class="text-right">

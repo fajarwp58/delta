@@ -30,3 +30,17 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('create', 'UserController@create');
     Route::get('listrole', 'UserController@listrole');
 });
+
+Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Admin']], function () {
+
+    Route::group(['prefix' => 'kelolauser'], function () {
+        Route::get('/', 'UserController@index');
+        Route::get('data', 'UserController@data');
+        Route::post('create', 'UserController@create');
+        Route::post('update/{id}', 'UserController@update');
+        Route::get('delete/{id}', 'UserController@delete');
+        Route::get('listrole', 'UserController@listrole');
+    });
+
+
+});

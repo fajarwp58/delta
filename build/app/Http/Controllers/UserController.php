@@ -6,9 +6,22 @@ use Illuminate\Http\Request;
 use App\Role;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
+
+    public function index(){
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $pin = mt_rand(1000, 9999)
+            . $characters[rand(0, strlen($characters) - 1)];
+        $AWAL = 'US';
+
+        $idmodal = $AWAL .'-'.str_shuffle($pin);
+
+        return view('user',['idmodal'=>$idmodal]);
+    }
+
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -67,23 +80,24 @@ class UserController extends Controller
         }
     }
 
-    // public function update(Request $request,$id){
+    public function update(Request $request,$id){
 
-    //     $user = User::where('user_nrp',$id)->first();
-    //     $user->user_nama = $request->user_nama;
-    //     $user->pangkat_id = $request->pangkat_id;
-    //     $user->update();
-    // }
+        $user = User::where('user_id',$id)->first();
+        $user->nama = $request->nama;
+        $user->phone = $request->phone;
+        $user->alamat = $request->alamat;
+        $user->update();
+    }
 
-    // public function delete($id)
-    // {
+    public function delete($id)
+    {
 
-    //   User::where('user_nrp', $id)->delete();
+      User::where('user_id', $id)->delete();
 
-    // }
+    }
 
     public function listrole(){
-        $role = Role::whereIn('role_id',['R01','R02'])
+        $role = Role::whereIn('role_id',['R02','R03'])
         ->get();
         return json_encode($role);
     }

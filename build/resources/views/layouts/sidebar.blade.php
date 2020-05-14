@@ -14,7 +14,7 @@
 
                     <!-- item-->
                     <a href="{{ route('logout') }}" class="dropdown-item notify-item">
-                        <i class="fe-log-out mr-1"></i>
+                        <i data-feather="log-out" class="icon-dual"></i>
                         <span>Logout</span>
                     </a>
 
@@ -34,6 +34,13 @@
                     <a href="{{ route('home') }}" >
                         <i data-feather="airplay"></i>
                         <span> Dashboards </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url('kelolauser') }}" >
+                        <i data-feather="user"></i>
+                        <span> Kelola User </span>
                     </a>
                 </li>
 
