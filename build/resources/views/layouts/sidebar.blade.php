@@ -38,10 +38,25 @@
                 </li>
 
                 <li>
-                    <a href="{{ url('kelolauser') }}" >
+                    <a href="#sidebarProjects" data-toggle="collapse">
                         <i data-feather="user"></i>
                         <span> Kelola User </span>
+                        <i data-feather="chevron-right" class="menu-arrow"></i>
                     </a>
+                    <div class="collapse" id="sidebarProjects">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('dokter') }}" >
+                                    <span>Dokter </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('pasien') }}" >
+                                    <span>Pasien </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
 
                 <li class="menu-title mt-2">Apps</li>

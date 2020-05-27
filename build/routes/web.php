@@ -34,12 +34,16 @@ Route::group(['prefix' => 'user'], function () {
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Admin']], function () {
 
     Route::group(['prefix' => 'kelolauser'], function () {
-        Route::get('/', 'UserController@index');
+        Route::get('/', 'UserController@index')->name('dokter');
+        Route::get('pasien', 'UserController@pasien')->name('pasien');
         Route::get('data', 'UserController@data');
+        Route::get('dataPasien', 'UserController@dataPasien');
+        Route::post('printCard', 'UserController@printCard');
         Route::post('create', 'UserController@create');
         Route::post('update/{id}', 'UserController@update');
         Route::get('delete/{id}', 'UserController@delete');
         Route::get('listrole', 'UserController@listrole');
+        Route::get('listrolePasien', 'UserController@listrolePasien');
     });
 
 

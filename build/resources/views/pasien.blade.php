@@ -13,14 +13,18 @@
                         <i class="anticon anticon-plus"></i>
                         Add User
                     </button>
+                    <a onclick="printCard()" class="btn btn-info"> Cetak Kartu</a>
                 </h4>
             </div>
 
             {{--        TABEL USER--}}
             <div class="card-body">
+                <form method="post" id="form-member">
+                    {{ csrf_field() }}
                 <table id="tuser" class="table activate-select dt-responsive nowrap w-100">
                     <thead>
                     <tr>
+                        <th width="20"><input type="checkbox" value="1" id="select-all"></th>
                         <th>Username</th>
                         <th>phone</th>
                         <th>Role</th>
@@ -28,6 +32,7 @@
                     </tr>
                     </thead>
                 </table>
+                </form>
             </div>
         </div>
     </div>
@@ -37,7 +42,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Form User</h4>
+                <h4 class="modal-title">Form Pasien</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body p-3">
@@ -179,8 +184,8 @@
 @endsection
 
 @section('js')
-    <script src="assets/jquery.dataTables.min.js"></script>
-    <script src="assets/dataTables.bootstrap.min.js"></script>
+    <script src="{{ asset('assets/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/dataTables.bootstrap.min.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -195,8 +200,13 @@
             });
             function loadData() {
                 $('#tuser').dataTable({
-                    "ajax": "{{ url('/kelolauser/data') }}",
+                    "ajax": "{{ url('/kelolauser/dataPasien') }}",
                     "columns": [
+                        { data: 'user_id',
+                          render: function(data){
+                            return'<input type="checkbox" name="user_id[]" value="'+data+'">';
+                            }
+                        },
                         { "data": "username" },
                         { "data": "phone",
                             sClass: 'text-center', },
@@ -214,11 +224,11 @@
                     ],
                     columnDefs: [
                         {
-                            width: "150px",
+                            width: "20px",
                             targets: [0]
                         },
                         {
-                            width: "100px",
+                            width: "150px",
                             targets: [1]
                         },
                         {
@@ -229,6 +239,10 @@
                             width: "100px",
                             targets: [3]
                         },
+                        {
+                            width: "100px",
+                            targets: [4]
+                        },
                     ],
                     scrollX: true,
                     scrollY: '350px',
@@ -236,6 +250,9 @@
                 });
             } loadData();
 
+            $('#select-all').click(function(){
+                $('input[type="checkbox"]').prop('checked', this.checked);
+            });
 
             $(document).on('click', '#adduser', function() {
                 var idmodal = "{{ $idmodal }}";
@@ -334,7 +351,7 @@
 
 
             $.ajax({
-                url: '{{ url('kelolauser/listrole') }}',
+                url: '{{ url('kelolauser/listrolePasien') }}',
                 dataType: "json",
                 success: function(data) {
                     var role = jQuery.parseJSON(JSON.stringify(data));
@@ -355,7 +372,16 @@
                 });
             });
 
+
         });
+
+        function printCard(){
+                if($('input:checked').length < 1){
+                    alert('Pilih data yang akan dicetak!');
+                }else{
+                    $('#form-member').attr('target', '_blank').attr('action', "printCard").submit();
+                }
+            }
 
 
     </script>

@@ -7,6 +7,7 @@ use App\Role;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
+use PDF;
 
 class UserController extends Controller
 {
@@ -20,6 +21,17 @@ class UserController extends Controller
         $idmodal = $AWAL .'-'.str_shuffle($pin);
 
         return view('user',['idmodal'=>$idmodal]);
+    }
+
+    public function pasien(){
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $pin = mt_rand(1000, 9999)
+            . $characters[rand(0, strlen($characters) - 1)];
+        $AWAL = 'US';
+
+        $idmodal = $AWAL .'-'.str_shuffle($pin);
+
+        return view('pasien',['idmodal'=>$idmodal]);
     }
 
     public function register(){
@@ -40,7 +52,13 @@ class UserController extends Controller
 
     public function data()
     {
-        $user = User::with(['role'])->get();
+        $user = User::with(['role'])->where('role_id', 'R02')->get();
+        return DataTables::of($user)->toJson();
+    }
+
+    public function dataPasien()
+    {
+        $user = User::with(['role'])->where('role_id', 'R03')->get();
         return DataTables::of($user)->toJson();
     }
 
@@ -93,9 +111,28 @@ class UserController extends Controller
     }
 
     public function listrole(){
-        $role = Role::whereIn('role_id',['R02','R03'])
+        $role = Role::where('role_id','R02')
         ->get();
         return json_encode($role);
+    }
+
+    public function listrolePasien(){
+        $role = Role::where('role_id','R03')
+        ->get();
+        return json_encode($role);
+    }
+
+    public function printCard(Request $request){
+        $datamember = array();
+        foreach($request['user_id'] as $user_id){
+            $member = User::find($user_id);
+            $datamember[] = $member;
+        }
+
+        $pdf = PDF::loadView('card',
+        compact('datamember'));
+        $pdf->setPaper(array(0, 0, 566.93, 850.39), 'potrait');
+        return $pdf->stream();
     }
 
 }
