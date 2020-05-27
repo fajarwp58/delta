@@ -22,17 +22,6 @@ class UserController extends Controller
         return view('user',['idmodal'=>$idmodal]);
     }
 
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'nama' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'max:13'],
-            'alamat' => ['required', 'string', 'min:255'],
-            'username' => ['required', 'string', 'max:255', 'unique:user'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
-        ]);
-    }
-
     public function register(){
         // Available alpha caracters
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -56,14 +45,21 @@ class UserController extends Controller
     }
 
     public function create(Request $request){
-        $valid = User::where('user_id',$request->user_id)->count();
+        request()->validate([
+            'nama' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:13'],
+            'alamat' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:5'],
+        ],
+            [
+                'nama.required'=> 'masukan nama anda',
+                'phone.required'=> 'masukan nomor hp anda',
+                'alamat.required'=> 'masukan alamat anda',
+                'username.required'=> 'username tidak boleh kosong / username telah ada',
+                'password.required'=> 'password tidak boleh kosong',
+            ]);
 
-        if($valid != 0){
-             $message = ['error' => 'Data Telah ada,Gagal menambahkan!'];
-             return response()->json($message);
-        }
-
-        else{
 
          $user = new User;
          $user->user_id = $request->user_id;
@@ -77,7 +73,7 @@ class UserController extends Controller
 
          $user->save();
          return redirect('login');
-        }
+
     }
 
     public function update(Request $request,$id){

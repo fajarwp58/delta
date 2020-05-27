@@ -52,16 +52,19 @@
                     <div class="form-group">
                         <label for="nama">Nama</label>
                         <input type="text"  class="form-control" id="nama" name="nama" placeholder="Nama">
+                        <span class="text-danger" id="namaError"></span>
                     </div>
 
                     <div class="form-group">
                         <label for="phone">Phone</label>
                         <input type="text"  class="form-control" id="phone" name="phone" placeholder="Phone">
+                        <span class="text-danger" id="phoneError"></span>
                     </div>
 
                     <div class="form-group">
                         <label for="alamat">Alamat</label>
                         <textarea type="text"  class="form-control" id="alamat" name="alamat" placeholder="Alamat"></textarea>
+                        <span class="text-danger" id="alamatError"></span>
                     </div>
 
                     <div class="form-group" id="div_role">
@@ -77,6 +80,7 @@
                         <div class="form-group col-md-12">
                             <label for="username">Username</label>
                             <input type="text"  class="form-control" id="username" name="username" placeholder="Username">
+                            <span class="text-danger" id="usernameError"></span>
                         </div>
                     </div>
 
@@ -84,6 +88,7 @@
                         <div class="form-group col-md-12">
                             <label for="password">Password</label>
                             <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                            <span class="text-danger" id="passwordError"></span>
                         </div>
                     </div>
 
@@ -246,6 +251,11 @@
 
             $('#formuser').submit(function(e) {
                 e.preventDefault();
+                $('#namaError').addClass('d-none');
+                $('#phoneError').addClass('d-none');
+                $('#alamatError').addClass('d-none');
+                $('#usernameError').addClass('d-none');
+                $('#passwordError').addClass('d-none');
                 $.ajax({
                     url: $(this).attr('action')+'?_token='+'{{ csrf_token() }}',
                     type: 'post',
@@ -257,11 +267,25 @@
                         'alamat': $('#alamat').val(),
                         'username': $('#username').val(),
                         'password': $('#password').val(),
+
                     },
+
+
                     success :function (response) {
                         $('#tuser').DataTable().destroy();
                         loadData();
                         $('#muser').modal('hide');
+                    },
+
+                    error : function (data){
+                        var errors = data.responseJSON;
+                        if ($.isEmptyObject(errors) == false){
+                            $.each(errors.errors, function (key, value){
+                                var ErrorID = '#' + key + 'Error';
+                                $(ErrorID).removeClass("d-none");
+                                $(ErrorID).text(value);
+                            })
+                        }
                     },
 
                 });
