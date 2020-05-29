@@ -48,3 +48,15 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Admin']], function
 
 
 });
+
+Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Pasien']], function () {
+
+    Route::group(['prefix' => 'profile'], function () {
+        Route::get('/', 'ProfileController@index')->name('profile');
+        Route::get('dataPasien', 'ProfileController@dataPasien');
+        Route::post('printCard', 'ProfileController@printCard');
+        Route::post('update/{id}', 'ProfileController@update');
+    });
+
+
+});

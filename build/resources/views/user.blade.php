@@ -186,6 +186,7 @@
         $(document).ready(function() {
             $.extend( $.fn.dataTable.defaults, {
                 autoWidth: false,
+                responsive: true,
                 language: {
                     search: '<span>Cari:</span> _INPUT_',
                     searchPlaceholder: 'Cari...',

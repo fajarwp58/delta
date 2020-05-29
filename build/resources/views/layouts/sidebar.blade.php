@@ -30,6 +30,8 @@
 
                 <li class="menu-title">Navigation</li>
 
+                @if(Auth::user()->role_id == 'R01')
+
                 <li>
                     <a href="{{ route('home') }}" >
                         <i data-feather="airplay"></i>
@@ -95,6 +97,17 @@
                         </ul>
                     </div>
                 </li>
+
+                @else
+
+                <li>
+                    <a href="{{ route('profile') }}" >
+                        <i data-feather="airplay"></i>
+                        <span> Dashboards </span>
+                    </a>
+                </li>
+
+                @endif
 
             </ul>
 
