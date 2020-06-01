@@ -61,6 +61,20 @@
                     </div>
                 </li>
 
+                <li>
+                    <a href="{{ route('kandang') }}" >
+                        <i data-feather="lock"></i>
+                        <span> Kelola Kandang </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('waktubooking') }}" >
+                        <i data-feather="crosshair"></i>
+                        <span> Kelola Waktu Booking </span>
+                    </a>
+                </li>
+
                 <li class="menu-title mt-2">Apps</li>
 
                 <li>
@@ -104,6 +118,21 @@
                     <a href="{{ route('profile') }}" >
                         <i data-feather="airplay"></i>
                         <span> Dashboards </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('hewan') }}" >
+                        <i data-feather="github"></i>
+                        <span> Kelola Hewan </span>
+                    </a>
+                </li>
+
+                <li class="menu-title mt-2">Apps</li>
+
+                <li>
+                    <a href="apps-calendar.html">
+                        <i data-feather="calendar"></i>
+                        <span> Booking </span>
                     </a>
                 </li>
 
