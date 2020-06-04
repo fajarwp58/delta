@@ -62,6 +62,14 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Admin']], function
         Route::post('cetak', 'KandangController@printBarcode');
     });
 
+    Route::group(['prefix' => 'booking'], function () {
+        Route::get('databooking', 'BookingController@dataBooking')->name('databooking');
+        Route::get('databooking/data', 'BookingController@data');
+        Route::post('databooking/update/{id}', 'BookingController@update');
+        Route::get('databooking/delete/{id}', 'BookingController@delete');
+        Route::get('databooking/listwaktu', 'BookingController@listwaktu');
+    });
+
 
 });
 
@@ -81,6 +89,16 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Pasien']], functio
         Route::post('update/{id}', 'HewanController@update');
         Route::get('delete/{id}', 'HewanController@delete');
         Route::get('listjenis', 'HewanController@listjenis');
+    });
+
+    Route::group(['prefix' => 'booking'], function () {
+        Route::get('/', 'BookingController@index')->name('booking');
+        Route::get('addjadwal/{id}', 'BookingController@addbooking');
+        Route::get('listhewan', 'BookingController@listhewan');
+        //Route::get('data', 'BookingController@data');
+        Route::post('create', 'BookingController@create');
+        //Route::post('update/{id}', 'BookingController@update');
+        //Route::get('delete/{id}', 'BookingController@delete');
     });
 
 

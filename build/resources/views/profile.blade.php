@@ -32,30 +32,6 @@
 </div>
 <br />
 <div class="row">
-    <div class="col-lg-3 col-xl-3">
-        <div class="card-box text-center">
-
-            <h4 class="mb-0">Pasien User</h4>
-
-            <div class="text-left mt-2">
-                <p class="text-muted mb-2 font-13"><strong>Nama :</strong> <span class="ml-2">{{ Auth::User()->nama }}</span></p>
-
-                <p class="text-muted mb-2 font-13"><strong>No Hp :</strong><span class="ml-2">{{ Auth::User()->phone }}</span></p>
-
-                <p class="text-muted mb-2 font-13"><strong>Alamat :</strong> <span class="ml-2 ">{{ Auth::User()->alamat }}</span></p>
-            </div>
-
-        </div> <!-- end card-box -->
-
-        <div class="card-box">
-            <h4 class="header-title mb-3">Inbox</h4>
-
-           //
-
-        </div> <!-- end card-box-->
-
-    </div> <!-- end col-->
-
     <div class="col-lg-9 col-xl-9">
         <div class="card-box">
 
@@ -100,6 +76,34 @@
         </div> <!-- end card-box-->
 
     </div> <!-- end col -->
+
+    <div class="col-lg-3 col-xl-3">
+        <div class="card-box text-center">
+
+            <h4 class="mb-0">Pasien User</h4>
+
+            <div class="text-left mt-2">
+                <p class="text-muted mb-2 font-13"><strong>Nama :</strong> <span class="ml-2">{{ Auth::User()->nama }}</span></p>
+
+                <p class="text-muted mb-2 font-13"><strong>No Hp :</strong><span class="ml-2">{{ Auth::User()->phone }}</span></p>
+
+                <p class="text-muted mb-2 font-13"><strong>Alamat :</strong> <span class="ml-2 ">{{ Auth::User()->alamat }}</span></p>
+            </div>
+
+        </div> <!-- end card-box -->
+
+        <div class="card-box">
+            <h4 class="header-title mb-3">List Jadwal</h4>
+
+            <div class="text-left mt-2">
+                //
+            </div>
+
+        </div> <!-- end card-box-->
+
+    </div> <!-- end col-->
+
+
 </div>
 
 {{--    MODAL DAN FORM DATA USER--}}

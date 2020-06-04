@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 Use App\User;
 Use App\Role;
+use App\WaktuBooking;
 Use Illuminate\Support\Facades\Auth;
 use PDF;
 

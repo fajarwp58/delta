@@ -75,6 +75,13 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="{{ route('databooking') }}" >
+                        <i data-feather="archive"></i>
+                        <span> Kelola Data Booking </span>
+                    </a>
+                </li>
+
                 <li class="menu-title mt-2">Apps</li>
 
                 <li>
@@ -130,7 +137,7 @@
                 <li class="menu-title mt-2">Apps</li>
 
                 <li>
-                    <a href="apps-calendar.html">
+                    <a href="{{ route('booking') }}">
                         <i data-feather="calendar"></i>
                         <span> Booking </span>
                     </a>

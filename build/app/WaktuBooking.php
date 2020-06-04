@@ -16,4 +16,9 @@ class WaktuBooking extends Model
 
     public $timestamps = false;
 
+    public function hewan()
+    {
+        return $this->belongsToMany('App\Hewan','booking','waktu_booking_id','kode');
+    }
+
 }

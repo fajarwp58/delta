@@ -22,4 +22,9 @@ class Hewan extends Model
     public function jenis_hewan() {
         return $this->belongsTo('App\JenisHewan', 'jenis_hewan_id', 'jenis_hewan_id');
     }
+
+    public function waktu_booking()
+    {
+        return $this->belongsToMany('App\WaktuBooking','booking','kode_hewan','waktu_booking_id');
+    }
 }

@@ -157,6 +157,8 @@
                     $('#twakbooking').DataTable().destroy();
                     loadData();
                     $('#mwakbooking').modal('hide');
+
+                    document.location.reload();
                 },
 
                 error : function (data){
