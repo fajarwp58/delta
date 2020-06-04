@@ -51,7 +51,7 @@
 
                     <div class="form-group" id="div_userid">
                         <label for="user_id">ID User</label>
-                        <input type="text"  class="form-control" id="user_id" name="user_id">
+                        <input type="text"  class="form-control" id="user_id" name="user_id" readonly>
                     </div>
 
                     <div class="form-group">
@@ -172,7 +172,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
+                        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
                     </div>
 
                 </form>

@@ -30,6 +30,10 @@ class HomeController extends Controller
             return view('home', compact('datamember'));
         }
 
+        elseif(Auth::user()->role_id == 'R02'){
+            return view('home', compact('datamember'));
+        }
+
         else {
             return view('profile', compact('datamember'));
         }

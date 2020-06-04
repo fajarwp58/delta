@@ -46,7 +46,7 @@
 									<input class="form-control text-center" name="tanggal_booking" value="{{ $now }}" readonly />
 								</div>
 								<div class="col-sm-3">
-									<input class="form-control" name="waktu" value="{{ date('G:i', strtotime( $waktu_booking->jam )) }}" readonly />
+									<input class="form-control text-center" name="waktu" value="{{ date('G:i', strtotime( $waktu_booking->jam )) }}" readonly />
 								</div>
 							</div>
 						</div>

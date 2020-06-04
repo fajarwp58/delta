@@ -46,7 +46,7 @@
 
                     <div class="form-group" id="div_wakbooking_id">
                             <label for="waktu_booking_id">Waktu ID</label>
-                            <input type="text"  class="form-control" id="waktu_booking_id" name="waktu_booking_id">
+                            <input type="text"  class="form-control" id="waktu_booking_id" name="waktu_booking_id" readonly>
                     </div>
                     <div class="form-group" >
                             <label for="jam">Jam</label>

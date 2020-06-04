@@ -47,7 +47,7 @@
 
                     <div class="form-group" id="div_kode">
                         <label for="kode">Kode</label>
-                        <input type="text"  class="form-control" id="kode" name="kode">
+                        <input type="text"  class="form-control" id="kode" name="kode" readonly>
                     </div>
                     <div class="form-group" id="div_userid">
                         <label for="user_id">ID User</label>

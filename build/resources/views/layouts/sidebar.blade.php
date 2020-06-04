@@ -119,8 +119,21 @@
                     </div>
                 </li>
 
-                @else
+                @elseif(Auth::user()->role_id == 'R02')
+                <li>
+                    <a href="{{ route('home') }}" >
+                        <i data-feather="airplay"></i>
+                        <span> Dashboards </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('penyakit') }}" >
+                        <i data-feather="thermometer"></i>
+                        <span> Kelola Penyakit </span>
+                    </a>
+                </li>
 
+                @else
                 <li>
                     <a href="{{ route('profile') }}" >
                         <i data-feather="airplay"></i>
