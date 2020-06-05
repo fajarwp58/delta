@@ -84,6 +84,23 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Dokter']], functio
         Route::get('listjenispenyakit', 'PenyakitController@listjenispenyakit');
     });
 
+    Route::group(['prefix' => 'obat'], function () {
+        Route::get('/', 'ObatController@index')->name('obat');
+        Route::get('data', 'ObatController@data');
+        Route::post('create', 'ObatController@create');
+        Route::post('update/{id}', 'ObatController@update');
+        Route::get('delete/{id}', 'ObatController@delete');
+    });
+
+    Route::group(['prefix' => 'layanan'], function () {
+        Route::get('/', 'LayananController@index')->name('layanan');
+        Route::get('data', 'LayananController@data');
+        Route::post('create', 'LayananController@create');
+        Route::post('update/{id}', 'LayananController@update');
+        Route::get('delete/{id}', 'LayananController@delete');
+        Route::get('listpenyakit', 'LayananController@listpenyakit');
+    });
+
 });
 
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Pasien']], function () {

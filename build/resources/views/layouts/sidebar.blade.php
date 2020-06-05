@@ -132,6 +132,18 @@
                         <span> Kelola Penyakit </span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('obat') }}" >
+                        <i data-feather="circle"></i>
+                        <span> Kelola Obat </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('layanan') }}" >
+                        <i data-feather="filter"></i>
+                        <span> Kelola Layanan </span>
+                    </a>
+                </li>
 
                 @else
                 <li>
