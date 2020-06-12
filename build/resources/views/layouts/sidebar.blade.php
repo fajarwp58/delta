@@ -144,6 +144,12 @@
                         <span> Kelola Layanan </span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('rekammedis') }}" >
+                        <i data-feather="book"></i>
+                        <span> Rekam Medis Hewan </span>
+                    </a>
+                </li>
 
                 @else
                 <li>

@@ -79,7 +79,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="ket">Keterangan</label>
+                        <label for="ket">Ras Hewan</label>
                         <input type="text"  class="form-control" id="ket" name="ket" placeholder="Keterangan">
                         <span class="text-danger" id="ketError"></span>
                     </div>

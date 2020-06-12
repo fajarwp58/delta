@@ -25,6 +25,7 @@ class Hewan extends Model
 
     public function waktu_booking()
     {
-        return $this->belongsToMany('App\WaktuBooking','booking','kode_hewan','waktu_booking_id');
+        return $this->belongsToMany('App\WaktuBooking','booking','kode','waktu_booking_id');
     }
+
 }

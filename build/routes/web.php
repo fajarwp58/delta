@@ -101,6 +101,22 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Dokter']], functio
         Route::get('listpenyakit', 'LayananController@listpenyakit');
     });
 
+    Route::group(['prefix' => 'rekammedis'], function () {
+        Route::get('/', 'RekammedisController@index')->name('rekammedis');
+        Route::get('datahewan', 'RekammedisController@datahewan');
+        Route::get('data', 'RekammedisController@data');
+        Route::get('addrekammedis/{id}', 'RekammedisController@addrekammedis');
+        Route::post('create', 'RekammedisController@create');
+        Route::post('update/{id}', 'RekammedisController@update');
+        Route::get('delete/{id}', 'RekammedisController@delete');
+    });
+
+    Route::group(['prefix' => 'dokterlayanan'], function () {
+        Route::get('/', 'TransaksilayananController@index')->name('dokterlayanan');
+        Route::post('create', 'TransaksilayananController@create');
+        Route::get('listlayanan', 'TransaksilayananController@listlayanan');
+    });
+
 });
 
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Pasien']], function () {

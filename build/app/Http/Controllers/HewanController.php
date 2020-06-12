@@ -11,12 +11,10 @@ use Illuminate\Http\Request;
 class HewanController extends Controller
 {
     public function index(){
-        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $pin = mt_rand(10, 99)
-            . $characters[rand(0, strlen($characters) - 1)];
-        $AWAL = 'HN';
+        $pin = mt_rand(1000000, 9999999);
+        $AWAL = 'REG';
 
-        $idmodal = $AWAL .'-'.str_shuffle($pin);
+        $idmodal = $AWAL .str_shuffle($pin);
 
         return view ('hewan' ,['idmodal'=>$idmodal]);
     }
