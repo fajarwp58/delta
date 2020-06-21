@@ -11,8 +11,6 @@ class TransaksiLayanan extends Model
         'kode_layanan', 'kode_transaksi',
     ];
 
-    protected $keyType = 'string';
-
     public $timestamps = false;
 
     public function layanan() {

@@ -3,28 +3,31 @@
 @extends('layouts.sidebar')
 
 @section('content')
-
 <br /><br />
+@if ($message = Session::get('success'))
+<div class="alert alert-success alert-block">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>{{ $message }}</strong>
+</div>
+@endif
 <div class="col-lg-12">
     <div class="card-box pb-2">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">
-                    <button class="btn btn-primary m-r-5" id="addlayanan">
-                        <i class="anticon anticon-plus"></i>
-                        Add Layanan
-                    </button>
+                    Kelola Transaksi
                 </h4>
             </div>
 
-            {{--        TABEL Obat--}}
+            {{--        TABEL Penyakit--}}
             <div class="card-body">
-                <table id="tlayanan" class="table activate-select dt-responsive nowrap w-100">
+                <table id="ttransaksilainnya" class="table activate-select dt-responsive nowrap w-100">
                     <thead>
                     <tr>
+                        <th>No Invoice</th>
+                        <th>Nama Hewan</th>
                         <th>Nama Layanan</th>
-                        <th>Nama Penyakit</th>
-                        <th>Harga</th>
+                        <th>Obat</th>
                         <th>Aksi</th>
                     </tr>
                     </thead>
@@ -33,44 +36,35 @@
         </div>
     </div>
 </div>
-{{--    MODAL DAN FORM DATA Obat--}}
-<div id="mlayanan" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+{{--    MODAL DAN FORM DATA Penyakit--}}
+<div id="mtransaksilainnya" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Form Data Layanan</h4>
+                <h4 class="modal-title">Tambah Transaksi Lainnya</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body p-3">
-                <form id="formlayanan">
+                <form id="formtransaksilainnya">
                     {{ csrf_field() }}
 
-                    <div class="form-group" id="div_kodelayanan">
-                        <label for="kode_layanan">Kode Layanan</label>
-                        <input type="text"  class="form-control" id="kode_layanan" name="kode_layanan" readonly>
+                    <div class="form-group" id="div_kodelainnya">
+                        <label for="kode_lainnya">ID</label>
+                        <input type="text"  class="form-control" id="kode_lainnya" name="kode_lainnya" readonly>
+                    </div>
+                    <div class="form-group" id="div_kodetransaksi">
+                        <label for="kode_transaksi">ID</label>
+                        <input type="text"  class="form-control" id="kode_transaksi" name="kode_transaksi" readonly>
                     </div>
 
                     <div class="form-group">
                         <label for="nama">Nama Layanan</label>
-                        <input type="text"  class="form-control" id="nama" name="nama" placeholder="Nama Layanan">
+                        <input type="text"  class="form-control" id="nama" name="nama" placeholder="Nama Layanan lainnya">
                         <span class="text-danger" id="namaError"></span>
                     </div>
-
-                    <div class="form-group">
-                        <label for="kode_penyakit">Nama Penyakit</label>
-                            <select class="form-control" id="kode_penyakit" name="kode_penyakit">
-                                <option value="">Pilih penyakit</option>
-                            </select>
-                        <span class="text-danger" id="kode_penyakitError"></span>
-                        <br>
-                        <div class="alert alert-warning col-md-12">
-                            <a href="{{ route('penyakit') }}"><b>Klik disini</b></a> untuk menambah penyakit.
-                        </div>
-                    </div>
-
                     <div class="form-group">
                         <label for="harga">Harga</label>
-                        <input type="number"  class="form-control" id="harga" name="harga" placeholder="Harga Layanan">
+                        <input type="text"  class="form-control" id="harga" name="harga" placeholder="Harga layanan">
                         <span class="text-danger" id="hargaError"></span>
                     </div>
 
@@ -86,12 +80,12 @@
 </div>
 
 
-{{--    MODAL DAN FORM DETAIL Obat--}}
-<div id="mdlayanan" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+{{--    MODAL DAN FORM DETAIL Penyakit--}}
+<div id="mdtransaksilainnya" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Detail Layanan</h4>
+                <h4 class="modal-title">Detail Transaksi</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body p-3">
@@ -102,38 +96,29 @@
                             <table width="400">
                                 <tr>
                                     <td>
-                                        <a class="text-gray">Kode Layanan</a>
+                                        <a class="text-gray">No Invoice</a>
                                     </td>
                                     <td>:</td>
                                     <td>
-                                        <a class="text-gray" id="dkodelayanan"></a>
+                                        <a class="text-gray" id="dkodetransaksi"></a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a class="text-gray">Nama Layanan</a>
+                                        <a class="text-gray">Dokter</a>
                                     </td>
                                     <td>:</td>
                                     <td>
-                                        <a class="text-gray" id="dnama"></a>
+                                        <a class="text-gray" id="dnamadokter"></a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a class="text-gray">Nama Penyakit</a>
+                                        <a class="text-gray">Nama Hewan</a>
                                     </td>
                                     <td>:</td>
                                     <td>
-                                        <a class="text-gray" id="dkodepenyakit"></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a class="text-gray">Harga</a>
-                                    </td>
-                                    <td>:</td>
-                                    <td>
-                                        <a class="text-gray" id="dharga"></a>
+                                        <a class="text-gray" id="dnamahewan"></a>
                                     </td>
                                 </tr>
                             </table>
@@ -169,21 +154,23 @@
             }
         });
         function loadData() {
-            $('#tlayanan').dataTable({
-                "ajax": "{{ url('/layanan/data') }}",
+            $('#ttransaksilainnya').dataTable({
+                "ajax": "{{ url('/transaksilainnya/data') }}",
                 "columns": [
-                    { "data": "nama",
+                    { "data": "kode_transaksi",
                         sClass: 'text-center' },
-                    { "data": "penyakit.nama",
-                        sClass: 'text-center' },
-                    { "data": "harga",
-                        sClass: 'text-center',},
+                    { "data": "hewan.nama_hewan",
+                        sClass: 'text-center'},
+                    { "data": "layanan",
+                        sClass: 'text-center'},
+                    { "data": "obat",
+                        sClass: 'text-center'},
                     {
-                        data: 'kode_layanan',
+                        data: 'kode_transaksi',
                         sClass: 'text-center',
                         render: function(data) {
-                            return'<a href="#" data-id="'+data+'" id="detail" class="btn btn-info waves-effect waves-light btn-xs" title="detail">detail </a> &nbsp;'+
-                                '<a href="#" data-id="'+data+'" id="edit" class="btn btn-warning waves-effect waves-light btn-xs" title="edit">edit </a> &nbsp;'+
+                            return'<a href="#" data-id="'+data+'" id="detail" class="btn btn-info waves-effect waves-light btn-xs" title="detail">tambah </a> &nbsp;'+
+                                '<a href="#" data-id="'+data+'" id="edit" class="btn btn-warning waves-effect waves-light btn-xs" title="edit">print </a> &nbsp;'+
                                 '<a href="#" data-id="'+data+'" id="delete" class="btn btn-danger waves-effect waves-light btn-xs" title="hapus">delete </a>';
                         }
                     }
@@ -198,12 +185,28 @@
                         targets: [1]
                     },
                     {
-                        width: "100px",
-                        targets: [2]
+                        width: "100px", targets: [2],
+                        render: function (data, type, full, meta) {
+                            var hasil = '';
+                            data.forEach((item, id)=>{
+                                hasil += '- '+item.nama+' '+'('+item.harga+')'+'<br> ';
+                            });
+                            return hasil;
+                        }
                     },
                     {
-                        width: "100px",
-                        targets: [3]
+                        width: "100px", targets: [3],
+                        render: function (data, type, full, meta) {
+                            var hasil = '';
+                            data.forEach((item, id)=>{
+                                hasil += '- '+item.nama+' '+'('+item.harga+')'+'<br> ';
+                            });
+                            return hasil;
+                        }
+                    },
+                    {
+                        width: "150px",
+                        targets: [4]
                     },
                 ],
                 scrollX: true,
@@ -213,34 +216,32 @@
         } loadData();
 
 
-        $(document).on('click', '#addlayanan', function() {
+        $(document).on('click', '#addpenyakit', function() {
             var idmodal = "{{ $idmodal }}";
-            $('#mlayanan').modal('show');
-            document.getElementById('div_kodelayanan').style.display = 'block';
-            $('#kode_layanan').val(idmodal).change();
-            $('#formlayanan').attr('action', '{{ url('layanan/create') }}');
+            $('#mpenyakit').modal('show');
+            document.getElementById('div_kodepenyakit').style.display = 'block';
+            $('#kode_penyakit').val(idmodal).change();
+            $('#formpenyakit').attr('action', '{{ url('penyakit/create') }}');
         });
 
-        $('#formlayanan').submit(function(e) {
+        $('#formpenyakit').submit(function(e) {
             e.preventDefault();
-            $('#kode_penyakitError').addClass('d-none');
             $('#namaError').addClass('d-none');
-            $('#hargaError').addClass('d-none');
+            $('#jenis_penyakit_idError').addClass('d-none');
             $.ajax({
                 url: $(this).attr('action')+'?_token='+'{{ csrf_token() }}',
                 type: 'post',
                 data: {
-                    'kode_layanan': $('#kode_layanan').val(),
                     'kode_penyakit': $('#kode_penyakit').val(),
+                    'jenis_penyakit_id': $('#jenis_penyakit_id').val(),
                     'nama': $('#nama').val(),
-                    'harga': $('#harga').val(),
                 },
 
 
                 success :function (response) {
-                    $('#tlayanan').DataTable().destroy();
+                    $('#tpenyakit').DataTable().destroy();
                     loadData();
-                    $('#mlayanan').modal('hide');
+                    $('#mpenyakit').modal('hide');
                 },
 
                 error : function (data){
@@ -258,33 +259,31 @@
         });
 
         $(document).on('click', '#edit', function() {
-            var data = $('#tlayanan').DataTable().row($(this).parents('tr')).data();
-            $('#mlayanan').modal('show');
-            document.getElementById('div_kodelayanan').style.display = 'none';
-            $('#kode_penyakit').val(data.kode_penyakit).change();
+            var data = $('#tpenyakit').DataTable().row($(this).parents('tr')).data();
+            $('#mpenyakit').modal('show');
+            document.getElementById('div_kodepenyakit').style.display = 'none';
             $('#nama').val(data.nama).change();
-            $('#harga').val(data.harga).change();
-            $('#formlayanan').attr('action', '{{ url('layanan/update') }}/'+data.kode_layanan);
+            $('#jenis_penyakit_id').val(data.jenis_penyakit_id).change();
+            $('#formpenyakit').attr('action', '{{ url('penyakit/update') }}/'+data.kode_penyakit);
         });
 
         $(document).on('click', '#detail', function() {
-            var data = $('#tlayanan').DataTable().row($(this).parents('tr')).data();
-            $('#mdlayanan').modal('show');
-            $('#dkodelayanan').text(data.kode_layanan);
-            $('#dkodepenyakit').text(data.penyakit.nama);
-            $('#dnama').text(data.nama);
-            $('#dharga').text(data.harga);
+            var data = $('#tpenyakit').DataTable().row($(this).parents('tr')).data();
+            $('#mdpenyakit').modal('show');
+            $('#dkodepenyakit').text(data.kode_penyakit);
+            $('#djenispenyakit').text(data.jenis_penyakit.nama);
+            $('#dnamapenyakit').text(data.nama);
         });
 
         $(document).on('click', '#delete', function() {
             var id = $(this).data('id');
             if (confirm("Yakin ingin menghapus data?")){
                 $.ajax({
-                    url : "{{ url('layanan/delete') }}/"+id,
+                    url : "{{ url('transaksilainnya/delete') }}/"+id,
 
                     success :function () {
 
-                        $('#tlayanan').DataTable().destroy();
+                        $('#ttransaksilainnya').DataTable().destroy();
                         loadData();
 
 
@@ -293,20 +292,22 @@
             }
         });
 
+
+
         $.ajax({
-            url: '{{ url('layanan/listpenyakit') }}',
+            url: '{{ url('penyakit/listjenispenyakit') }}',
             dataType: "json",
             success: function(data) {
-                var penyakit = jQuery.parseJSON(JSON.stringify(data));
-                $.each(penyakit, function(k, v) {
-                    $('#kode_penyakit').append($('<option>', {value:v.kode_penyakit}).text(v.nama))
+                var jenis_penyakit = jQuery.parseJSON(JSON.stringify(data));
+                $.each(jenis_penyakit, function(k, v) {
+                    $('#jenis_penyakit_id').append($('<option>', {value:v.jenis_penyakit_id}).text(v.nama))
                 })
             }
         });
 
-        $('#mlayanan').on('hidden.bs.modal', function () {
+        $('#mpenyakit').on('hidden.bs.modal', function () {
             $(this).find('form').trigger('reset');
-            let hapusValidasi = document.getElementById('formlayanan');
+            let hapusValidasi = document.getElementById('formpenyakit');
             hapusValidasi.querySelectorAll('.form-control').forEach(hapusValidasi => {
                 hapusValidasi.classList.remove('label');
                 hapusValidasi.classList.remove('is-valid');

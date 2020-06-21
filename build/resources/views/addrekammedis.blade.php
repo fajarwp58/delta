@@ -83,14 +83,14 @@
                 </div>
             </div>
             <br><br>
-            ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            --------------------------------------------------------------------------------------------------------------------------------------------
             <br><br><br>
             <form id="formrekammedis" method="POST" action="{{ url('/rekammedis/create/') }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-row">
                     <div class="form-group row mb-3 col-md-4">
                         <label for="suhu" class="col-3 col-form-label">Suhu</label>
-                        <div class="col-8">
+                        <div class="col-9">
                             <input type="text"  class="form-control" id="suhu" name="suhu" placeholder="Suhu dalam *C" required>
                         </div>
                         <span class="text-danger" id="suhuError"></span>

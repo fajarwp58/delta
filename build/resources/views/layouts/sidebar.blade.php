@@ -150,6 +150,12 @@
                         <span> Rekam Medis Hewan </span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('transaksilainnya') }}" >
+                        <i data-feather="dollar-sign"></i>
+                        <span> Kelola Transaksi </span>
+                    </a>
+                </li>
 
                 @else
                 <li>

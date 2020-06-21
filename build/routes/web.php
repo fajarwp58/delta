@@ -115,6 +115,15 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Dokter']], functio
         Route::get('/', 'TransaksilayananController@index')->name('dokterlayanan');
         Route::post('create', 'TransaksilayananController@create');
         Route::get('listlayanan', 'TransaksilayananController@listlayanan');
+        Route::get('listobat', 'TransaksilayananController@listobat');
+    });
+
+    Route::group(['prefix' => 'transaksilainnya'], function () {
+        Route::get('/', 'TransaksilainnyaController@index')->name('transaksilainnya');
+        Route::get('data', 'TransaksilainnyaController@data');
+        Route::post('create', 'TransaksilainnyaController@create');
+        Route::post('update/{id}', 'TransaksilainnyaController@update');
+        Route::get('delete/{id}', 'TransaksilainnyaController@delete');
     });
 
 });

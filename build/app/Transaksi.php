@@ -9,7 +9,7 @@ class Transaksi extends Model
     protected $table = 'transaksi';
     protected $primaryKey = 'kode_transaksi';
     protected $fillable = [
-        'dokter_id', 'kode_hewan', 'waktu', 'deposit',
+        'dokter_id', 'kode_hewan', 'waktu', 'total_harga',
     ];
 
     protected $keyType = 'string';
@@ -32,6 +32,9 @@ class Transaksi extends Model
     public function layanan()
     {
         return $this->belongsToMany('App\Layanan','transaksi_layanan','kode_transaksi','kode_layanan');
+    }
+    public function transaksi_lainnya() {
+        return $this->hasMany('App\TransaksiLainnya', 'kode_transaksi', 'kode_transaksi');
     }
 
 }
