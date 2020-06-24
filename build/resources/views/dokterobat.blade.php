@@ -15,30 +15,30 @@
     <div class="card-box pb-2">
         <div class="card">
             <div class="card-header">
-                <h4>Form <span class="small">Input Layanan Pasien</span></h4>
+                <h4>Form <span class="small">Input Transaksi Obat</span></h4>
             </div>
             <div class="card-body">
-                <form class="form form-horizontal form-layanan" method="post">
+                <form class="form form-horizontal form-obat" method="post">
                     {{ csrf_field() }}
                     <h3 class="card-title">NO Transaksi : <b>{{ $transaksi->kode_transaksi }}</b></h3>
                       <input type="hidden" name="kode_transaksi" value="{{ $transaksi->kode_transaksi }}">
                       <div class="form-group row mb-3 col-md-12">
-                          <label for="kode_layanan" class="col-2 col-form-label">Kode Layanan</label>
+                          <label for="kode_obat" class="col-2 col-form-label">Kode Obat</label>
                           <div class="col-5">
                             <div class="input-group">
-                              <input id="kode_layanan" type="text" class="form-control" name="kode_layanan" autofocus required>
+                              <input id="kode_obat" type="text" class="form-control" name="kode_obat" autofocus required>
                               <span class="input-group-btn">
-                                <button onclick="showLayanan()" type="button" class="btn btn-info">...</button>
+                                <button onclick="showObat()" type="button" class="btn btn-info">...</button>
                               </span>
                             </div>
                           </div>
                       </div>
                 </form>
                 <h5> <i data-feather="shopping-cart" class="icon-dual"></i> Cart :</h5>
-                    <table id="ttransaksilayanan" class="table table-striped tabel-layanan">
+                    <table id="ttransaksiobat" class="table table-striped tabel-obat">
                         <thead style="display: none">
                         <tr>
-                            <th>Nama Layanan</th>
+                            <th>Nama Obat</th>
                             <th>Harga</th>
                             <th>Aksi</th>
                         </tr>
@@ -51,13 +51,14 @@
                             </tr>
                         </tfoot>
                     </table>
-                    <form method="POST" id="formtotal" action="{{ url('/dokterlayanan/update/') }}" enctype="multipart/form-data">
+                    <form method="POST" id="formtotal" action="{{ url('/dokterobat/update/') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="form-group row mb- col-md-12">
                             <label for="total" class="col-8 col-form-label"></label>
                             <div class="col-4">
                                 <input type="text" id="kodetransaksi" name="kodetransaksi" value="{{ $transaksi->kode_transaksi }}" hidden>
                                 <input type="text" id="total" name="total" value="" hidden>
+                                <input type="text" id="totallayanan" name="totallayanan" value="{{ $transaksi->total_harga }}" hidden>
                             </div>
                         </div>
                         <center><button class="btn btn-info waves-effect waves-light" type="submit">Simpan</button></center>
@@ -67,23 +68,23 @@
     </div>
 </div>
 
-<div class="modal" id="modal-layanan" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+<div class="modal" id="modal-obat" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog modal-lg">
        <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Layanan Delta Animal Medical Care</h3>
+                <h3 class="modal-title">Delta Animal Medical Care</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"> &times; </span> </button>
             </div>
             <div class="modal-body">
-                <form method="post" id="form-addlayanan">
+                <form method="post" id="form-addobat">
                     {{ csrf_field() }}
                     <input type="hidden" name="kode_transaksi" value="{{ $transaksi->kode_transaksi }}">
-                <table id="tlayanan" class="table table-striped tabel-layanan">
+                <table id="tobat" class="table table-striped tabel-obat">
                     <thead style="display: none">
                         <tr>
                             <th></th>
-                            <th>Kode Layanan</th>
-                            <th>Nama Layanan</th>
+                            <th>Kode Obat</th>
+                            <th>Nama Obat</th>
                             <th>Harga</th>
                         </tr>
                     </thead>
@@ -91,7 +92,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <a onclick="pilihLayanan()" class="btn btn-info"> Pilih Layanan </a>
+                <a onclick="pilihObat()" class="btn btn-info"> Pilih Obat </a>
                 <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -116,15 +117,15 @@ $(document).ready(function() {
             }
         });
         function loadData() {
-            $('#tlayanan').dataTable({
-                "ajax": "{{ url('/dokterlayanan/dataLayanan') }}",
+            $('#tobat').dataTable({
+                "ajax": "{{ url('/dokterobat/dataObat') }}",
                 "columns": [
-                    { data: 'kode_layanan',
+                    { data: 'kode_obat',
                       render: function(data){
-                        return'<input type="checkbox" name="kode_layanan[]" value="'+data+'">';
+                        return'<input type="checkbox" name="kode_obat[]" value="'+data+'">';
                         }
                     },
-                    { "data": "kode_layanan",
+                    { "data": "kode_obat",
                         sClass: 'text-center' },
                     { "data": "nama",
                         sClass: 'text-center'},
@@ -157,15 +158,15 @@ $(document).ready(function() {
         } loadData();
 
         function loadData2() {
-            $('#ttransaksilayanan').dataTable({
-                "ajax": "{{ url('/dokterlayanan/dataKeranjang') }}",
+            $('#ttransaksiobat').dataTable({
+                "ajax": "{{ url('/dokterobat/dataKeranjang') }}",
                 "columns": [
-                    { "data": "layanan.nama",
+                    { "data": "obat.nama",
                         sClass: 'text-center'},
-                    { "data": "layanan.harga",
+                    { "data": "obat.harga",
                         sClass: 'text-center'},
                     {
-                        data: 'kode_layanan',
+                        data: 'kode_obat',
                         sClass: 'text-center',
                         render: function(data) {
                             return'<a href="#" data-id="'+data+'" id="delete" class="btn btn-danger waves-effect waves-light btn-xs" title="hapus">hapus </a>';
@@ -226,11 +227,11 @@ $(document).ready(function() {
             var id = $(this).data('id');
             if (confirm("Yakin ingin menghapus data?")){
                 $.ajax({
-                    url : "{{ url('dokterlayanan/delete') }}/"+id,
+                    url : "{{ url('dokterobat/delete') }}/"+id,
 
                     success :function () {
 
-                        $('#ttransaksilayanan').DataTable().destroy();
+                        $('#ttransaksiobat').DataTable().destroy();
                         loadData2();
 
 
@@ -239,16 +240,16 @@ $(document).ready(function() {
             }
         });
     });
-    function showLayanan(){
-        $('#modal-layanan').modal('show');
+    function showObat(){
+        $('#modal-obat').modal('show');
     }
 
-    function pilihLayanan(){
+    function pilihObat(){
             if($('input:checked').length < 1){
-                alert('Pilih layanan yang ditambahkan!');
+                alert('Pilih obat yang ditambahkan!');
             }else{
-                $('#form-addlayanan').attr('action', "dokterlayanan/store").submit();
-                $('#modal-layanan').modal('hide');
+                $('#form-addobat').attr('action', "dokterobat/store").submit();
+                $('#modal-obat').modal('hide');
             }
         }
 

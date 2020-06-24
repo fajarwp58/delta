@@ -8,7 +8,7 @@ class TransaksiLayanan extends Model
 {
     protected $table = 'transaksi_layanan';
     protected $fillable = [
-        'kode_layanan', 'kode_transaksi',
+        'kode_layanan', 'kode_transaksi'
     ];
 
     public $timestamps = false;

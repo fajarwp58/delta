@@ -25,7 +25,7 @@ class ObatController extends Controller
 
         return DataTables::of($obat)
         ->editColumn('harga', function ($obat) {
-            return 'Rp. '.format_uang($obat->harga).',-';
+            return 'Rp. '.format_uang($obat->harga);
         })
         ->toJson();
     }

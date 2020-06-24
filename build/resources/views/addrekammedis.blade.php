@@ -104,7 +104,7 @@
                     </div>
                     <div class="form-group row mb-3 col-md-4">
                         <label for="clinical_sign" class="col-4 col-form-label">Clinical Sign</label>
-                        <div class="col-7">
+                        <div class="col-8">
                             <input type="date"  class="form-control" id="clinical_sign" name="clinical_sign" value="{{ $now }}" required>
                         </div>
                         <span class="text-danger" id="clinical_signError"></span>

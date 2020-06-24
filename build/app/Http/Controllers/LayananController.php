@@ -26,7 +26,7 @@ class LayananController extends Controller
 
         return DataTables::of($layanan)
         ->editColumn('harga', function ($layanan) {
-            return 'Rp. '.format_uang($layanan->harga).',-';
+            return 'Rp. '.format_uang($layanan->harga);
         })
         ->toJson();
     }

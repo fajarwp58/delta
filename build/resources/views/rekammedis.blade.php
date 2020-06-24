@@ -10,7 +10,7 @@
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">
-                        Rekam Medis Delta Animal Medical Care
+                       Tambah Rekam Medis Delta Animal Medical Care
                 </h4>
             </div>
 
@@ -32,7 +32,7 @@
 <br /><br />
             <div class="card-header">
                 <h4 class="card-title">
-                        Data Rekam Medis Delta Animal Medical Care
+                       Kelola Data Rekam Medis Delta Animal Medical Care
                 </h4>
             </div>
 
@@ -42,7 +42,7 @@
                     <thead>
                         <tr>
                             <th>Nama Hewan</th>
-                            <th>Berat Badan</th>
+                            <th>Clinical Sign</th>
                             <th>Diagnosa</th>
                             <th>Aksi</th>
                         </tr>
@@ -163,7 +163,7 @@
                 "columns": [
                     { "data": "hewan.nama_hewan",
                         sClass: 'text-center' },
-                    { "data": "berat_badan",
+                    { "data": "clinical_sign",
                         sClass: 'text-center' },
                     { "data": "diagnosa",
                         sClass: 'text-center'},

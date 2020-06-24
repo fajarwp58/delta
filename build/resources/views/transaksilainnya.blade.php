@@ -26,8 +26,9 @@
                     <tr>
                         <th>No Invoice</th>
                         <th>Nama Hewan</th>
+                        <th>Tgl / Jam</th>
                         <th>Nama Layanan</th>
-                        <th>Obat</th>
+                        <th>Total Bayar</th>
                         <th>Aksi</th>
                     </tr>
                     </thead>
@@ -161,9 +162,11 @@
                         sClass: 'text-center' },
                     { "data": "hewan.nama_hewan",
                         sClass: 'text-center'},
+                    { "data": "waktu",
+                        sClass: 'text-center'},
                     { "data": "layanan",
                         sClass: 'text-center'},
-                    { "data": "obat",
+                    { "data": "total_harga",
                         sClass: 'text-center'},
                     {
                         data: 'kode_transaksi',
@@ -177,7 +180,7 @@
                 ],
                 columnDefs: [
                     {
-                        width: "150px",
+                        width: "50px",
                         targets: [0]
                     },
                     {
@@ -185,28 +188,26 @@
                         targets: [1]
                     },
                     {
-                        width: "100px", targets: [2],
+                        width: "75px",
+                        targets: [2]
+                    },
+                    {
+                        width: "150px", targets: [3],
                         render: function (data, type, full, meta) {
                             var hasil = '';
                             data.forEach((item, id)=>{
-                                hasil += '- '+item.nama+' '+'('+item.harga+')'+'<br> ';
+                                hasil += '- '+item.nama+'<br>';
                             });
                             return hasil;
                         }
                     },
                     {
-                        width: "100px", targets: [3],
-                        render: function (data, type, full, meta) {
-                            var hasil = '';
-                            data.forEach((item, id)=>{
-                                hasil += '- '+item.nama+' '+'('+item.harga+')'+'<br> ';
-                            });
-                            return hasil;
-                        }
+                        width: "75px",
+                        targets: [4]
                     },
                     {
                         width: "150px",
-                        targets: [4]
+                        targets: [5]
                     },
                 ],
                 scrollX: true,

@@ -105,6 +105,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Dokter']], functio
         Route::get('/', 'RekammedisController@index')->name('rekammedis');
         Route::get('datahewan', 'RekammedisController@datahewan');
         Route::get('data', 'RekammedisController@data');
+        Route::get('cetakrm/{id}', 'RekammedisController@cetakRm');
         Route::get('addrekammedis/{id}', 'RekammedisController@addrekammedis');
         Route::post('create', 'RekammedisController@create');
         Route::post('update/{id}', 'RekammedisController@update');
@@ -113,9 +114,20 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Dokter']], functio
 
     Route::group(['prefix' => 'dokterlayanan'], function () {
         Route::get('/', 'TransaksilayananController@index')->name('dokterlayanan');
-        Route::post('create', 'TransaksilayananController@create');
-        Route::get('listlayanan', 'TransaksilayananController@listlayanan');
-        Route::get('listobat', 'TransaksilayananController@listobat');
+        Route::get('dataLayanan', 'TransaksilayananController@dataLayanan');
+        Route::get('dataKeranjang', 'TransaksilayananController@dataKeranjang');
+        Route::post('store', 'TransaksilayananController@store');
+        Route::post('update', 'TransaksilayananController@update');
+        Route::get('delete/{id}', 'TransaksilayananController@delete');
+    });
+
+    Route::group(['prefix' => 'dokterobat'], function () {
+        Route::get('/', 'TransaksiobatController@index')->name('dokterobat');
+        Route::get('dataObat', 'TransaksiobatController@dataObat');
+        Route::get('dataKeranjang', 'TransaksiobatController@dataKeranjang');
+        Route::post('store', 'TransaksiobatController@store');
+        Route::post('update', 'TransaksiobatController@update');
+        Route::get('delete/{id}', 'TransaksiobatController@delete');
     });
 
     Route::group(['prefix' => 'transaksilainnya'], function () {

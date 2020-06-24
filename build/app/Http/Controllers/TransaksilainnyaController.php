@@ -26,8 +26,8 @@ class TransaksilainnyaController extends Controller
     {
         $transaksi = Transaksi::with(['users','hewan','obat','layanan'])->get();
         return DataTables::of($transaksi)
-        ->editColumn('harga', function ($transaksi) {
-            return 'Rp. '.format_uang($transaksi->total_harga).',-';
+        ->editColumn('total_harga', function ($transaksi) {
+            return 'Rp. '.format_uang($transaksi->total_harga);
         })
         ->toJson();
     }

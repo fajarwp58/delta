@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2020 at 06:32 PM
+-- Generation Time: Jun 21, 2020 at 10:44 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -166,9 +166,7 @@ CREATE TABLE `kandang_hewan` (
   `kandang_id` int(11) NOT NULL,
   `kode_hewan` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tgl_masuk` date NOT NULL,
-  `tgl_keluar` date NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `tgl_keluar` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -279,7 +277,7 @@ CREATE TABLE `riwayat_pemeriksaan` (
   `suhu` float NOT NULL,
   `berat_badan` float NOT NULL,
   `anamnesa` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `clinical_sign` date NOT NULL DEFAULT current_timestamp(),
+  `clinical_sign` date NOT NULL,
   `diagnosa` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `pragnosa` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `terapi` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL
@@ -290,7 +288,7 @@ CREATE TABLE `riwayat_pemeriksaan` (
 --
 
 INSERT INTO `riwayat_pemeriksaan` (`riwayat_pemeriksaan_id`, `no_reg`, `suhu`, `berat_badan`, `anamnesa`, `clinical_sign`, `diagnosa`, `pragnosa`, `terapi`) VALUES
-('RM-739I41A', 'REG9597541', 17, 34, 'aaaaa', '2020-06-12', 'asdsadsd', 'aaaa', 'qweerty');
+('RM-Z25G544', 'REG9597541', 17, 22, 'asd', '2020-06-21', 'dsa', 'aaa', NULL);
 
 -- --------------------------------------------------------
 
@@ -323,15 +321,15 @@ CREATE TABLE `transaksi` (
   `dokter_id` varchar(17) COLLATE utf8mb4_unicode_ci NOT NULL,
   `kode_hewan` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
   `waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `deposit` int(11) DEFAULT NULL
+  `total_harga` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`kode_transaksi`, `dokter_id`, `kode_hewan`, `waktu`, `deposit`) VALUES
-('INV-94774', 'US-533A7', 'REG9597541', '2020-06-12 07:00:42', NULL);
+INSERT INTO `transaksi` (`kode_transaksi`, `dokter_id`, `kode_hewan`, `waktu`, `total_harga`) VALUES
+('INV-09935', 'US-533A7', 'REG9597541', '2020-06-21 01:15:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -362,9 +360,7 @@ CREATE TABLE `transaksi_layanan` (
 --
 
 INSERT INTO `transaksi_layanan` (`kode_transaksi`, `kode_layanan`) VALUES
-('INV-94774', 'LYN-6Q51'),
-('INV-94774', 'LYN-9Y61'),
-('INV-94774', 'LYN-6Q51');
+('INV-09935', 'LYN-6Q51');
 
 -- --------------------------------------------------------
 
@@ -373,9 +369,16 @@ INSERT INTO `transaksi_layanan` (`kode_transaksi`, `kode_layanan`) VALUES
 --
 
 CREATE TABLE `transaksi_obat` (
-  `kode_obat` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `kode_transaksi` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL
+  `kode_transaksi` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kode_obat` varchar(12) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `transaksi_obat`
+--
+
+INSERT INTO `transaksi_obat` (`kode_transaksi`, `kode_obat`) VALUES
+('INV-09935', NULL);
 
 -- --------------------------------------------------------
 
@@ -647,21 +650,21 @@ ALTER TABLE `transaksi`
 -- Constraints for table `transaksi_lainnya`
 --
 ALTER TABLE `transaksi_lainnya`
-  ADD CONSTRAINT `constraint_lainnya_transaksi` FOREIGN KEY (`kode_transaksi`) REFERENCES `transaksi` (`kode_transaksi`);
+  ADD CONSTRAINT `constraint_lainnya_transaksi` FOREIGN KEY (`kode_transaksi`) REFERENCES `transaksi` (`kode_transaksi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `transaksi_layanan`
 --
 ALTER TABLE `transaksi_layanan`
-  ADD CONSTRAINT `constraint_layanan` FOREIGN KEY (`kode_layanan`) REFERENCES `layanan` (`kode_layanan`),
-  ADD CONSTRAINT `constraint_layanan_transaksi` FOREIGN KEY (`kode_transaksi`) REFERENCES `transaksi` (`kode_transaksi`);
+  ADD CONSTRAINT `constraint_layanan` FOREIGN KEY (`kode_layanan`) REFERENCES `layanan` (`kode_layanan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `constraint_layanan_transaksi` FOREIGN KEY (`kode_transaksi`) REFERENCES `transaksi` (`kode_transaksi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `transaksi_obat`
 --
 ALTER TABLE `transaksi_obat`
-  ADD CONSTRAINT `constraint_obat_transaksi` FOREIGN KEY (`kode_transaksi`) REFERENCES `transaksi` (`kode_transaksi`),
-  ADD CONSTRAINT `constraint_transaksi_obat` FOREIGN KEY (`kode_obat`) REFERENCES `obat` (`kode_obat`);
+  ADD CONSTRAINT `constraint_obat_transaksi` FOREIGN KEY (`kode_transaksi`) REFERENCES `transaksi` (`kode_transaksi`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `constraint_transaksi_obat` FOREIGN KEY (`kode_obat`) REFERENCES `obat` (`kode_obat`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `users`

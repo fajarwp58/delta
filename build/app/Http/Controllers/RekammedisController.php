@@ -35,6 +35,10 @@ class RekammedisController extends Controller
         return DataTables::of($rekammedis)->tojson();
     }
 
+    public function cetakRm($id){
+        return view('cetakRm');
+    }
+
     public function addrekammedis($id){
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $characters1 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
