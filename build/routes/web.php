@@ -105,7 +105,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Dokter']], functio
         Route::get('/', 'RekammedisController@index')->name('rekammedis');
         Route::get('datahewan', 'RekammedisController@datahewan');
         Route::get('data', 'RekammedisController@data');
-        Route::get('cetakrm/{id}', 'RekammedisController@cetakRm');
+        Route::get('view/{id}', 'RekammedisController@view');
         Route::get('addrekammedis/{id}', 'RekammedisController@addrekammedis');
         Route::post('create', 'RekammedisController@create');
         Route::post('update/{id}', 'RekammedisController@update');
@@ -166,6 +166,9 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Pasien']], functio
         Route::post('create', 'BookingController@create');
         //Route::post('update/{id}', 'BookingController@update');
         //Route::get('delete/{id}', 'BookingController@delete');
+        Route::get('databookinguser', 'BookingController@databookingUser')->name('databookinguser');;
+        Route::get('databooking/dataUser', 'BookingController@dataUser');
+        Route::get('databooking/delete/{id}', 'BookingController@delete');
     });
 
 

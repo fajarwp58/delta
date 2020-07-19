@@ -20,7 +20,7 @@
                     <thead>
                     <tr>
                         <th>Waktu Booking</th>
-                        <th>Nama Hewan</th>
+                        <th>Nama</th>
                         <th>Tanggal</th>
                         <th>Status</th>
                         <th>Aksi</th>
@@ -58,8 +58,8 @@
                         <label for="statuss">Status</label>
                         <select class="form-control" id="statuss" name="statuss" required>
                             <option value="">Pilih Status</option>
-                            <option value="1">Dibooking</option>
-                            <option value="2">Selesai</option>
+                            <option value="1">Tidak Disetujui</option>
+                            <option value="2">Disetujui</option>
                         </select>
                     </div>
 
@@ -100,20 +100,20 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        <a class="text-gray">Nama</a>
+                                    </td>
+                                    <td>:</td>
+                                    <td>
+                                        <a class="text-gray" id="dnama"></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         <a class="text-gray">Nama Hewan</a>
                                     </td>
                                     <td>:</td>
                                     <td>
                                         <a class="text-gray" id="dnamahewan"></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a class="text-gray">Jenis Kelamin</a>
-                                    </td>
-                                    <td>:</td>
-                                    <td>
-                                        <a class="text-gray" id="djeniskelamin"></a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -179,9 +179,9 @@
             $('#tdatabooking').dataTable({
                 "ajax": "{{ url('/booking/databooking/data') }}",
                 "columns": [
-                    { "data": "waktu_booking.jam",
+                    { "data": "jam",
                         sClass: 'text-center' },
-                    { "data": "hewan.nama_hewan",
+                    { "data": "nama",
                         sClass: 'text-center' },
                     { "data": "tanggal_booking",
                         sClass: 'text-center'},
@@ -247,8 +247,8 @@
         $(document).on('click', '#edit', function() {
             var data = $('#tdatabooking').DataTable().row($(this).parents('tr')).data();
             $('#mdatabooking').modal('show');
-            $('#jam').val(data.waktu_booking.jam).change();
-            if (data.status=="Dibooking"){
+            $('#jam').val(data.jam).change();
+            if (data.status=="Tidak Disetujui"){
                 $('#statuss').val(1).change();
             }
             else{
@@ -261,9 +261,9 @@
             var data = $('#tdatabooking').DataTable().row($(this).parents('tr')).data();
             $('#mddatabooking').modal('show');
             $('#dbookingid').text(data.booking_id);
-            $('#dnamahewan').text(data.hewan.nama_hewan);
-            $('#djeniskelamin').text(data.hewan.jenis_kelamin);
-            $('#dwaktubookingid').text(data.waktu_booking.jam);
+            $('#dnama').text(data.nama);
+            $('#dnamahewan').text(data.nama_hewan);
+            $('#dwaktubookingid').text(data.jam);
             $('#dtanggalbooking').text(data.tanggal_booking);
             $('#dstatus').text(data.status);
         });

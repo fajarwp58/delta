@@ -24,7 +24,7 @@ class TransaksilainnyaController extends Controller
 
     public function data()
     {
-        $transaksi = Transaksi::with(['users','hewan','obat','layanan'])->get();
+        $transaksi = Transaksi::with(['users','hewan','obat','layanan'])->orderBY('waktu','DESC')->get();
         return DataTables::of($transaksi)
         ->editColumn('total_harga', function ($transaksi) {
             return 'Rp. '.format_uang($transaksi->total_harga);

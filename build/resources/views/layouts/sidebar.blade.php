@@ -159,9 +159,23 @@
 
                 @else
                 <li>
-                    <a href="{{ route('profile') }}" >
+                    <a href="{{ route('home') }}" >
                         <i data-feather="airplay"></i>
                         <span> Dashboards </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('profile') }}" >
+                        <i data-feather="user"></i>
+                        <span> Profile </span>
+                    </a>
+                </li>
+                <li class="menu-title mt-2">Apps</li>
+
+                <li>
+                    <a href="{{ route('booking') }}">
+                        <i data-feather="calendar"></i>
+                        <span> Booking </span>
                     </a>
                 </li>
                 <li>
@@ -170,13 +184,10 @@
                         <span> Kelola Hewan </span>
                     </a>
                 </li>
-
-                <li class="menu-title mt-2">Apps</li>
-
                 <li>
-                    <a href="{{ route('booking') }}">
-                        <i data-feather="calendar"></i>
-                        <span> Booking </span>
+                    <a href="{{ route('databookinguser') }}" >
+                        <i data-feather="archive"></i>
+                        <span> Kelola Data Booking </span>
                     </a>
                 </li>
 

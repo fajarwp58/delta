@@ -41,7 +41,8 @@
                 <table id="tuser" class="table activate-select dt-responsive nowrap w-100">
                     <thead>
                     <tr>
-                        <th width="20"><input type="checkbox" value="1" id="select-all"></th>
+                        {{-- <th width="20"><input type="checkbox" value="1" id="select-all"></th> --}}
+                        <th width="20"></th>
                         <th>Username</th>
                         <th>phone</th>
                         <th>Role</th>
@@ -201,7 +202,7 @@
                 "columns": [
                     { data: 'user_id',
                       render: function(data){
-                        return'<input type="checkbox" name="user_id[]" value="'+data+'">';
+                        return'<input type="checkbox" name="user_id[]" value="'+data+'" checked>';
                         }
                     },
                     { "data": "username" },

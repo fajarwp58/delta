@@ -35,7 +35,7 @@ class HomeController extends Controller
         }
 
         else {
-            return view('profile', compact('datamember'));
+            return view('home', compact('datamember'));
         }
 
     }

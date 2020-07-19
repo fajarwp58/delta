@@ -171,7 +171,7 @@
                             data: 'riwayat_pemeriksaan_id',
                             sClass: 'text-center',
                             render: function(data) {
-                                return'<a href="#" data-id="'+data+'" id="detail" class="btn btn-info waves-effect waves-light btn-xs" title="detail">detail </a> &nbsp;'+
+                                return'<a href="#" data-id="'+data+'" id="view" class="btn btn-info waves-effect waves-light btn-xs" title="view">view </a> &nbsp;'+
                                 '<a href="#" data-id="'+data+'" id="edit" class="btn btn-warning waves-effect waves-light btn-xs" title="edit">edit </a> &nbsp;'+
                                 '<a href="#" data-id="'+data+'" id="delete" class="btn btn-danger waves-effect waves-light btn-xs" title="hapus">delete </a>';
                             }
@@ -267,6 +267,11 @@
                     }
                 })
             }
+        });
+
+         $(document).on('click', '#view', function() {
+            var data = $('#trekammedis').DataTable().row($(this).parents('tr')).data();
+            window.location.href = '{{ url('rekammedis/view') }}/'+data.riwayat_pemeriksaan_id ;
         });
 
         $('#mrekammedis').on('hidden.bs.modal', function () {

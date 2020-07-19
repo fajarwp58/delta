@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Booking;
 use App\Hewan;
 use App\WaktuBooking;
@@ -26,24 +27,46 @@ class BookingController extends Controller
         return view('databooking', compact('booking','now'));
     }
 
+    public function databookingUser(){
+        $booking = Booking::all();
+        $now = Carbon::parse()->format('Y-m-d');
+        return view('databookinguser', compact('booking','now'));
+    }
+
     public function data()
     {
-        $booking = Booking::with(['hewan', 'waktu_booking'])->get();
+        $booking = DB::table('booking')
+        ->join('waktu_booking','waktu_booking.waktu_booking_id','=','booking.waktu_booking_id')
+        ->join('hewan','hewan.kode','=','booking.kode_hewan')
+        ->join('users','users.user_id','=','hewan.user_id')
+        ->get();
         return DataTables::of($booking)
         ->editColumn('status', function ($booking) {
             if($booking->status == 1)
-                return 'Dibooking';
+                return 'Tidak Disetujui';
 
                 else
-                    return 'Selesai';
+                    return 'Disetujui';
                 })
-        ->editColumn('hewan.jenis_kelamin', function ($booking) {
+            ->toJson();
+    }
+
+    public function dataUser()
+    {
+        $booking = DB::table('booking')
+        ->join('waktu_booking','waktu_booking.waktu_booking_id','=','booking.waktu_booking_id')
+        ->join('hewan','hewan.kode','=','booking.kode_hewan')
+        ->join('users','users.user_id','=','hewan.user_id')
+        ->where('users.user_id','=',Auth::User()->user_id)
+        ->get();
+        return DataTables::of($booking)
+        ->editColumn('status', function ($booking) {
             if($booking->status == 1)
-                return 'Jantan';
+                return 'Tidak Disetujui';
 
                 else
-                    return 'Betina';
-                        })
+                    return 'Disetujui';
+                })
             ->toJson();
     }
 
@@ -89,7 +112,7 @@ class BookingController extends Controller
 
         $waktu_booking->update();
 
-        return redirect('booking')->with(['success' => 'Booking Berhasil']);
+        return redirect('booking/databookinguser')->with(['success' => 'Booking Berhasil']);
 
     }
 

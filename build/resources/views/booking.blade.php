@@ -15,12 +15,6 @@
             <div class="card-header">
                 <h4>Booking <span class="small">Jadwal Klinik</span></h4>
             </div>
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success alert-block">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    <strong>{{ $message }}</strong>
-                </div>
-            @endif
             <div class="card-body">
                 @if ($total_wb != 0)
                 <div class="row">
