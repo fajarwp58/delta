@@ -37,7 +37,10 @@ class RekammedisController extends Controller
 
     public function view($id)
     {
-        return view('viewRMedis');
+        $hewan = Hewan::with('users','jenis_hewan')->where('kode',$id)->first();
+        $rekammedis = RiwayatPemeriksaan::with('hewan')->orderBY('clinical_sign', 'DESC')->where('no_reg',$id)->get();
+
+        return view('viewRMedis', compact('hewan','rekammedis'));
     }
 
 

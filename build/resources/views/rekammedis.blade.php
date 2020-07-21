@@ -271,7 +271,7 @@
 
          $(document).on('click', '#view', function() {
             var data = $('#trekammedis').DataTable().row($(this).parents('tr')).data();
-            window.location.href = '{{ url('rekammedis/view') }}/'+data.riwayat_pemeriksaan_id ;
+            window.location.href = '{{ url('rekammedis/view') }}/'+data.hewan.kode ;
         });
 
         $('#mrekammedis').on('hidden.bs.modal', function () {

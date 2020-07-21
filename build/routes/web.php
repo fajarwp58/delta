@@ -84,6 +84,14 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Dokter']], functio
         Route::get('listjenispenyakit', 'PenyakitController@listjenispenyakit');
     });
 
+    Route::group(['prefix' => 'chat'], function () {
+        Route::get('/', 'ChatController@index')->name('chat');
+    });
+
+    Route::group(['prefix' => 'contacts'], function () {
+        Route::get('/', 'ContactsController@get');
+    });
+
     Route::group(['prefix' => 'obat'], function () {
         Route::get('/', 'ObatController@index')->name('obat');
         Route::get('data', 'ObatController@data');
