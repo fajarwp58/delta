@@ -13,6 +13,7 @@
                 <div class="card-body" id="app">
                     <chat-app :user="{{ Auth()->user() }}"></chat-app>
                 </div>
+                <script src="{{ asset('assets/js/app.js') }}"></script>
             </div>
         </div>
     </div>

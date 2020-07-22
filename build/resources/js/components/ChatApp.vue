@@ -25,7 +25,7 @@
         },
         mounted() {
             console.log(this.user);
-            axios.get('/contacts')
+            axios.get('/delta/contacts')
                 .then((response) => {
                     this.contacts = response.data;
                 });

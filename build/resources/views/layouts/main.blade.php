@@ -62,7 +62,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-6">
-                                2020 - <script>document.write(new Date().getFullYear())</script> &copy; Website by <a href="#">Fajar Wirya Putra</a>
+                                2020 - <script>2020</script> &copy; Website by <a href="#">Fajar Wirya Putra</a>
                             </div>
                             <div class="col-md-6">
                                 <div class="text-md-right footer-links d-none d-sm-block">

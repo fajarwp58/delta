@@ -1937,7 +1937,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     console.log(this.user);
-    axios.get('/contacts').then(function (response) {
+    axios.get('/delta/contacts').then(function (response) {
       _this.contacts = response.data;
     });
   },
@@ -1958,6 +1958,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -37725,8 +37726,34 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {}
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "contacts-list" }, [
+    _c(
+      "ul",
+      _vm._l(_vm.contacts, function(contact) {
+        return _c("li", { key: contact.user_id }, [
+          _c("div", { staticClass: "avatar" }, [
+            _c("image", { attrs: { alt: contact.nama } })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "contact" }, [
+            _c("p", { staticClass: "nama" }, [_vm._v(_vm._s(contact.nama))]),
+            _vm._v(" "),
+            _c("p", { staticClass: "username" }, [
+              _vm._v(_vm._s(contact.username))
+            ])
+          ])
+        ])
+      }),
+      0
+    )
+  ])
+}
 var staticRenderFns = []
+render._withStripped = true
 
 
 
