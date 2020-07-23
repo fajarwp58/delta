@@ -8,12 +8,14 @@
     <div class="row justify-content-center">
         <div class="col-sm-12">
             <div class="card">
-                <div class="card-header">Chats</div>
+                <div class="card-header">
+                    <h3>Delta <span class="small">Messanger</span></h3>
+                </div>
 
                 <div class="card-body" id="app">
                     <chat-app :user="{{ Auth()->user() }}"></chat-app>
                 </div>
-                <script src="{{ asset('assets/js/app.js') }}"></script>
+                <script src="{{ asset('/build/public/js/app.js') }}" defer></script>
             </div>
         </div>
     </div>

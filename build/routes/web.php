@@ -90,6 +90,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Dokter']], functio
 
     Route::group(['prefix' => 'contacts'], function () {
         Route::get('/', 'ContactsController@get');
+        Route::get('/conversation/{id}', 'ContactsController@getMessagesFor');
     });
 
     Route::group(['prefix' => 'obat'], function () {
