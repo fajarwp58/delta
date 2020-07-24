@@ -1,5 +1,5 @@
 <template>
-    <div class="feed">
+    <div class="feed" ref="feed">
         <ul v-if="contact">
             <li v-for="message in messages" :class="`message${message.to == contact.user_id ? ' sent' : ' received'}`" :key="message.id">
                 <div class="text">
@@ -16,11 +16,25 @@
         props: {
             contact: {
                 type: Object,
-                required: true
             },
             messages: {
                 type: Array,
                 required: true
+            }
+        },
+        methods: {
+            scrollToBottom() {
+                setTimeout(() => {
+                    this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight - this.$refs.feed.clientHeight;
+                }, 50);
+            }
+        },
+        watch: {
+            contact(contact) {
+                this.scrollToBottom();
+            },
+            messages(messages) {
+                this.scrollToBottom();
             }
         }
     }
@@ -44,7 +58,7 @@
                 width: 100%;
 
                 .text {
-                    max-width: 200px;
+                    max-width: 300px;
                     border-radius: 5px;
                     padding: 12px;
                     display: inline-block;

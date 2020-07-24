@@ -1,6 +1,6 @@
 <template>
     <div class="chat-app">
-        <Conversation :contact="selectedContact" :messages="messages"/>
+        <Conversation :contact="selectedContact" :messages="messages" @new="saveNewMessage" />
         <ContactsList :contacts="contacts" @selected="startConversationWith" />
     </div>
 </template>
@@ -24,6 +24,11 @@
             };
         },
         mounted() {
+            Echo.private(`messages.${this.user.user_id}`)
+                .listen('NewMessage', (e) => {
+                    this.hanleIncoming(e.message);
+                });
+
             axios.get('/delta/contacts')
                 .then((response) => {
                     this.contacts = response.data;
@@ -31,11 +36,38 @@
         },
         methods: {
             startConversationWith(contact) {
+                this.updateUnreadCount(contact, true);
+
                 axios.get(`/delta/contacts/conversation/${contact.user_id}`)
                     .then((response) => {
                         this.messages = response.data;
                         this.selectedContact = contact;
                     })
+            },
+            saveNewMessage(message) {
+                this.messages.push(message);
+            },
+            hanleIncoming(message) {
+                if (this.selectedContact && message.from == this.selectedContact.user_id) {
+                    this.saveNewMessage(message);
+                    return;
+                }
+
+                this.updateUnreadCount(message.from_contact, false);
+            },
+            updateUnreadCount(contact, reset) {
+                this.contacts = this.contacts.map((single) => {
+                    if (single.id !== contact.user_id) {
+                        return single;
+                    }
+
+                    if (reset)
+                        single.unread = 0;
+                    else
+                        single.unread += 1;
+
+                    return single;
+                })
             }
         },
         components: {Conversation, ContactsList}

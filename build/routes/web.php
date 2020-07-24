@@ -73,7 +73,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Admin']], function
 
 });
 
-Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Dokter']], function () {
+Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Dokter', 'Pasien']], function () {
 
     Route::group(['prefix' => 'penyakit'], function () {
         Route::get('/', 'PenyakitController@index')->name('penyakit');
@@ -91,6 +91,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Dokter']], functio
     Route::group(['prefix' => 'contacts'], function () {
         Route::get('/', 'ContactsController@get');
         Route::get('/conversation/{id}', 'ContactsController@getMessagesFor');
+        Route::post('/conversation/send', 'ContactsController@send');
     });
 
     Route::group(['prefix' => 'obat'], function () {

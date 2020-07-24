@@ -23,11 +23,19 @@
         },
         methods: {
             sendMessage(text) {
-                console.log(text);
+                if (!this.contact) {
+                    return;
+                }
+
+                axios.post('/delta/contacts/conversation/send', {
+                    contact_id: this.contact.user_id,
+                    text: text
+                }).then((response) => {
+                    this.$emit('new', response.data);
+                })
             }
         },
         components: {MessagesFeed, MessageComposer}
-
     }
 </script>
 

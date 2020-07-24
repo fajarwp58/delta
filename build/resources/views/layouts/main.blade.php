@@ -101,6 +101,10 @@
         <!-- App js-->
         <script src="{{ asset('assets/js/app.min.js') }}"></script>
 
+        {{-- <script src="{{ asset('assets/js/pusher.min.js') }}"></script> --}}
+
+        {{-- <script src="http://{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script> --}}
+
         @yield('js')
     </body>
 

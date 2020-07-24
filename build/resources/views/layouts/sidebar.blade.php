@@ -171,6 +171,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ 'chat' }}" >
+                        <i data-feather="message-circle"></i>
+                        <span> Chats </span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('profile') }}" >
                         <i data-feather="user"></i>
                         <span> Profile </span>
