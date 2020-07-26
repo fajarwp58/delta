@@ -54,10 +54,11 @@
                 }
 
                 this.updateUnreadCount(message.from_contact, false);
+
             },
             updateUnreadCount(contact, reset) {
                 this.contacts = this.contacts.map((single) => {
-                    if (single.id !== contact.user_id) {
+                    if (single.user_id !== contact.user_id) {
                         return single;
                     }
 

@@ -1966,7 +1966,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateUnreadCount: function updateUnreadCount(contact, reset) {
       this.contacts = this.contacts.map(function (single) {
-        if (single.id !== contact.user_id) {
+        if (single.user_id !== contact.user_id) {
           return single;
         }
 
@@ -17928,7 +17928,7 @@ var Connector = /*#__PURE__*/function () {
       auth: {
         headers: {}
       },
-      authEndpoint: 'broadcasting/auth',
+      authEndpoint: '/delta/broadcasting/auth',
       broadcaster: 'pusher',
       csrfToken: null,
       host: null,
@@ -57207,19 +57207,11 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-var token = document.head.querySelector('meta[name="csrf-token"]');
-
-if (token) {
-  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-} else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
-}
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
  * allows your team to easily build robust real-time web applications.
  */
-
 
 
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
