@@ -23,8 +23,8 @@
                 </div>
                 <div class="col-6">
                     <div class="text-right">
-                        <h3 class="mt-1 text-dark">$<span data-plugin="counterup">58,947</span></h3>
-                        <p class="text-muted mb-1 text-truncate">Total Revenue</p>
+                        <h3 class="mt-1 text-dark"><span data-plugin="counterup">{{ $user }}</span> User</h3>
+                        <p class="text-muted mb-1 text-truncate">Total User</p>
                     </div>
                 </div>
             </div> <!-- end row-->
@@ -39,8 +39,8 @@
                 </div>
                 <div class="col-6">
                     <div class="text-right">
-                        <h3 class="text-dark mt-1"><span data-plugin="counterup">127</span></h3>
-                        <p class="text-muted mb-1 text-truncate">Today's Sales</p>
+                        <h3 class="text-dark mt-1"><span data-plugin="counterup">{{ $hewan }}</span></h3>
+                        <p class="text-muted mb-1 text-truncate">Total Hewan Yang Berobat</p>
                     </div>
                 </div>
             </div> <!-- end row-->
@@ -55,8 +55,8 @@
                 </div>
                 <div class="col-6">
                     <div class="text-right">
-                        <h3 class="text-dark mt-1"><span data-plugin="counterup">0.58</span>%</h3>
-                        <p class="text-muted mb-1 text-truncate">Conversion</p>
+                        <h3 class="text-dark mt-1">Rp.<span data-plugin="counterup">{{ $totaltransaksihariini }}</span>,</h3>
+                        <p class="text-muted mb-1 text-truncate">Total Transaksi Hari Ini</p>
                     </div>
                 </div>
             </div> <!-- end row-->
@@ -71,8 +71,8 @@
                 </div>
                 <div class="col-6">
                     <div class="text-right">
-                        <h3 class="text-dark mt-1"><span data-plugin="counterup">78.41</span>k</h3>
-                        <p class="text-muted mb-1 text-truncate">Today's Visits</p>
+                        <h3 class="text-dark mt-1"><span data-plugin="counterup">{{  $totalbookinghariini }}</span> Booking</h3>
+                        <p class="text-muted mb-1 text-truncate">Total Booking Hari Ini</p>
                     </div>
                 </div>
             </div> <!-- end row-->

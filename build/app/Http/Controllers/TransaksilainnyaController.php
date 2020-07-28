@@ -8,6 +8,8 @@ use App\TransaksiLayanan;
 use App\TransaksiObat;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class TransaksilainnyaController extends Controller
 {
@@ -40,6 +42,50 @@ class TransaksilainnyaController extends Controller
       TransaksiLayanan::where('kode_transaksi', $id)->delete();
       Transaksi::where('kode_transaksi', $id)->delete();
 
+    }
+
+    public function create(Request $request)
+    {
+        $transaksilainnya = new TransaksiLainnya;
+        $transaksilainnya->kode_lainnya = $request->kode_lainnya;
+        $transaksilainnya->kode_transaksi = $request->kode_transaksi;
+        $transaksilainnya->nama = $request->nama;
+        $transaksilainnya->harga = $request->harga;
+
+        $transaksilainnya->save();
+
+        $transaksi = Transaksi::where('kode_transaksi',$request->kode_transaksi)->first();
+        $transaksi->total_harga = $transaksi->total_harga + $request->harga;
+
+        $transaksi->update();
+
+        return redirect('transaksilainnya')->with(['success' => 'Berhasil menyimpan layanan tambahan']);
+    }
+
+    public function cetak($id)
+    {
+        $transaksi = Transaksi::with('users','hewan','obat','layanan','transaksi_lainnya')->where('kode_transaksi',$id)->first();
+        $pemilik = DB::table('transaksi')
+        ->join('hewan','hewan.kode','=','transaksi.kode_hewan')
+        ->join('users','users.user_id','=','hewan.user_id')
+        ->where('hewan.kode','=',$transaksi->kode_hewan)
+        ->get();
+        $layanan = DB::table('transaksi_layanan')
+        ->join('layanan','layanan.kode_layanan','=','transaksi_layanan.kode_layanan')
+        ->where('transaksi_layanan.kode_transaksi','=',$transaksi->kode_transaksi)
+        ->get();
+        $obat = DB::table('transaksi_obat')
+        ->join('obat','obat.kode_obat','=','transaksi_obat.kode_obat')
+        ->where('transaksi_obat.kode_transaksi','=',$transaksi->kode_transaksi)
+        ->get();
+        $lainlain = DB::table('transaksi_lainnya')
+        ->join('transaksi','transaksi.kode_transaksi','=','transaksi_lainnya.kode_transaksi')
+        ->where('transaksi_lainnya.kode_transaksi','=',$transaksi->kode_transaksi)
+        ->get();
+        $tgltransaksi = Carbon::parse($transaksi->waktu)->format('d/m/Y');
+        //dd($transaksi);
+
+        return view('cetakTransaksi', compact('transaksi','pemilik','layanan','obat','lainlain','tgltransaksi'));
     }
 
 }

@@ -62,6 +62,22 @@
                 </li>
 
                 <li>
+                    <a href="{{ route('databooking') }}" >
+                        <i data-feather="archive"></i>
+                        <span> Kelola Data Booking </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('transaksilainnya') }}" >
+                        <i data-feather="dollar-sign"></i>
+                        <span> Kelola Transaksi </span>
+                    </a>
+                </li>
+
+                <li class="menu-title mt-2">Apps</li>
+
+                <li>
                     <a href="{{ route('kandang') }}" >
                         <i data-feather="lock"></i>
                         <span> Kelola Kandang </span>
@@ -75,50 +91,6 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="{{ route('databooking') }}" >
-                        <i data-feather="archive"></i>
-                        <span> Kelola Data Booking </span>
-                    </a>
-                </li>
-
-                <li class="menu-title mt-2">Apps</li>
-
-                <li>
-                    <a href="apps-calendar.html">
-                        <i data-feather="calendar"></i>
-                        <span> Booking </span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="apps-chat.html">
-                        <i data-feather="message-square"></i>
-                        <span> Chat </span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#sidebarProjects" data-toggle="collapse">
-                        <i data-feather="briefcase"></i>
-                        <span> Projects </span>
-                        <i data-feather="chevron-right" class="menu-arrow"></i>
-                    </a>
-                    <div class="collapse" id="sidebarProjects">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="project-list.html">List</a>
-                            </li>
-                            <li>
-                                <a href="project-detail.html">Detail</a>
-                            </li>
-                            <li>
-                                <a href="project-create.html">Create Project</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
                 @elseif(Auth::user()->role_id == 'R02')
                 <li>
                     <a href="{{ route('home') }}" >
@@ -127,27 +99,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ 'chat' }}" >
+                    <a href="{{ route('chat') }}" >
                         <i data-feather="message-circle"></i>
                         <span> Chats </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('penyakit') }}" >
-                        <i data-feather="thermometer"></i>
-                        <span> Kelola Penyakit </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('obat') }}" >
-                        <i data-feather="circle"></i>
-                        <span> Kelola Obat </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('layanan') }}" >
-                        <i data-feather="filter"></i>
-                        <span> Kelola Layanan </span>
                     </a>
                 </li>
                 <li>
@@ -163,6 +117,27 @@
                     </a>
                 </li>
 
+                <li class="menu-title mt-2">Apps</li>
+
+                <li>
+                    <a href="{{ route('layanan') }}" >
+                        <i data-feather="filter"></i>
+                        <span> Kelola Layanan </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('penyakit') }}" >
+                        <i data-feather="thermometer"></i>
+                        <span> Kelola Penyakit </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('obat') }}" >
+                        <i data-feather="circle"></i>
+                        <span> Kelola Obat </span>
+                    </a>
+                </li>
+
                 @else
                 <li>
                     <a href="{{ route('home') }}" >
@@ -171,25 +146,32 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ 'chat' }}" >
-                        <i data-feather="message-circle"></i>
-                        <span> Chats </span>
-                    </a>
-                </li>
-                <li>
                     <a href="{{ route('profile') }}" >
                         <i data-feather="user"></i>
                         <span> Profile </span>
                     </a>
                 </li>
-                <li class="menu-title mt-2">Apps</li>
-
+                <li>
+                    <a href="{{ route('chat') }}" >
+                        <i data-feather="message-circle"></i>
+                        <span> Chats </span>
+                    </a>
+                </li>
                 <li>
                     <a href="{{ route('booking') }}">
                         <i data-feather="calendar"></i>
                         <span> Booking </span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('historytransaksi') }}">
+                        <i data-feather="book-open"></i>
+                        <span> History Transaksi </span>
+                    </a>
+                </li>
+
+                <li class="menu-title mt-2">Apps</li>
+
                 <li>
                     <a href="{{ route('hewan') }}" >
                         <i data-feather="github"></i>

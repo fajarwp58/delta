@@ -93,14 +93,14 @@
 
         </div> <!-- end card-box -->
 
-        <div class="card-box">
+        {{-- <div class="card-box">
             <h4 class="header-title mb-3">List Jadwal</h4>
 
             <div class="text-left mt-2">
                 //
             </div>
 
-        </div> <!-- end card-box-->
+        </div> --}}
 
     </div> <!-- end col-->
 

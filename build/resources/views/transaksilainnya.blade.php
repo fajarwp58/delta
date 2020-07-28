@@ -157,6 +157,7 @@
         function loadData() {
             $('#ttransaksilainnya').dataTable({
                 "ajax": "{{ url('/transaksilainnya/data') }}",
+                "order": [[ 2, "desc" ]],
                 "columns": [
                     { "data": "kode_transaksi",
                         sClass: 'text-center' },
@@ -172,8 +173,8 @@
                         data: 'kode_transaksi',
                         sClass: 'text-center',
                         render: function(data) {
-                            return'<a href="#" data-id="'+data+'" id="detail" class="btn btn-info waves-effect waves-light btn-xs" title="detail">tambah </a> &nbsp;'+
-                                '<a href="#" data-id="'+data+'" id="edit" class="btn btn-warning waves-effect waves-light btn-xs" title="edit">print </a> &nbsp;'+
+                            return'<a href="#" data-id="'+data+'" id="tambah" class="btn btn-info waves-effect waves-light btn-xs" title="tambah">tambah </a> &nbsp;'+
+                                '<a href="#" data-id="'+data+'" id="cetak" class="btn btn-warning waves-effect waves-light btn-xs" title="cetak">cetak </a> &nbsp;'+
                                 '<a href="#" data-id="'+data+'" id="delete" class="btn btn-danger waves-effect waves-light btn-xs" title="hapus">delete </a>';
                         }
                     }
@@ -217,12 +218,15 @@
         } loadData();
 
 
-        $(document).on('click', '#addpenyakit', function() {
+        $(document).on('click', '#tambah', function() {
+            var data = $('#ttransaksilainnya').DataTable().row($(this).parents('tr')).data();
             var idmodal = "{{ $idmodal }}";
-            $('#mpenyakit').modal('show');
-            document.getElementById('div_kodepenyakit').style.display = 'block';
-            $('#kode_penyakit').val(idmodal).change();
-            $('#formpenyakit').attr('action', '{{ url('penyakit/create') }}');
+            $('#mtransaksilainnya').modal('show');
+            document.getElementById('div_kodelainnya').style.display = 'none';
+            //document.getElementById('div_kodepenyakit').style.display = 'block';
+            $('#kode_lainnya').val(idmodal).change();
+            $('#kode_transaksi').val(data.kode_transaksi).change();
+            $('#formtransaksilainnya').attr('action', '{{ url('transaksilainnya/create') }}');
         });
 
         $('#formpenyakit').submit(function(e) {
@@ -259,22 +263,18 @@
             });
         });
 
-        $(document).on('click', '#edit', function() {
-            var data = $('#tpenyakit').DataTable().row($(this).parents('tr')).data();
-            $('#mpenyakit').modal('show');
-            document.getElementById('div_kodepenyakit').style.display = 'none';
-            $('#nama').val(data.nama).change();
-            $('#jenis_penyakit_id').val(data.jenis_penyakit_id).change();
-            $('#formpenyakit').attr('action', '{{ url('penyakit/update') }}/'+data.kode_penyakit);
+        $(document).on('click', '#cetak', function() {
+            var data = $('#ttransaksilainnya').DataTable().row($(this).parents('tr')).data();
+            window.location.href = '{{ url('transaksilainnya/cetak') }}/'+data.kode_transaksi ;
         });
 
-        $(document).on('click', '#detail', function() {
-            var data = $('#tpenyakit').DataTable().row($(this).parents('tr')).data();
-            $('#mdpenyakit').modal('show');
-            $('#dkodepenyakit').text(data.kode_penyakit);
-            $('#djenispenyakit').text(data.jenis_penyakit.nama);
-            $('#dnamapenyakit').text(data.nama);
-        });
+        // $(document).on('click', '#detail', function() {
+        //     var data = $('#tpenyakit').DataTable().row($(this).parents('tr')).data();
+        //     $('#mdpenyakit').modal('show');
+        //     $('#dkodepenyakit').text(data.kode_penyakit);
+        //     $('#djenispenyakit').text(data.jenis_penyakit.nama);
+        //     $('#dnamapenyakit').text(data.nama);
+        // });
 
         $(document).on('click', '#delete', function() {
             var id = $(this).data('id');
@@ -289,19 +289,6 @@
 
 
                     }
-                })
-            }
-        });
-
-
-
-        $.ajax({
-            url: '{{ url('penyakit/listjenispenyakit') }}',
-            dataType: "json",
-            success: function(data) {
-                var jenis_penyakit = jQuery.parseJSON(JSON.stringify(data));
-                $.each(jenis_penyakit, function(k, v) {
-                    $('#jenis_penyakit_id').append($('<option>', {value:v.jenis_penyakit_id}).text(v.nama))
                 })
             }
         });

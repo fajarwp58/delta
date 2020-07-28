@@ -23,7 +23,9 @@ Route::get('logout', function(){
     return redirect('login');
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['prefix' => 'home'], function () {
+    Route::get('/', 'DashboardController@index')->name('home');
+});
 
 Route::group(['prefix' => 'user'], function () {
     Route::get('register', 'UserController@register');
@@ -73,7 +75,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Admin']], function
 
 });
 
-Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Dokter', 'Pasien']], function () {
+Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Dokter']], function () {
 
     Route::group(['prefix' => 'penyakit'], function () {
         Route::get('/', 'PenyakitController@index')->name('penyakit');
@@ -82,16 +84,6 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Dokter', 'Pasien']
         Route::post('update/{id}', 'PenyakitController@update');
         Route::get('delete/{id}', 'PenyakitController@delete');
         Route::get('listjenispenyakit', 'PenyakitController@listjenispenyakit');
-    });
-
-    Route::group(['prefix' => 'chat'], function () {
-        Route::get('/', 'ChatController@index')->name('chat');
-    });
-
-    Route::group(['prefix' => 'contacts'], function () {
-        Route::get('/', 'ContactsController@get');
-        Route::get('/conversation/{id}', 'ContactsController@getMessagesFor');
-        Route::post('/conversation/send', 'ContactsController@send');
     });
 
     Route::group(['prefix' => 'obat'], function () {
@@ -140,14 +132,6 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Dokter', 'Pasien']
         Route::get('delete/{id}', 'TransaksiobatController@delete');
     });
 
-    Route::group(['prefix' => 'transaksilainnya'], function () {
-        Route::get('/', 'TransaksilainnyaController@index')->name('transaksilainnya');
-        Route::get('data', 'TransaksilainnyaController@data');
-        Route::post('create', 'TransaksilainnyaController@create');
-        Route::post('update/{id}', 'TransaksilainnyaController@update');
-        Route::get('delete/{id}', 'TransaksilainnyaController@delete');
-    });
-
 });
 
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Pasien']], function () {
@@ -181,5 +165,32 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Pasien']], functio
         Route::get('databooking/delete/{id}', 'BookingController@delete');
     });
 
+    Route::group(['prefix' => 'historytransaksi'], function () {
+        Route::get('/', 'HistoryController@index')->name('historytransaksi');
+    });
+
+
+});
+
+Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Dokter','Pasien']], function () {
+
+    Route::group(['prefix' => 'contacts'], function () {
+        Route::get('/chat', 'ContactsController@index')->name('chat');
+        Route::get('/', 'ContactsController@get');
+        Route::get('/conversation/{id}', 'ContactsController@getMessagesFor');
+        Route::post('/conversation/send', 'ContactsController@send');
+    });
+
+});
+
+Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Admin','Dokter']], function () {
+    Route::group(['prefix' => 'transaksilainnya'], function () {
+        Route::get('/', 'TransaksilainnyaController@index')->name('transaksilainnya');
+        Route::get('data', 'TransaksilainnyaController@data');
+        Route::get('create', 'TransaksilainnyaController@create');
+        Route::post('update/{id}', 'TransaksilainnyaController@update');
+        Route::get('delete/{id}', 'TransaksilainnyaController@delete');
+        Route::get('cetak/{id}', 'TransaksilainnyaController@cetak');
+    });
 
 });

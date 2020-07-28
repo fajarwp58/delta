@@ -9,6 +9,11 @@ use App\Events\NewMessage;
 
 class ContactsController extends Controller
 {
+    public function index()
+    {
+        return view('chat');
+    }
+
     public function get()
     {
         // get all users except the authenticated one
