@@ -43,7 +43,7 @@
 							<label>Tanggal / Waktu Booking</label>
 							<div class="row">
 								<div class="col-sm-6">
-									<input class="form-control text-center" name="tanggal_booking" value="{{ $now }}" readonly />
+									<input type="date" class="form-control text-center" name="tanggal_booking" value="{{ $now }}" />
 								</div>
 								<div class="col-sm-3">
 									<input class="form-control text-center" name="waktu" value="{{ date('G:i', strtotime( $waktu_booking->jam )) }}" readonly />

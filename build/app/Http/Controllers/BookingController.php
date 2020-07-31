@@ -14,8 +14,10 @@ use Illuminate\Http\Request;
 class BookingController extends Controller
 {
     public function index(){
-        $waktu_booking = WaktuBooking::where('status_waktu', 1)->orderBY('jam','ASC')->get();
+        $now = Carbon::now();
+        $waktu_booking = WaktuBooking::where('status_waktu', 1)->where('jam','>',$now)->orderBY('jam','ASC')->get();
         $total_wb = WaktuBooking::where('status_waktu', 1)->count();
+        //dd($waktu_booking);
 
         //dd($jam);
         return view('booking',compact('waktu_booking','total_wb'));

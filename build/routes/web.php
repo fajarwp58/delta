@@ -25,6 +25,7 @@ Route::get('logout', function(){
 
 Route::group(['prefix' => 'home'], function () {
     Route::get('/', 'DashboardController@index')->name('home');
+    Route::get('jenis', 'DashboardController@alljenis');
 });
 
 Route::group(['prefix' => 'user'], function () {
