@@ -69,7 +69,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Admin']], function
         Route::get('databooking', 'BookingController@dataBooking')->name('databooking');
         Route::get('databooking/data', 'BookingController@data');
         Route::post('databooking/update/{id}', 'BookingController@update');
-        Route::get('databooking/delete/{id}', 'BookingController@delete');
+        Route::get('databooking/delete2/{id}', 'BookingController@delete2');
         Route::get('databooking/listwaktu', 'BookingController@listwaktu');
     });
 

@@ -15,7 +15,7 @@ class BookingController extends Controller
 {
     public function index(){
         $now = Carbon::now();
-        $waktu_booking = WaktuBooking::where('status_waktu', 1)->where('jam','>',$now)->orderBY('jam','ASC')->get();
+        $waktu_booking = WaktuBooking::where('status_waktu', 1)->where('jam_awal','>=',$now)->orderBY('jam_awal','ASC')->get();
         $total_wb = WaktuBooking::where('status_waktu', 1)->count();
         //dd($waktu_booking);
 
@@ -47,8 +47,14 @@ class BookingController extends Controller
             if($booking->status == 1)
                 return 'Tidak Disetujui';
 
-                else
+                elseif($booking->status == 2)
                     return 'Disetujui';
+
+                elseif($booking->status == 3)
+                    return 'Datang';
+
+                    else
+                        return 'Tidak datang / Dibatalkan';
                 })
             ->toJson();
     }
@@ -66,8 +72,14 @@ class BookingController extends Controller
             if($booking->status == 1)
                 return 'Tidak Disetujui';
 
-                else
+                elseif($booking->status == 2)
                     return 'Disetujui';
+
+                elseif($booking->status == 3)
+                    return 'Datang';
+
+                    else
+                        return 'Dibatalkan';
                 })
             ->toJson();
     }
@@ -124,14 +136,31 @@ class BookingController extends Controller
         $booking->status = $request->statuss;
         $booking->update();
 
-        $waktu_booking = WaktuBooking::where('waktu_booking_id',$id)->first();
-        $waktu_booking->status_waktu = 1;
-        $waktu_booking->update();
+        if($request->statuss = 4){
+            $waktu_booking = WaktuBooking::where('waktu_booking_id',$id)->first();
+            $waktu_booking->status_waktu = 1;
+            $waktu_booking->update();
+        }
+
     }
 
     public function delete($id)
     {
 
+        $booking = Booking::where('booking_id',$id)->first();
+        $booking->status = 4;
+        $booking->update();
+
+        $waktu_booking = WaktuBooking::where('waktu_booking_id',$booking->waktu_booking_id)->first();
+        $waktu_booking->status_waktu = 1;
+        $waktu_booking->update();
+
+      //Booking::where('booking_id', $id)->delete();
+
+    }
+
+    public function delete2($id)
+    {
       Booking::where('booking_id', $id)->delete();
 
     }

@@ -95,19 +95,12 @@
                         </div>
                         <span class="text-danger" id="suhuError"></span>
                     </div>
-                    <div class="form-group row mb-3 col-md-4">
-                        <label for="berat_badan" class="col-4 col-form-label">Berat Badan</label>
-                        <div class="col-8">
+                    <div class="form-group row mb-3 col-md-8">
+                        <label for="berat_badan" class="col-2 col-form-label">Berat Badan</label>
+                        <div class="col-5">
                             <input type="text"  class="form-control" id="berat_badan" name="berat_badan" placeholder="Berat Badan dalam KG" required>
                         </div>
                         <span class="text-danger" id="berat_badanError"></span>
-                    </div>
-                    <div class="form-group row mb-3 col-md-4">
-                        <label for="clinical_sign" class="col-4 col-form-label">Clinical Sign</label>
-                        <div class="col-8">
-                            <input type="date"  class="form-control" id="clinical_sign" name="clinical_sign" value="{{ $now }}" required>
-                        </div>
-                        <span class="text-danger" id="clinical_signError"></span>
                     </div>
                 </div>
                 <div class="form-group row mb-1 col-md-8">
@@ -143,6 +136,7 @@
                         <input class="form-control" id="dokter_id" name="dokter_id" value="{{ Auth::User()->user_id }}" hidden />
                         <input class="form-control" id="kode_transaksi" name="kode_transaksi" value="{{ $idmodal2 }}" hidden />
                         <input class="form-control" id="riwayat_pemeriksaan_id" name="riwayat_pemeriksaan_id" value="{{ $idmodal }}" hidden />
+                        <input type="date"  class="form-control" id="clinical_sign" name="clinical_sign" value="{{ $now }}" hidden/>
                         <input class="form-control" id="no_reg" name="no_reg" value="{{ $hewan->kode }}" hidden />
                         <a class="btn btn-warning" href="{{ route('rekammedis') }}">Batal</a>
                         <button class="btn btn-success" type="submit">Simpan</button>

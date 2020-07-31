@@ -68,7 +68,7 @@ class TransaksilainnyaController extends Controller
         $pemilik = DB::table('transaksi')
         ->join('hewan','hewan.kode','=','transaksi.kode_hewan')
         ->join('users','users.user_id','=','hewan.user_id')
-        ->where('hewan.kode','=',$transaksi->kode_hewan)
+        ->where('kode_transaksi','=',$transaksi->kode_transaksi)
         ->get();
         $layanan = DB::table('transaksi_layanan')
         ->join('layanan','layanan.kode_layanan','=','transaksi_layanan.kode_layanan')
@@ -83,7 +83,7 @@ class TransaksilainnyaController extends Controller
         ->where('transaksi_lainnya.kode_transaksi','=',$transaksi->kode_transaksi)
         ->get();
         $tgltransaksi = Carbon::parse($transaksi->waktu)->format('d/m/Y');
-        //dd($transaksi);
+        //dd($pemilik);
 
         return view('cetakTransaksi', compact('transaksi','pemilik','layanan','obat','lainlain','tgltransaksi'));
     }

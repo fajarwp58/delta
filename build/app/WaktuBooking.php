@@ -9,7 +9,7 @@ class WaktuBooking extends Model
     protected $table = 'waktu_booking';
     protected $primaryKey = 'waktu_booking_id';
     protected $fillable = [
-        'jam', 'status_waktu',
+        'jam_awal','jam_akhir', 'status_waktu',
     ];
 
     protected $keyType = 'string';

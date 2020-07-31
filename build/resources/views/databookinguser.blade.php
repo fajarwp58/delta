@@ -58,8 +58,9 @@
         function loadData() {
             $('#tdatabooking').dataTable({
                 "ajax": "{{ url('/booking/databooking/dataUser') }}",
+                "order": [[ 2, "desc" ]],
                 "columns": [
-                    { "data": "jam",
+                    { "data": "jam_awal",
                         sClass: 'text-center' },
                     { "data": "nama",
                         sClass: 'text-center' },
@@ -71,7 +72,7 @@
                         data: 'booking_id',
                         sClass: 'text-center',
                         render: function(data) {
-                            return'<a href="#" data-id="'+data+'" id="batal" class="btn btn-danger waves-effect waves-light btn-xs" title="Batal">Batal </a>';
+                            return'<button href="#" data-id="'+data+'" id="batal" class="btn btn-danger waves-effect waves-light btn-xs" title="Batal">Batal </button>';
                         }
                     }
                 ],
@@ -147,6 +148,7 @@
         });
 
         $(document).on('click', '#batal', function() {
+
             var id = $(this).data('id');
             if (confirm("Yakin ingin membatalkan bookingan?")){
                 $.ajax({

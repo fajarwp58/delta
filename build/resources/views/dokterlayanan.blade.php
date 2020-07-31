@@ -36,7 +36,7 @@
                 </form>
                 <h5> <i data-feather="shopping-cart" class="icon-dual"></i> Cart :</h5>
                     <table id="ttransaksilayanan" class="table table-striped tabel-layanan">
-                        <thead style="display: none">
+                        <thead >
                         <tr>
                             <th>Nama Layanan</th>
                             <th>Harga</th>

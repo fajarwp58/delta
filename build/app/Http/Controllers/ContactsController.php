@@ -17,7 +17,11 @@ class ContactsController extends Controller
     public function get()
     {
         // get all users except the authenticated one
-        $contacts = User::where('user_id', '!=', auth()->id())->get();
+        $contacts = User::with('role')
+        ->whereIn('role_id',['R02','R03'])
+        ->where('user_id', '!=', auth()->id())
+        ->orderByDesc('nama')
+        ->get();
 
         // get a collection of items where sender_id is the user who sent us a message
         // and messages_count is the number of unread messages we have from him

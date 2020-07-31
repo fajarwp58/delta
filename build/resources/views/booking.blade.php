@@ -23,7 +23,7 @@
                         <div class="card-box" style="background-color: rgb(236, 233, 233)">
                             <i class="fa fa-info-circle text-muted float-right" data-feather="clock" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="More Info"></i>
                             <h4 class="mt-0 font-16">Tersedia</h4>
-                            <h2 class="my-3 text-center" id="jam">{{ date('G:i', strtotime( $wb->jam )) }}</h2>
+                            <h3 class="my-3 text-center" id="jam">{{ date('G:i', strtotime( $wb->jam_awal )) }} - {{ date('G:i', strtotime( $wb->jam_akhir )) }}</h3>
                             <center><a href="booking/addjadwal/{{ $wb->waktu_booking_id }}" title="pilih jadwal ini" class="btn btn-light btn-rounded waves-effect">Pilih Jadwal</a></center>
                         </div>
                     </div>

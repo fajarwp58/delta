@@ -72,7 +72,7 @@
 
                </table>
 
-            <center><a onclick="printCard()" class="btn btn-primary"> <p style="color: black">Cetak Kartu</p></a></center>
+            <center><button onclick="printCard()" class="btn btn-info"> Cetak Kartu</button></center>
 
         </div> <!-- end card-box-->
 

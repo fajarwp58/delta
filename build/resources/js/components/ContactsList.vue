@@ -7,7 +7,7 @@
                 </div>
                 <div class="contact">
                     <p class="nama">{{contact.nama}}</p>
-                    <p class="phone">{{contact.phone}}</p>
+                    <p class="role">( {{contact.role.nama}} )</p>
                 </div>
                 <span class="unread" v-if="contact.unread">{{ contact.unread }}</span>
             </li>

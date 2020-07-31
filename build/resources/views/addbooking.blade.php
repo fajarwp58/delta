@@ -14,14 +14,14 @@
             <div class="card-body">
                 <form method="POST" id="formbooking" action="{{ url('/booking/create/') }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                <h3 class="card-title">JAM : <b>{{ $waktu_booking->jam }}</b></h3>
+                <h3 class="card-title">Booking Jam <b>{{ date('G:i', strtotime( $waktu_booking->jam_awal )) }} sampai {{ date('G:i', strtotime( $waktu_booking->jam_akhir )) }} </b></h3><br>
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label>#Booking ID</label>
                         <input type="text" class="form-control" id="booking_id" name="booking_id"  value="{{$idmodal}}" readonly >
                         <br>
                         <div class="alert alert-info">
-							<h4>Waktu Booking : {{ $waktu_booking->jam }}</h4>
+							<h4>Waktu Booking : {{ date('G:i', strtotime( $waktu_booking->jam_awal )) }}</h4>
 							<ul class="list-unstyled">
 								<li>Batas tenggang keterlambatan : <br> <b>15 Menit</b></li>
 							</ul>
@@ -46,7 +46,8 @@
 									<input type="date" class="form-control text-center" name="tanggal_booking" value="{{ $now }}" />
 								</div>
 								<div class="col-sm-3">
-									<input class="form-control text-center" name="waktu" value="{{ date('G:i', strtotime( $waktu_booking->jam )) }}" readonly />
+                                    <input class="form-control text-center" name="waktu_awal" value="{{ date('G:i', strtotime( $waktu_booking->jam_awal )) }}" hidden />
+                                    <input class="form-control text-center" name="waktu_akhir" value="{{ date('G:i', strtotime( $waktu_booking->jam_akhir )) }}" hidden />
 								</div>
 							</div>
 						</div>

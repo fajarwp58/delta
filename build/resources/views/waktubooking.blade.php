@@ -22,7 +22,8 @@
                 <table id="twakbooking" class="table activate-select dt-responsive nowrap w-100">
                     <thead>
                     <tr>
-                        <th>Jam</th>
+                        <th>Jam Awal</th>
+                        <th>Jam Akhir</th>
                         <th>Status Waktu </th>
                         <th>Aksi</th>
                     </tr>
@@ -49,9 +50,15 @@
                             <input type="text"  class="form-control" id="waktu_booking_id" name="waktu_booking_id" readonly>
                     </div>
                     <div class="form-group" >
-                            <label for="jam">Jam</label>
-                            <input type="time"  class="form-control" id="jam" name="jam" placeholder="Jam" >
+                            <label for="jam">Jam Awal</label>
+                            <input type="time"  class="form-control" id="jam" name="jam" placeholder="Jam Awal" >
                             <span class="text-danger" id="jamError"></span>
+                    </div>
+
+                    <div class="form-group" >
+                        <label for="jam_akhir">Jam Akhir</label>
+                        <input type="time"  class="form-control" id="jam_akhir" name="jam_akhir" placeholder="Jam Akhir" >
+                        <span class="text-danger" id="jam_akhirError"></span>
                     </div>
 
                     <div class="form-group">
@@ -97,7 +104,9 @@
             $('#twakbooking').dataTable({
                 "ajax": "{{ url('/waktubooking/data') }}",
                 "columns": [
-                    { "data": "jam",
+                    { "data": "jam_awal",
+                        sClass: 'text-center', },
+                    { "data": "jam_akhir",
                         sClass: 'text-center', },
                     { "data": "status_waktu",
                         sClass: 'text-center',},
@@ -122,6 +131,10 @@
                     {
                         width: "100px",
                         targets: [2]
+                    },
+                    {
+                        width: "100px",
+                        targets: [3]
                     }
                 ],
                 scrollX: true,
@@ -149,6 +162,7 @@
                 data: {
                     'waktu_booking_id': $('#waktu_booking_id').val(),
                     'jam': $('#jam').val(),
+                    'jam_akhir': $('#jam_akhir').val(),
                     'status_waktu': $('#status_waktu').val(),
                 },
 
@@ -179,7 +193,8 @@
             var data = $('#twakbooking').DataTable().row($(this).parents('tr')).data();
             $('#mwakbooking').modal('show');
             document.getElementById('div_wakbooking_id').style.display = 'none';
-            $('#jam').val(data.jam).change();
+            $('#jam').val(data.jam_awal).change();
+            $('#jam_akhir').val(data.jam_akhir).change();
             if(data.status_waktu=="Tersedia"){
                 $('#status_waktu').val(1).change();
             }

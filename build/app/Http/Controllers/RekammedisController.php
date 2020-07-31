@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Booking;
 use App\Hewan;
 use App\RiwayatPemeriksaan;
 use App\Transaksi;
@@ -16,7 +17,7 @@ class RekammedisController extends Controller
     }
 
     public function datahewan(){
-        $hewan = Hewan::with('users','jenis_hewan')->get();
+        $hewan = Booking::with('hewan')->whereIn('status',[2,3])->whereDate('tanggal_booking', Carbon::today())->get();
 
         return DataTables::of($hewan)
         ->editColumn('jenis_kelamin', function ($hewan) {

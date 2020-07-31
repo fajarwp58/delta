@@ -20,7 +20,6 @@
                     <thead class="table-dark">
                         <tr>
                             <th>Nama Hewan</th>
-                            <th>Jenis Hewan</th>
                             <th>Jenis Kelamin</th>
                             <th>+Rekam Medis</th>
                         </tr>
@@ -119,14 +118,12 @@
             $('#thewan').dataTable({
                 "ajax": "{{ url('/rekammedis/datahewan') }}",
                 "columns": [
-                    { "data": "nama_hewan",
-                        sClass: 'text-center' },
-                    { "data": "jenis_hewan.nama",
+                    { "data": "hewan.nama_hewan",
                         sClass: 'text-center' },
                     { "data": "jenis_kelamin",
                         sClass: 'text-center'},
                     {
-                            data: 'kode',
+                            data: 'hewan.kode',
                             sClass: 'text-center',
                             render: function(data) {
                                 return'<a href="#" data-id="'+data+'" id="addrekammedis" class="btn btn-success waves-effect waves-light btn-xs" title="tambah rekam medis"> <span class="btn-label"><i class="dripicons-document-new"></i></span>Tambah</a>';
@@ -145,10 +142,6 @@
                     {
                         width: "100px",
                         targets: [2]
-                    },
-                    {
-                        width: "100px",
-                        targets: [3]
                     },
                 ],
                 scrollX: true,
@@ -203,7 +196,7 @@
 
             $(document).on('click', '#addrekammedis', function() {
                     var data = $('#thewan').DataTable().row($(this).parents('tr')).data();
-                    window.location.href = '{{ url('rekammedis/addrekammedis') }}/'+data.kode ;
+                    window.location.href = '{{ url('rekammedis/addrekammedis') }}/'+data.hewan.kode ;
                 });
 
             $('#formrekammedis').submit(function(e) {

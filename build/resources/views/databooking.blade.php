@@ -60,6 +60,8 @@
                             <option value="">Pilih Status</option>
                             <option value="1">Tidak Disetujui</option>
                             <option value="2">Disetujui</option>
+                            <option value="3">Datang</option>
+                            <option value="4">tidak datang / Dibatalkan</option>
                         </select>
                     </div>
 
@@ -178,8 +180,9 @@
         function loadData() {
             $('#tdatabooking').dataTable({
                 "ajax": "{{ url('/booking/databooking/data') }}",
+                "order": [[ 2, "desc" ]],
                 "columns": [
-                    { "data": "jam",
+                    { "data": "jam_awal",
                         sClass: 'text-center' },
                     { "data": "nama",
                         sClass: 'text-center' },
@@ -193,13 +196,13 @@
                         render: function(data) {
                             return'<a href="#" data-id="'+data+'" id="detail" class="btn btn-info waves-effect waves-light btn-xs" title="detail">detail </a> &nbsp;'+
                                 '<a href="#" data-id="'+data+'" id="edit" class="btn btn-warning waves-effect waves-light btn-xs" title="edit">edit </a> &nbsp;'+
-                                '<a href="#" data-id="'+data+'" id="delete" class="btn btn-danger waves-effect waves-light btn-xs" title="hapus">delete </a>';
+                                '<a href="#" data-id="'+data+'" id="delete2" class="btn btn-danger waves-effect waves-light btn-xs" title="hapus">delete </a>';
                         }
                     }
                 ],
                 columnDefs: [
                     {
-                        width: "150px",
+                        width: "50px",
                         targets: [0]
                     },
                     {
@@ -207,7 +210,7 @@
                         targets: [1]
                     },
                     {
-                        width: "100px",
+                        width: "50px",
                         targets: [2]
                     },
                     {
@@ -247,7 +250,7 @@
         $(document).on('click', '#edit', function() {
             var data = $('#tdatabooking').DataTable().row($(this).parents('tr')).data();
             $('#mdatabooking').modal('show');
-            $('#jam').val(data.jam).change();
+            $('#jam').val(data.jam_awal).change();
             if (data.status=="Tidak Disetujui"){
                 $('#statuss').val(1).change();
             }
@@ -268,11 +271,11 @@
             $('#dstatus').text(data.status);
         });
 
-        $(document).on('click', '#delete', function() {
+        $(document).on('click', '#delete2', function() {
             var id = $(this).data('id');
             if (confirm("Yakin ingin menghapus data?")){
                 $.ajax({
-                    url : "{{ url('booking/databooking/delete') }}/"+id,
+                    url : "{{ url('booking/databooking/delete2') }}/"+id,
 
                     success :function () {
 
