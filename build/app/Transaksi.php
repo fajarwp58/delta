@@ -36,5 +36,8 @@ class Transaksi extends Model
     public function transaksi_lainnya() {
         return $this->hasMany('App\TransaksiLainnya', 'kode_transaksi', 'kode_transaksi');
     }
+    public function riwayat_pemeriksaan() {
+        return $this->hasMany('App\RiwayatPemeriksaan', 'kode_transaksi', 'kode_transaksi');
+    }
 
 }

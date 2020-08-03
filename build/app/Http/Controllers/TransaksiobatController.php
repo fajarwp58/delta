@@ -52,7 +52,20 @@ class TransaksiobatController extends Controller
         $transaksiobat->total_harga = $request->total + $request->totallayanan;
         $transaksiobat->update();
 
+        // foreach($request['cara_pakai'] as $cara_pakai){
+        //     $transaksi = TransaksiObat::where('kode_transaksi',$request->kodetransaksi)->first();
+        //     $transaksi->cara_pakai = $cara_pakai;
+        //     $transaksi->update();
+        // }
+
+
         return redirect('transaksilainnya')->with(['success' => 'Transaksi berhasil di simpan']);
+    }
+
+    public function carapakai(Request $request, $id){
+        $transaksi = TransaksiObat::where('kode_obat',$request->kodeobat)->first();
+        $transaksi->cara_pakai = $request->cara_pakai;
+        $transaksi->update();
     }
 
     public function delete($id)

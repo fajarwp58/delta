@@ -28,7 +28,7 @@
 		                	<td>{{ $t->kode_transaksi }}</td>
 		                	<td>{{ $t->nama_hewan }}</td>
 		                	<td>{{ $t->waktu }}</td>
-		                	<td>Rp.{{ $t->total_harga }},</td>
+		                	<td>Rp  {{ format_uang($t->total_harga) }},-</td>
 		                </tr>
 		                @endforeach
                     </tbody>

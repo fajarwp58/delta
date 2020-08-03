@@ -8,10 +8,11 @@ class TransaksiObat extends Model
 {
     protected $table = 'transaksi_obat';
     protected $fillable = [
-        'kode_obat', 'kode_transaksi',
+        'kode_obat', 'kode_transaksi', 'cara_pakai',
     ];
 
     protected $keyType = 'string';
+    protected $primaryKey = 'kode_obat';
 
     public $timestamps = false;
 

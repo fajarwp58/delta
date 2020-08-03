@@ -46,7 +46,8 @@
             "database/factories"
         ],
         "files": [
-            "app/Helpers/FormatUang.php"
+            "app/Helpers/FormatUang.php",
+            "app/Helpers/TanggalIndonesia.php"
         ]
     },
     "autoload-dev": {

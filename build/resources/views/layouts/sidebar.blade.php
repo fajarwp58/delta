@@ -78,13 +78,6 @@
                 <li class="menu-title mt-2">Apps</li>
 
                 <li>
-                    <a href="{{ route('kandang') }}" >
-                        <i data-feather="lock"></i>
-                        <span> Kelola Kandang </span>
-                    </a>
-                </li>
-
-                <li>
                     <a href="{{ route('waktubooking') }}" >
                         <i data-feather="crosshair"></i>
                         <span> Kelola Waktu Booking </span>

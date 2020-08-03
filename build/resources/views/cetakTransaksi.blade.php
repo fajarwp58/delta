@@ -31,6 +31,13 @@
     p {
         padding-left:13em;
     }
+    b {
+        padding-block: 3em;
+        padding-left:3em;
+    }
+    .box-dua{
+	margin-left: 70px;
+}
 </style>
 
 
@@ -66,7 +73,7 @@
     <h3>No. {{ $transaksi->kode_transaksi }}</h3>
 
     <h3>
-        <b><u>NOTA PEMBAYARAN</u></b>
+        <strong><u>NOTA PEMBAYARAN</u></strong>
     </h3>
     <br>
     @foreach ($pemilik as $p)
@@ -76,22 +83,32 @@
 
     <h5>Biaya layanan&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  : </h5>
     @foreach ($layanan as $l)
-    <h5><li>{{ $l->nama }} - Rp.{{ $l->harga }},</li></h5>
+    <h5><li>{{ $l->nama }} :
+        <div class="box-dua">
+            <b> Rp  {{ format_uang($l->harga) }},- </b></li></h5>
+        </div>
     @endforeach
 
     <h5>Biaya obat &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :</h5>
     @foreach ($obat as $o)
-    <h5><li>{{ $o->nama }} - Rp.{{ $o->harga }},</li></h5>
+    <h5><li>{{ $o->nama }} :
+        <div class="box-dua">
+            ({{ $o->cara_pakai }}) <br>
+            <b> Rp  {{ format_uang($o->harga) }},- </b></li></h5>
+        </div>
     @endforeach
 
     <h5>Lain lain&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  : </h5>
     @foreach ($lainlain as $ll)
-    <h5><li>{{ $ll->nama }} - Rp.{{ $ll->harga }},</li></h5>
+    <h5><li>{{ $ll->nama }} :
+        <div class="box-dua">
+            <b> Rp  {{ format_uang($ll->harga) }},- </b></li></h5>
+        </div>
     @endforeach
 
     <p>___________________________</p>
 
-    <h4>Jumlah&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rp.{{ $transaksi->total_harga }},</h4>
+    <h4>Jumlah&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b> Rp  {{ format_uang($transaksi->total_harga) }},- </b></h4>
 
     <br><br>
     <tr>
@@ -106,7 +123,7 @@
 
 
                             <br><br>
-                            <b>{{ $transaksi->users->nama }}</b>
+                            <strong>{{ $transaksi->users->nama }}</strong>
                         </td>
                     </tr>
                 </table>
@@ -118,6 +135,6 @@
 </body>
 </html>
 
-{{-- <script>
+<script>
     window.onload = function() { window.print(); }
-</script> --}}
+</script>

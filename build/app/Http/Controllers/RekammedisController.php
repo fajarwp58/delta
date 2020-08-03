@@ -8,6 +8,7 @@ use App\RiwayatPemeriksaan;
 use App\Transaksi;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 class RekammedisController extends Controller
@@ -39,7 +40,17 @@ class RekammedisController extends Controller
     public function view($id)
     {
         $hewan = Hewan::with('users','jenis_hewan')->where('kode',$id)->first();
-        $rekammedis = RiwayatPemeriksaan::with('hewan')->orderBY('clinical_sign', 'DESC')->where('no_reg',$id)->get();
+        $rekammedis = Transaksi::with('riwayat_pemeriksaan','layanan','obat')
+        ->orderBY('waktu', 'DESC')
+        ->where('kode_hewan',$id)
+        ->get();
+
+        // $rekammedis = DB::table('riwayat_pemeriksaan')
+        // ->join('transaksi','transaksi.kode_transaksi','=','riwayat_pemeriksaan.kode_transaksi')
+        // ->join('layanan','layanan.kode_layanan','=','transaksi_layanan.kode_layanan')
+        // ->where('kode_hewan','=',$id)
+        // ->get();
+        //dd($rekammedis);
 
         return view('viewRMedis', compact('hewan','rekammedis'));
     }
@@ -64,9 +75,19 @@ class RekammedisController extends Controller
     }
 
     public function create(Request $reqruest){
+
+        $transaksi = new Transaksi;
+        $transaksi->kode_transaksi = $reqruest->kode_transaksi;
+        $transaksi->dokter_id = $reqruest->dokter_id;
+        $transaksi->kode_hewan = $reqruest->no_reg;
+        $transaksi->waktu = Carbon::now();
+
+        $transaksi->save();
+
         $rekammedis = new RiwayatPemeriksaan;
         $rekammedis->riwayat_pemeriksaan_id = $reqruest->riwayat_pemeriksaan_id;
         $rekammedis->no_reg = $reqruest->no_reg;
+        $rekammedis->kode_transaksi = $reqruest->kode_transaksi;
         $rekammedis->suhu = $reqruest->suhu;
         $rekammedis->berat_badan = $reqruest->berat_badan;
         $rekammedis->clinical_sign = $reqruest->clinical_sign;
@@ -76,14 +97,6 @@ class RekammedisController extends Controller
         $rekammedis->terapi = $reqruest->terapi;
 
         $rekammedis->save();
-
-        $transaksi = new Transaksi;
-        $transaksi->kode_transaksi = $reqruest->kode_transaksi;
-        $transaksi->dokter_id = $reqruest->dokter_id;
-        $transaksi->kode_hewan = $reqruest->no_reg;
-        $transaksi->waktu = Carbon::now();
-
-        $transaksi->save();
 
         return redirect('dokterlayanan')->with(['success' => 'Rekam Medis berhasil di simpan']);
 

@@ -25,7 +25,7 @@ class ObatController extends Controller
 
         return DataTables::of($obat)
         ->editColumn('harga', function ($obat) {
-            return 'Rp. '.format_uang($obat->harga);
+            return 'Rp '.format_uang($obat->harga);
         })
         ->toJson();
     }
@@ -34,16 +34,22 @@ class ObatController extends Controller
         request()->validate([
             'harga' => ['required'],
             'nama' => ['required', 'string', 'max:255'],
+            'jenis' => ['required', 'string', 'max:255'],
+            'jumlah' => ['required', 'string', 'max:255'],
         ],
             [
                 'harga.required'=> 'Masukan harga obat',
                 'nama.required'=> 'Masukan nama obat',
+                'jenis.required'=> 'Masukan jenis obat',
+                'jumlah.required'=> 'Masukan jumlah obat per paket/pack',
             ]);
 
 
          $obat = new Obat;
          $obat->kode_obat = $request->kode_obat;
          $obat->nama = $request->nama;
+         $obat->jenis = $request->jenis;
+         $obat->jumlah = $request->jumlah;
          $obat->harga = $request->harga;
 
          $obat->save();
@@ -55,6 +61,8 @@ class ObatController extends Controller
         $obat = Obat::where('kode_obat',$id)->first();
         $obat->harga = $request->harga;
         $obat->nama = $request->nama;
+        $obat->jenis = $request->jenis;
+        $obat->jumlah = $request->jumlah;
 
         $obat->update();
     }

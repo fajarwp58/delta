@@ -105,18 +105,70 @@
                 <th>Clinical Sign</th>
                 <th>Diagnosa</th>
                 <th>Pragnosa</th>
+                <th>Layanan</th>
+                <th>Obat</th>
                 <th>Terapi/Note</th>
             </tr>
         </thead>
         <tbody>
             @foreach($rekammedis as $r)
 		<tr>
-			<td>{{ $r->berat_badan }}</td>
-			<td>{{ $r->anamnesa }}</td>
-			<td>{{ $r->clinical_sign }}</td>
-            <td>{{ $r->diagnosa }}</td>
-            <td>{{ $r->pragnosa }}</td>
-            <td>{{ $r->terapi }}</td>
+			<td>
+                <ul>
+                    @foreach($r->riwayat_pemeriksaan as $rp)
+                    <li style="list-style-type: none"> {{ $rp->berat_badan }} </li>
+                    @endforeach
+                </ul>
+            </td>
+			<td>
+                <ul>
+                    @foreach($r->riwayat_pemeriksaan as $rp)
+                    <li style="list-style-type: none"> {{ $rp->anamnesa }} </li>
+                    @endforeach
+                </ul>
+            </td>
+			<td>
+                <ul>
+                    @foreach($r->riwayat_pemeriksaan as $rp)
+                    <li style="list-style-type: none"> {{ $rp->clinical_sign }} </li>
+                    @endforeach
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    @foreach($r->riwayat_pemeriksaan as $rp)
+                    <li style="list-style-type: none"> {{ $rp->diagnosa }} </li>
+                    @endforeach
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    @foreach($r->riwayat_pemeriksaan as $rp)
+                    <li style="list-style-type: none"> {{ $rp->pragnosa }} </li>
+                    @endforeach
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    @foreach($r->layanan as $l)
+                    <li > {{ $l->nama }} </li>
+                    @endforeach
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    @foreach($r->obat as $o)
+                    <li > {{ $o->nama }} </li>
+                    @endforeach
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    @foreach($r->riwayat_pemeriksaan as $rp)
+                    <li style="list-style-type: none"> {{ $rp->terapi }} </li>
+                    @endforeach
+                </ul>
+            </td>
 		</tr>
 		@endforeach
         </tbody>

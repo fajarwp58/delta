@@ -57,14 +57,6 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Admin']], function
         Route::get('delete/{id}', 'WakbookingController@delete');
     });
 
-    Route::group(['prefix' => 'kandang'], function () {
-        Route::get('/', 'KandangController@index')->name('kandang');
-        Route::get('data', 'KandangController@data');
-        Route::post('create', 'KandangController@create');
-        Route::get('delete/{id}', 'KandangController@delete');
-        Route::post('cetak', 'KandangController@printBarcode');
-    });
-
     Route::group(['prefix' => 'booking'], function () {
         Route::get('databooking', 'BookingController@dataBooking')->name('databooking');
         Route::get('databooking/data', 'BookingController@data');
@@ -130,6 +122,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Dokter']], functio
         Route::get('dataKeranjang', 'TransaksiobatController@dataKeranjang');
         Route::post('store', 'TransaksiobatController@store');
         Route::post('update', 'TransaksiobatController@update');
+        Route::post('carapakai/{id}', 'TransaksiobatController@carapakai');
         Route::get('delete/{id}', 'TransaksiobatController@delete');
     });
 

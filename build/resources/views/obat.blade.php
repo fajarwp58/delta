@@ -23,6 +23,8 @@
                     <thead>
                     <tr>
                         <th>Nama Obat</th>
+                        <th>Jenis</th>
+                        <th>jumlah/Pack</th>
                         <th>Harga</th>
                         <th>Aksi</th>
                     </tr>
@@ -53,6 +55,23 @@
                         <label for="nama">Nama Obat</label>
                         <input type="text"  class="form-control" id="nama" name="nama" placeholder="Nama Obat">
                         <span class="text-danger" id="namaError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jenis">Jenis Obat</label>
+                        <select class="form-control" id="jenis" name="jenis">
+                            <option value="">Pilih Jenis Obat</option>
+                            <option value="Tablet">Tablet</option>
+                            <option value="Kapsul">Kapsul</option>
+                            <option value="Sirup">Sirup</option>
+                        </select>
+                        <span class="text-danger" id="jenisError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jumlah">Jumlah/Pack</label>
+                        <input type="text"  class="form-control" id="jumlah" name="jumlah" placeholder="Jumlah Obat">
+                        <span class="text-danger" id="jumlahError"></span>
                     </div>
 
                     <div class="form-group">
@@ -107,6 +126,24 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        <a class="text-gray">Jenis Obat</a>
+                                    </td>
+                                    <td>:</td>
+                                    <td>
+                                        <a class="text-gray" id="djenis"></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a class="text-gray">Jumlah/Pack</a>
+                                    </td>
+                                    <td>:</td>
+                                    <td>
+                                        <a class="text-gray" id="djumlah"></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         <a class="text-gray">Harga</a>
                                     </td>
                                     <td>:</td>
@@ -152,6 +189,10 @@
                 "columns": [
                     { "data": "nama",
                         sClass: 'text-center' },
+                    { "data": "jenis",
+                        sClass: 'text-center' },
+                    { "data": "jumlah",
+                        sClass: 'text-center' },
                     { "data": "harga",
                         sClass: 'text-center',},
                     {
@@ -166,7 +207,7 @@
                 ],
                 columnDefs: [
                     {
-                        width: "150px",
+                        width: "100px",
                         targets: [0]
                     },
                     {
@@ -176,6 +217,14 @@
                     {
                         width: "100px",
                         targets: [2]
+                    },
+                    {
+                        width: "100px",
+                        targets: [3]
+                    },
+                    {
+                        width: "100px",
+                        targets: [4]
                     },
                 ],
                 scrollX: true,
@@ -196,6 +245,8 @@
         $('#formobat').submit(function(e) {
             e.preventDefault();
             $('#namaError').addClass('d-none');
+            $('#jenisError').addClass('d-none');
+            $('#jumlahError').addClass('d-none');
             $('#hargaError').addClass('d-none');
             $.ajax({
                 url: $(this).attr('action')+'?_token='+'{{ csrf_token() }}',
@@ -203,6 +254,8 @@
                 data: {
                     'kode_obat': $('#kode_obat').val(),
                     'nama': $('#nama').val(),
+                    'jenis': $('#jenis').val(),
+                    'jumlah': $('#jumlah').val(),
                     'harga': $('#harga').val(),
                 },
 
@@ -233,6 +286,8 @@
             document.getElementById('div_kodeobat').style.display = 'none';
             $('#nama').val(data.nama).change();
             $('#harga').val(data.harga).change();
+            $('#jenis').val(data.jenis).change();
+            $('#jumlah').val(data.jumlah).change();
             $('#formobat').attr('action', '{{ url('obat/update') }}/'+data.kode_obat);
         });
 
@@ -241,6 +296,8 @@
             $('#mdobat').modal('show');
             $('#dkodeobat').text(data.kode_obat);
             $('#dnama').text(data.nama);
+            $('#djenis').text(data.jenis);
+            $('#djumlah').text(data.jumlah);
             $('#dharga').text(data.harga);
         });
 

@@ -9,7 +9,7 @@ class Obat extends Model
     protected $table = 'obat';
     protected $primaryKey = 'kode_obat';
     protected $fillable = [
-        'nama', 'harga',
+        'nama','jenis', 'harga', 'jumlah',
     ];
 
     protected $keyType = 'string';
