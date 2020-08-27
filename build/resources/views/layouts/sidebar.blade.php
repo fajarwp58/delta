@@ -74,6 +74,12 @@
                         <span> Kelola Transaksi </span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('downloadlaporan') }}" >
+                        <i data-feather="download"></i>
+                        <span> Download Laporan </span>
+                    </a>
+                </li>
 
                 <li class="menu-title mt-2">Apps</li>
 

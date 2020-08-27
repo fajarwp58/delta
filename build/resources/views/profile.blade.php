@@ -9,7 +9,7 @@
     .kode{
        position: absolute;
        top: 110pt;
-       left: 10pt;
+       left: 80pt;
        color: #fff;
        font-size: 15pt;
      }
@@ -18,6 +18,22 @@
        top: 15pt;
        left: 280pt;
        font-size: 10pt;
+     }
+     .btnprint{
+        position: absolute;
+        top: 220pt;
+        left: 345pt;
+        border-radius: 4px;
+        background-color: #f4511e;
+        border: none;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 18px;
+        padding: 10px;
+        width: 100px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
      }
   </style>
 <br />
@@ -61,10 +77,10 @@
                   <div class="box">
                     <img src="{{ asset('assets/card.png') }}" class="card">
                     <div class="kode">{{ $data->nama }}</div>
-                    <div class="barcode">
+                    {{-- <div class="barcode">
                       <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG( $data->user_id, 'C39') }}" height="30" width="130">
                       <br>{{ $data->user_id }}
-                    </div>
+                    </div> --}}
                   </div>
                   </td>
                 </tr>
@@ -72,7 +88,7 @@
 
                </table>
 
-            <center><button onclick="printCard()" class="btn btn-info"> Cetak Kartu</button></center>
+            <button onclick="printCard()" class="btnprint"> Cetak Kartu</button>
 
         </div> <!-- end card-box-->
 

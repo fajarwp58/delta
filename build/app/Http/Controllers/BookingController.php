@@ -45,7 +45,7 @@ class BookingController extends Controller
         return DataTables::of($booking)
         ->editColumn('status', function ($booking) {
             if($booking->status == 1)
-                return 'Tidak Disetujui';
+                return 'Belum Disetujui';
 
                 elseif($booking->status == 2)
                     return 'Disetujui';
@@ -70,7 +70,7 @@ class BookingController extends Controller
         return DataTables::of($booking)
         ->editColumn('status', function ($booking) {
             if($booking->status == 1)
-                return 'Tidak Disetujui';
+                return 'Belum Disetujui';
 
                 elseif($booking->status == 2)
                     return 'Disetujui';
@@ -132,15 +132,9 @@ class BookingController extends Controller
 
     public function update(Request $request,$id){
 
-        $booking = Booking::where('waktu_booking_id',$id)->first();
+        $booking = Booking::where('booking_id',$id)->first();
         $booking->status = $request->statuss;
         $booking->update();
-
-        if($request->statuss = 4){
-            $waktu_booking = WaktuBooking::where('waktu_booking_id',$id)->first();
-            $waktu_booking->status_waktu = 1;
-            $waktu_booking->update();
-        }
 
     }
 

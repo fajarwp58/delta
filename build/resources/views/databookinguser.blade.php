@@ -72,7 +72,7 @@
                         data: 'booking_id',
                         sClass: 'text-center',
                         render: function(data) {
-                            return'<button href="#" data-id="'+data+'" id="batal" class="btn btn-danger waves-effect waves-light btn-xs" title="Batal">Batal </button>';
+                                return'<button href="#" type="button" data-id="'+data+'" id="batal" class="btn btn-danger waves-effect waves-light btn-xs" <?php if('+data.status+' == "Dibatalkan") { '+echo "disabled"+';} ?> title="Batal">Batal </button>';
                         }
                     }
                 ],
@@ -103,6 +103,7 @@
                 scrollCollapse: true,
             });
         } loadData();
+
 
         $('#formdatabooking').submit(function(e) {
             e.preventDefault();
@@ -150,6 +151,7 @@
         $(document).on('click', '#batal', function() {
 
             var id = $(this).data('id');
+            var status = $(this).data('status');
             if (confirm("Yakin ingin membatalkan bookingan?")){
                 $.ajax({
                     url : "{{ url('booking/databooking/delete') }}/"+id,
@@ -159,7 +161,6 @@
                         $('#tdatabooking').DataTable().destroy();
                         loadData();
 
-
                     }
                 })
             }
@@ -167,16 +168,16 @@
 
 
 
-        $.ajax({
-            url: '{{ url('booking/databooking/listwaktu') }}',
-            dataType: "json",
-            success: function(data) {
-                var waktu_booking = jQuery.parseJSON(JSON.stringify(data));
-                $.each(waktu_booking, function(k, v) {
-                    $('#waktu_booking_id').append($('<option>', {value:v.waktu_booking_id}).text(v.jam))
-                })
-            }
-        });
+        // $.ajax({
+        //     url: '{{ url('booking/databooking/listwaktu') }}',
+        //     dataType: "json",
+        //     success: function(data) {
+        //         var waktu_booking = jQuery.parseJSON(JSON.stringify(data));
+        //         $.each(waktu_booking, function(k, v) {
+        //             $('#waktu_booking_id').append($('<option>', {value:v.waktu_booking_id}).text(v.jam))
+        //         })
+        //     }
+        // });
 
         $('#mdatabooking').on('hidden.bs.modal', function () {
             $(this).find('form').trigger('reset');

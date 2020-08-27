@@ -56,7 +56,7 @@ class ProfileController extends Controller
 
         $pdf = PDF::loadView('card',
         compact('datamember'));
-        $pdf->setPaper(array(0, 0, 566.93, 850.39), 'potrait');
+        $pdf->setPaper('a6', 'landscape');
         return $pdf->stream();
     }
 

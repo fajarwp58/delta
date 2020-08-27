@@ -10,6 +10,7 @@ use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use PDF;
 
 class TransaksilainnyaController extends Controller
 {
@@ -22,6 +23,65 @@ class TransaksilainnyaController extends Controller
 
         $idmodal = $AWAL .'-'.str_shuffle($pin);
         return view('transaksilainnya',['idmodal'=>$idmodal]);
+    }
+
+    public function download()
+    {
+        $awal = date('Y-m-d', mktime(0,0,0, date('m'), 1, date('Y')));
+        $akhir = date('Y-m-d');
+        return view('downloadlaporan', compact('awal', 'akhir'));
+    }
+
+    protected function getData($awal, $akhir){
+        $no = 0;
+        $data = array();
+        $pendapatan = 0;
+        $total_pendapatan = 0;
+        while(strtotime($awal) <= strtotime($akhir)){
+          $tanggal = $awal;
+          $awal = date('Y-m-d', strtotime("+1 day", strtotime($awal)));
+
+          $pendapatan = Transaksi::where('waktu', 'LIKE', "$tanggal%")->sum('total_harga');
+
+          //$pendapatan = $total_penjualan - $total_pembelian - $total_pengeluaran;
+          $total_pendapatan += $pendapatan;
+
+          $no ++;
+          $row = array();
+          $row[] = $no;
+          $row[] = tanggal_indonesia($tanggal, false);
+          $row[] = format_uang($pendapatan);
+          $data[] = $row;
+        }
+        $data[] = array("", "Total Pendapatan", format_uang($total_pendapatan));
+
+        return $data;
+      }
+
+    public function listData($awal, $akhir)
+    {
+        $data = $this->getData($awal, $akhir);
+
+        $output = array("data" => $data);
+        return response()->json($output);
+    }
+
+    public function refresh(Request $request)
+    {
+        $awal = $request['awal'];
+        $akhir = $request['akhir'];
+        return view('downloadlaporan', compact('awal', 'akhir'));
+    }
+
+    public function exportPDF($awal, $akhir){
+        $tanggal_awal = $awal;
+        $tanggal_akhir = $akhir;
+        $data = $this->getData($awal, $akhir);
+
+        $pdf = PDF::loadView('laporanpdf', compact('tanggal_awal', 'tanggal_akhir', 'data'));
+        $pdf->setPaper('a4', 'potrait');
+
+        return $pdf->stream();
     }
 
     public function data()

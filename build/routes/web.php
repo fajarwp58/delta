@@ -177,9 +177,13 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Dokter','Pasien']]
 
 });
 
-Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Admin','Dokter']], function () {
+Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Admin','Dokter','Pasien']], function () {
     Route::group(['prefix' => 'transaksilainnya'], function () {
         Route::get('/', 'TransaksilainnyaController@index')->name('transaksilainnya');
+        Route::get('download', 'TransaksilainnyaController@download')->name('downloadlaporan');
+        Route::post('download', 'TransaksilainnyaController@refresh')->name('laporan.refresh');
+        Route::get('download/laporan/data/{awal}/{akhir}', 'TransaksilainnyaController@listData')->name('laporan.data');
+        Route::get('download/laporan/pdf/{awal}/{akhir}', 'TransaksilainnyaController@exportPDF');
         Route::get('data', 'TransaksilainnyaController@data');
         Route::get('create', 'TransaksilainnyaController@create');
         Route::post('update/{id}', 'TransaksilainnyaController@update');

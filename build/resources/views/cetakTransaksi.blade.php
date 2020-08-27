@@ -8,6 +8,12 @@
         #printPageButton {
             display: none;
         }
+        @page {
+        size: 180mm 207mm; /* landscape */
+        /* you can also specify margins here: */
+        margin: 25mm;
+        margin-right: 45mm; /* for compatibility with both A4 and Letter */
+  }
     }
     body {
         height: 842px;

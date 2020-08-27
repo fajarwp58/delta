@@ -58,7 +58,7 @@
                         <label for="statuss">Status</label>
                         <select class="form-control" id="statuss" name="statuss" required>
                             <option value="">Pilih Status</option>
-                            <option value="1">Tidak Disetujui</option>
+                            <option value="1">Belum Disetujui</option>
                             <option value="2">Disetujui</option>
                             <option value="3">Datang</option>
                             <option value="4">tidak datang / Dibatalkan</option>
@@ -257,7 +257,7 @@
             else{
                 $('#statuss').val(2).change();
             }
-            $('#formdatabooking').attr('action', '{{ url('booking/databooking/update') }}/'+data.waktu_booking_id);
+            $('#formdatabooking').attr('action', '{{ url('booking/databooking/update') }}/'+data.booking_id);
         });
 
         $(document).on('click', '#detail', function() {

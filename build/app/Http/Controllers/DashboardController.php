@@ -17,7 +17,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-      $awal = date('Y-m-d', mktime(0,0,0, date('m'), -4, date('Y')));
+      $awal = date('Y-m-d', mktime(0,0,0, date('m'), 1, date('Y')));
       $akhir = date('Y-m-d');
 
       $tanggal = $awal;
