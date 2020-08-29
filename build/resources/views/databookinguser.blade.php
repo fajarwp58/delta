@@ -71,8 +71,11 @@
                     {
                         data: 'booking_id',
                         sClass: 'text-center',
-                        render: function(data) {
-                                return'<button href="#" type="button" data-id="'+data+'" id="batal" class="btn btn-danger waves-effect waves-light btn-xs" <?php if('+data.status+' == "Dibatalkan") { '+echo "disabled"+';} ?> title="Batal">Batal </button>';
+                        render: function(data,type,full,meta) {
+                            if (full.status == 'Dibatalkan')
+                                return'<button href="#" type="button" data-id="'+data+'" id="batal" class="btn btn-danger waves-effect waves-light btn-xs" title="Batal" disabled>Batal </button>';
+                            else
+                            return'<button href="#" type="button" data-id="'+data+'" id="batal" class="btn btn-danger waves-effect waves-light btn-xs" title="Batal">Batal </button>';
                         }
                     }
                 ],
