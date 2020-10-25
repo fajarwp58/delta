@@ -15,7 +15,11 @@
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
+<<<<<<< HEAD
         "laravel/ui": "2.4",
+=======
+        "laravel/ui": "^2.0",
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
         "milon/barcode": "^7.0",
         "pusher/pusher-php-server": "^4.1",
         "yajra/laravel-datatables-oracle": "^9.10"

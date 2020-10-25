@@ -136,7 +136,11 @@
                         <input class="form-control" id="dokter_id" name="dokter_id" value="{{ Auth::User()->user_id }}" hidden />
                         <input class="form-control" id="kode_transaksi" name="kode_transaksi" value="{{ $idmodal2 }}" hidden />
                         <input class="form-control" id="riwayat_pemeriksaan_id" name="riwayat_pemeriksaan_id" value="{{ $idmodal }}" hidden />
+<<<<<<< HEAD
                         <input class="form-control" id="clinical_sign" name="clinical_sign" value="{{ $now }}" hidden/>
+=======
+                        <input type="date"  class="form-control" id="clinical_sign" name="clinical_sign" value="{{ $now }}" hidden/>
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
                         <input class="form-control" id="no_reg" name="no_reg" value="{{ $hewan->kode }}" hidden />
                         <a class="btn btn-warning" href="{{ route('rekammedis') }}">Batal</a>
                         <button class="btn btn-success" type="submit">Simpan</button>

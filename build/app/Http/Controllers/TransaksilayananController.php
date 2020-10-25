@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Layanan;
+<<<<<<< HEAD
 use App\Penyakit;
 use App\RiwayatPemeriksaan;
 use App\TransaksiLayanan;
+=======
+use App\TransaksiLayanan;
+use App\Transaksi;
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
 
@@ -13,13 +18,21 @@ use Illuminate\Http\Request;
 class TransaksilayananController extends Controller
 {
     public function index(){
+<<<<<<< HEAD
         $transaksi = RiwayatPemeriksaan::orderBY('clinical_sign','DESC')->first();
+=======
+        $transaksi = Transaksi::orderBY('waktu','DESC')->first();
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
         return view('dokterlayanan', compact('transaksi'));
     }
 
     public function dataLayanan()
     {
+<<<<<<< HEAD
         $layanan = Layanan::with('Penyakit')->get();
+=======
+        $layanan = Layanan::all();
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
         return DataTables::of($layanan)
         ->editColumn('harga', function ($layanan) {
             return 'Rp. '.format_uang($layanan->harga);
@@ -29,9 +42,15 @@ class TransaksilayananController extends Controller
 
     public function dataKeranjang()
     {
+<<<<<<< HEAD
         $transaksi = RiwayatPemeriksaan::orderBY('clinical_sign','DESC')->first();
         $layananKeranjang = TransaksiLayanan::with('layanan')
         ->where('kode_transaksi',$transaksi->transaksi_pemeriksaan_id)->get();
+=======
+        $transaksi = Transaksi::orderBY('waktu','DESC')->first();
+        $layananKeranjang = TransaksiLayanan::with('layanan')
+        ->where('kode_transaksi',$transaksi->kode_transaksi)->get();
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
 
         return DataTables::of($layananKeranjang)->toJson();
     }
@@ -50,7 +69,11 @@ class TransaksilayananController extends Controller
     }
 
     public function update(Request $request){
+<<<<<<< HEAD
         $transaksilayanan = RiwayatPemeriksaan::where('transaksi_pemeriksaan_id',$request->kodetransaksi)->first();
+=======
+        $transaksilayanan = Transaksi::where('kode_transaksi',$request->kodetransaksi)->first();
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
         $transaksilayanan->total_harga = $request->total;
         $transaksilayanan->update();
 

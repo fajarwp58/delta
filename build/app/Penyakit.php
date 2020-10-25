@@ -20,8 +20,11 @@ class Penyakit extends Model
         return $this->belongsTo('App\JenisPenyakit', 'jenis_penyakit_id', 'jenis_penyakit_id');
     }
 
+<<<<<<< HEAD
     // public function riwayat_pemeriksaan() {
     //     return $this->hasMany('App\RiwayatPemeriksaan', 'kode_penyakit', 'kode_penyakit');
     // }
 
+=======
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
 }

@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+<<<<<<< HEAD
 use App\RiwayatPemeriksaan;
+=======
+use App\Transaksi;
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
 use App\TransaksiLainnya;
 use App\TransaksiLayanan;
 use App\TransaksiObat;
@@ -41,7 +45,11 @@ class TransaksilainnyaController extends Controller
           $tanggal = $awal;
           $awal = date('Y-m-d', strtotime("+1 day", strtotime($awal)));
 
+<<<<<<< HEAD
           $pendapatan = RiwayatPemeriksaan::where('clinical_sign', 'LIKE', "$tanggal%")->sum('total_harga');
+=======
+          $pendapatan = Transaksi::where('waktu', 'LIKE', "$tanggal%")->sum('total_harga');
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
 
           //$pendapatan = $total_penjualan - $total_pembelian - $total_pengeluaran;
           $total_pendapatan += $pendapatan;
@@ -86,7 +94,11 @@ class TransaksilainnyaController extends Controller
 
     public function data()
     {
+<<<<<<< HEAD
         $transaksi = RiwayatPemeriksaan::with(['users','hewan','obat','layanan'])->orderBY('clinical_sign','DESC')->get();
+=======
+        $transaksi = Transaksi::with(['users','hewan','obat','layanan'])->orderBY('waktu','DESC')->get();
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
         return DataTables::of($transaksi)
         ->editColumn('total_harga', function ($transaksi) {
             return 'Rp. '.format_uang($transaksi->total_harga);
@@ -100,7 +112,11 @@ class TransaksilainnyaController extends Controller
       TransaksiObat::where('kode_transaksi', $id)->delete();
       TransaksiLainnya::where('kode_transaksi', $id)->delete();
       TransaksiLayanan::where('kode_transaksi', $id)->delete();
+<<<<<<< HEAD
       RiwayatPemeriksaan::where('transaksi_pemeriksaan_id', $id)->delete();
+=======
+      Transaksi::where('kode_transaksi', $id)->delete();
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
 
     }
 
@@ -114,7 +130,11 @@ class TransaksilainnyaController extends Controller
 
         $transaksilainnya->save();
 
+<<<<<<< HEAD
         $transaksi = RiwayatPemeriksaan::where('transaksi_pemeriksaan_id',$request->kode_transaksi)->first();
+=======
+        $transaksi = Transaksi::where('kode_transaksi',$request->kode_transaksi)->first();
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
         $transaksi->total_harga = $transaksi->total_harga + $request->harga;
 
         $transaksi->update();
@@ -124,6 +144,7 @@ class TransaksilainnyaController extends Controller
 
     public function cetak($id)
     {
+<<<<<<< HEAD
         $transaksi = RiwayatPemeriksaan::with('users','hewan','obat','layanan')->where('transaksi_pemeriksaan_id',$id)->first();
         $pemilik = DB::table('transaksi_pemeriksaan')
         ->join('hewan','hewan.kode','=','transaksi_pemeriksaan.kode_hewan')
@@ -143,6 +164,27 @@ class TransaksilainnyaController extends Controller
         ->where('transaksi_lainnya.kode_transaksi','=',$transaksi->transaksi_pemeriksaan_id)
         ->get();
         $tgltransaksi = Carbon::parse($transaksi->clinical_sign)->format('d/m/Y');
+=======
+        $transaksi = Transaksi::with('users','hewan','obat','layanan','transaksi_lainnya')->where('kode_transaksi',$id)->first();
+        $pemilik = DB::table('transaksi')
+        ->join('hewan','hewan.kode','=','transaksi.kode_hewan')
+        ->join('users','users.user_id','=','hewan.user_id')
+        ->where('kode_transaksi','=',$transaksi->kode_transaksi)
+        ->get();
+        $layanan = DB::table('transaksi_layanan')
+        ->join('layanan','layanan.kode_layanan','=','transaksi_layanan.kode_layanan')
+        ->where('transaksi_layanan.kode_transaksi','=',$transaksi->kode_transaksi)
+        ->get();
+        $obat = DB::table('transaksi_obat')
+        ->join('obat','obat.kode_obat','=','transaksi_obat.kode_obat')
+        ->where('transaksi_obat.kode_transaksi','=',$transaksi->kode_transaksi)
+        ->get();
+        $lainlain = DB::table('transaksi_lainnya')
+        ->join('transaksi','transaksi.kode_transaksi','=','transaksi_lainnya.kode_transaksi')
+        ->where('transaksi_lainnya.kode_transaksi','=',$transaksi->kode_transaksi)
+        ->get();
+        $tgltransaksi = Carbon::parse($transaksi->waktu)->format('d/m/Y');
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
         //dd($pemilik);
 
         return view('cetakTransaksi', compact('transaksi','pemilik','layanan','obat','lainlain','tgltransaksi'));

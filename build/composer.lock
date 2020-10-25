@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "997791311d4d0bcdfd1e805244e4f7ff",
+=======
+    "content-hash": "e5eb3a69d47f9823177348c0488730d0",
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1040,6 +1044,7 @@
         },
         {
             "name": "laravel/ui",
+<<<<<<< HEAD
             "version": "v2.4.0",
             "source": {
                 "type": "git",
@@ -1050,6 +1055,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/ui/zipball/f5398544a9cd4804a42d09ce51735e37cd51ea2d",
                 "reference": "f5398544a9cd4804a42d09ce51735e37cd51ea2d",
+=======
+            "version": "v2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/ui.git",
+                "reference": "15368c5328efb7ce94f35ca750acde9b496ab1b1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/ui/zipball/15368c5328efb7ce94f35ca750acde9b496ab1b1",
+                "reference": "15368c5328efb7ce94f35ca750acde9b496ab1b1",
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
                 "shasum": ""
             },
             "require": {
@@ -1091,7 +1108,11 @@
                 "laravel",
                 "ui"
             ],
+<<<<<<< HEAD
             "time": "2020-09-11T15:31:52+00:00"
+=======
+            "time": "2020-04-29T15:06:45+00:00"
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
         },
         {
             "name": "league/commonmark",
@@ -6040,6 +6061,10 @@
     "platform": {
         "php": "^7.2.5"
     },
+<<<<<<< HEAD
     "platform-dev": [],
     "plugin-api-version": "1.1.0"
+=======
+    "platform-dev": []
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
 }

@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Booking;
 use App\Hewan;
 use App\RiwayatPemeriksaan;
+<<<<<<< HEAD
+=======
+use App\Transaksi;
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -39,8 +43,13 @@ class RekammedisController extends Controller
     public function view($id)
     {
         $hewan = Hewan::with('users','jenis_hewan')->where('kode',$id)->first();
+<<<<<<< HEAD
         $rekammedis = RiwayatPemeriksaan::with('layanan','obat')
         ->orderBY('clinical_sign', 'DESC')
+=======
+        $rekammedis = Transaksi::with('riwayat_pemeriksaan','layanan','obat')
+        ->orderBY('waktu', 'DESC')
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
         ->where('kode_hewan',$id)
         ->get();
 
@@ -61,7 +70,11 @@ class RekammedisController extends Controller
         $pin = mt_rand(10000, 99999)
             . $characters[rand(0, strlen($characters) - 1)]
             . $characters1[rand(0, strlen($characters1) - 1)];
+<<<<<<< HEAD
         $AWAL = 'INV';
+=======
+        $AWAL = 'RM';
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
         $idmodal = $AWAL .'-'.str_shuffle($pin);
 
         $pin2 = mt_rand(10000, 99999);
@@ -69,6 +82,7 @@ class RekammedisController extends Controller
         $idmodal2 = $AWAL2 .'-'.str_shuffle($pin2);
 
         $hewan = Hewan::with('users','jenis_hewan')->where('kode',$id)->first();
+<<<<<<< HEAD
         $now = Carbon::now();
         return view('addrekammedis', compact('hewan', 'idmodal', 'now' , 'idmodal2'));
     }
@@ -79,6 +93,26 @@ class RekammedisController extends Controller
         $rekammedis->transaksi_pemeriksaan_id = $reqruest->riwayat_pemeriksaan_id;
         $rekammedis->dokter_id = $reqruest->dokter_id;
         $rekammedis->kode_hewan = $reqruest->no_reg;
+=======
+        $now = Carbon::parse()->format('Y-m-d');
+        return view('addrekammedis', compact('hewan', 'idmodal', 'now' , 'idmodal2'));
+    }
+
+    public function create(Request $reqruest){
+
+        $transaksi = new Transaksi;
+        $transaksi->kode_transaksi = $reqruest->kode_transaksi;
+        $transaksi->dokter_id = $reqruest->dokter_id;
+        $transaksi->kode_hewan = $reqruest->no_reg;
+        $transaksi->waktu = Carbon::now();
+
+        $transaksi->save();
+
+        $rekammedis = new RiwayatPemeriksaan;
+        $rekammedis->riwayat_pemeriksaan_id = $reqruest->riwayat_pemeriksaan_id;
+        $rekammedis->no_reg = $reqruest->no_reg;
+        $rekammedis->kode_transaksi = $reqruest->kode_transaksi;
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
         $rekammedis->suhu = $reqruest->suhu;
         $rekammedis->berat_badan = $reqruest->berat_badan;
         $rekammedis->clinical_sign = $reqruest->clinical_sign;

@@ -4,12 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Booking;
 use App\Hewan;
+<<<<<<< HEAD
 use App\JenisHewan;
 use App\Layanan;
 use App\Message;
 use App\User;
 use App\RiwayatPemeriksaan;
 use Illuminate\Support\Facades\DB;
+=======
+use App\Layanan;
+use App\Message;
+use App\User;
+use App\Transaksi;
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
 use App\TransaksiLayanan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -29,7 +36,11 @@ class DashboardController extends Controller
       while(strtotime($tanggal) <= strtotime($akhir)){
         $data_tanggal[] = (int)substr($tanggal,8,2);
 
+<<<<<<< HEAD
         $pendapatan = RiwayatPemeriksaan::where('clinical_sign', 'LIKE', "$tanggal%")->sum('total_harga');
+=======
+        $pendapatan = Transaksi::where('waktu', 'LIKE', "$tanggal%")->sum('total_harga');
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
 
         $data_pendapatan[] = (int) $pendapatan;
 
@@ -42,11 +53,16 @@ class DashboardController extends Controller
         $layanan = Layanan::all()->count();
         $totalbookinghariini = Booking::whereDate('tanggal_booking', Carbon::today())->count();
 
+<<<<<<< HEAD
         $totaltransaksihariini = RiwayatPemeriksaan::whereDate('clinical_sign', Carbon::today())->sum('total_harga');
+=======
+        $totaltransaksihariini = Transaksi::whereDate('waktu', Carbon::today())->sum('total_harga');
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
         $totalchat = Message::where('to',Auth::user()->user_id)->where('read',0)->count();
         $hewan_saya = Hewan::where('user_id',Auth::user()->user_id)->count();
         $hewan = Hewan::all()->count();
 
+<<<<<<< HEAD
         $now = Carbon::now()->year;
         $kucing = DB::table('transaksi_pemeriksaan AS a')
         ->join('hewan AS b', 'a.kode_hewan', '=', 'b.kode')
@@ -65,6 +81,8 @@ class DashboardController extends Controller
         ->where('b.jenis_hewan_id', '=', 'JH004')
         ->count();
 
+=======
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
         return view('home',[
             'user'=>$user,
             'totalbookinghariini'=>$totalbookinghariini,
@@ -77,11 +95,14 @@ class DashboardController extends Controller
             'layanan'=>$layanan,
             'hewan_saya'=>$hewan_saya,
             'totalchat'=>$totalchat,
+<<<<<<< HEAD
             'kucing'=>$kucing,
             'anjing'=>$anjing,
             'oranghutan'=>$oranghutan,
             'kelinci'=>$kelinci,
             'now'=>$now,
+=======
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
         ]);
     }
 
@@ -96,5 +117,8 @@ class DashboardController extends Controller
     //     return $jumlah_jenis;
 
     // }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
 }

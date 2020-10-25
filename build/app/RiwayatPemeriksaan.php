@@ -6,10 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class RiwayatPemeriksaan extends Model
 {
+<<<<<<< HEAD
     protected $table = 'transaksi_pemeriksaan';
     protected $primaryKey = 'transaksi_pemeriksaan_id';
     protected $fillable = [
         'dokter_id','kode_hewan','kode_penyakit', 'suhu', 'berat_badan', 'anamnesa', 'clinical_sign', 'diagnosa', 'pragnosa', 'terapi', 'total_harga'
+=======
+    protected $table = 'riwayat_pemeriksaan';
+    protected $primaryKey = 'riwayat_pemeriksaan_id';
+    protected $fillable = [
+        'no_reg','kode_transaksi', 'suhu', 'berat_badan', 'anamnesa', 'clinical_sign', 'diagnosa', 'pragnosa', 'terapi'
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
     ];
 
     protected $keyType = 'string';
@@ -17,6 +24,7 @@ class RiwayatPemeriksaan extends Model
     public $timestamps = false;
 
     public function hewan() {
+<<<<<<< HEAD
         return $this->belongsTo('App\Hewan', 'kode_hewan', 'kode');
     }
 
@@ -43,4 +51,13 @@ class RiwayatPemeriksaan extends Model
     // }
 
 
+=======
+        return $this->belongsTo('App\Hewan', 'no_reg', 'kode');
+    }
+
+    public function transaksi() {
+        return $this->belongsTo('App\Transaksi', 'kode_transaksi', 'kode_transaksi');
+    }
+
+>>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
 }
