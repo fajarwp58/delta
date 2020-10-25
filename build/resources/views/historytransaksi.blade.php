@@ -53,30 +53,18 @@
                 "ajax": "{{ url('/transaksilainnya/data') }}",
                 "order": [[ 2, "desc" ]],
                 "columns": [
-<<<<<<< HEAD
                     { "data": "transaksi_pemeriksaan_id",
                         sClass: 'text-center' },
                     { "data": "hewan.nama_hewan",
                         sClass: 'text-center'},
                     { "data": "clinical_sign",
-=======
-                    { "data": "kode_transaksi",
-                        sClass: 'text-center' },
-                    { "data": "hewan.nama_hewan",
-                        sClass: 'text-center'},
-                    { "data": "waktu",
->>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
                         sClass: 'text-center'},
                     { "data": "layanan",
                         sClass: 'text-center'},
                     { "data": "total_harga",
                         sClass: 'text-center'},
                     {
-<<<<<<< HEAD
                         data: 'transaksi_pemeriksaan_id',
-=======
-                        data: 'kode_transaksi',
->>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
                         sClass: 'text-center',
                         render: function(data) {
                             return'<a href="#" data-id="'+data+'" id="cetak" class="btn btn-warning waves-effect waves-light btn-xs" title="cetak">cetak </a> &nbsp;';
@@ -123,11 +111,7 @@
 
         $(document).on('click', '#cetak', function() {
             var data = $('#ttransaksilainnya').DataTable().row($(this).parents('tr')).data();
-<<<<<<< HEAD
             window.location.href = '{{ url('transaksilainnya/cetak') }}/'+data.transaksi_pemeriksaan_id ;
-=======
-            window.location.href = '{{ url('transaksilainnya/cetak') }}/'+data.kode_transaksi ;
->>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
         });
 
         $('#mpenyakit').on('hidden.bs.modal', function () {

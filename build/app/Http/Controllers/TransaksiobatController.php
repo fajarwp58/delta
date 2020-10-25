@@ -3,11 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Obat;
-<<<<<<< HEAD
 use App\RiwayatPemeriksaan;
-=======
-use App\Transaksi;
->>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
 use App\TransaksiObat;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
@@ -15,11 +11,7 @@ use Illuminate\Http\Request;
 class TransaksiobatController extends Controller
 {
     public function index(){
-<<<<<<< HEAD
         $transaksi = RiwayatPemeriksaan::orderBY('clinical_sign','DESC')->first();
-=======
-        $transaksi = Transaksi::orderBY('waktu','DESC')->first();
->>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
         return view('dokterobat', compact('transaksi'));
     }
 
@@ -35,15 +27,9 @@ class TransaksiobatController extends Controller
 
     public function dataKeranjang()
     {
-<<<<<<< HEAD
         $transaksi = RiwayatPemeriksaan::orderBY('clinical_sign','DESC')->first();
         $obatKeranjang = TransaksiObat::with('obat')
         ->where('kode_transaksi',$transaksi->transaksi_pemeriksaan_id)->get();
-=======
-        $transaksi = Transaksi::orderBY('waktu','DESC')->first();
-        $obatKeranjang = TransaksiObat::with('obat')
-        ->where('kode_transaksi',$transaksi->kode_transaksi)->get();
->>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
 
         return DataTables::of($obatKeranjang)->toJson();
     }
@@ -62,11 +48,7 @@ class TransaksiobatController extends Controller
     }
 
     public function update(Request $request){
-<<<<<<< HEAD
         $transaksiobat = RiwayatPemeriksaan::where('transaksi_pemeriksaan_id',$request->kodetransaksi)->first();
-=======
-        $transaksiobat = Transaksi::where('kode_transaksi',$request->kodetransaksi)->first();
->>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
         $transaksiobat->total_harga = $request->total + $request->totallayanan;
         $transaksiobat->update();
 

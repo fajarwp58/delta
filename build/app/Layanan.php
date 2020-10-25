@@ -20,14 +20,8 @@ class Layanan extends Model
         return $this->belongsTo('App\Penyakit', 'kode_penyakit', 'kode_penyakit');
     }
 
-<<<<<<< HEAD
     public function riwayat_pemeriksaan()
     {
         return $this->belongsToMany('App\RiwayatPemeriksaan','transaksi_layanan','kode_layanan','kode_transaksi');
-=======
-    public function transaksi()
-    {
-        return $this->belongsToMany('App\Transaksi','transaksi_layanan','kode_layanan','kode_transaksi');
->>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
     }
 }

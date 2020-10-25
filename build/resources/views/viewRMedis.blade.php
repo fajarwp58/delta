@@ -115,57 +115,27 @@
 		<tr>
 			<td>
                 <ul>
-<<<<<<< HEAD
                     <li style="list-style-type: none"> {{ $r->berat_badan }} </li>
-=======
-                    @foreach($r->riwayat_pemeriksaan as $rp)
-                    <li style="list-style-type: none"> {{ $rp->berat_badan }} </li>
-                    @endforeach
->>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
                 </ul>
             </td>
 			<td>
                 <ul>
-<<<<<<< HEAD
                     <li style="list-style-type: none"> {{ $r->anamnesa }} </li>
-=======
-                    @foreach($r->riwayat_pemeriksaan as $rp)
-                    <li style="list-style-type: none"> {{ $rp->anamnesa }} </li>
-                    @endforeach
->>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
                 </ul>
             </td>
 			<td>
                 <ul>
-<<<<<<< HEAD
                     <li style="list-style-type: none"> {{ $r->clinical_sign }} </li>
-=======
-                    @foreach($r->riwayat_pemeriksaan as $rp)
-                    <li style="list-style-type: none"> {{ $rp->clinical_sign }} </li>
-                    @endforeach
->>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
                 </ul>
             </td>
             <td>
                 <ul>
-<<<<<<< HEAD
                     <li style="list-style-type: none"> {{ $r->diagnosa }} </li>
-=======
-                    @foreach($r->riwayat_pemeriksaan as $rp)
-                    <li style="list-style-type: none"> {{ $rp->diagnosa }} </li>
-                    @endforeach
->>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
                 </ul>
             </td>
             <td>
                 <ul>
-<<<<<<< HEAD
                     <li style="list-style-type: none"> {{ $r->pragnosa }} </li>
-=======
-                    @foreach($r->riwayat_pemeriksaan as $rp)
-                    <li style="list-style-type: none"> {{ $rp->pragnosa }} </li>
-                    @endforeach
->>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
                 </ul>
             </td>
             <td>
@@ -184,13 +154,7 @@
             </td>
             <td>
                 <ul>
-<<<<<<< HEAD
                     <li style="list-style-type: none"> {{ $r->terapi }} </li>
-=======
-                    @foreach($r->riwayat_pemeriksaan as $rp)
-                    <li style="list-style-type: none"> {{ $rp->terapi }} </li>
-                    @endforeach
->>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
                 </ul>
             </td>
 		</tr>

@@ -90,7 +90,6 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD
 <div class="row">
     <div class="col-lg-8">
         <div class="card-box pb-2">
@@ -114,8 +113,6 @@
         </div>
     </div>
 </div>
-=======
->>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
 
 @elseif(Auth::user()->role_id == 'R03')
 <div class="row">
@@ -259,12 +256,8 @@
     </div>
 </div>
 <!-- end row-->
-<<<<<<< HEAD
 <div class="row">
     <div class="col-lg-8">
-=======
-    <div class="col-lg-12">
->>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
         <div class="card-box pb-2">
             <div class="d-flex justify-content-between align-items-center">
             	<h3 class="box-title">Grafik Pendapatan {{ tanggal_indonesia($awal) }} s/d {{ tanggal_indonesia($akhir) }}</h3>
@@ -276,7 +269,6 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
     <div class="col-lg-4">
         <div class="card-box">
             <div class="box-body">
@@ -290,29 +282,10 @@
 
     @endif
 
-=======
-
-    @endif
-
-{{-- <div class="col-lg-12">
-    <div class="card-box pb-2">
-            <div class="d-flex justify-content-between align-items-center">
-                <h5>Jumlah Transaksi Layanan</h5>
-                <div>
-
-                </div>
-            </div>
-            <div class="m-t-50" style="height: 470px">
-                <canvas class="chart" id="bar-chart"></canvas>
-            </div>
-    </div>
-</div> --}}
->>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
 @endsection
 
 @section('js')
 <script type="text/javascript">
-<<<<<<< HEAD
 var pie_basic_element = document.getElementById('pie_basic');
 if (pie_basic_element) {
     var pie_basic = echarts.init(pie_basic_element);
@@ -380,8 +353,6 @@ if (pie_basic_element) {
         }]
     });
 }
-=======
->>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
 $(function () {
   var salesChartCanvas = $("#salesChart").get(0).getContext("2d");
   var salesChart = new Chart(salesChartCanvas);
@@ -411,98 +382,4 @@ $(function () {
   salesChart.Line(salesChartData, salesChartOptions);
 });
 </script>
-<<<<<<< HEAD
 @endsection
-=======
-@endsection
-
-{{--
-@section('js')
-    <script src="{{ asset ('assets/vendors/chartjs/Chart.min.js')}}"></script>
-    <script type="text/javascript">
-
-        var url2 = "{{ url('/home/jenis') }}";
-        var Data = new Array();
-        var Labels = new Array();
-
-        $(document).ready(function(){
-
-            $.get(url2, function(data){
-
-                var operasi = data.operasi
-                var potong = data.potong
-
-                var bar = document.getElementById('bar-chart').getContext('2d');
-                var barchart = new Chart(bar, {
-
-                    type: 'bar',
-                    // The data for our dataset
-                    data: {
-                        labels: [ 'OPERASI', 'POTONG'],
-                        datasets: [{
-                            backgroundColor: 'rgba(31,82,165,0.99)',
-                            borderWidth: 0,
-                            data: [ operasi, potong],
-                        }]
-                    },
-                    // Configuration options go here
-                    options: {
-                        scaleShowVerticalLines: false,
-                        responsive: true,
-                        legend: {
-                            display: false
-                        },
-                        scales: {
-                            xAxes: [{
-                                categoryPercentage: 0.45,
-                                barPercentage: 0.70,
-                                display: true,
-                                scaleLabel: {
-                                    display: false,
-                                    labelString: 'Month'
-                                },
-                                gridLines: false,
-                                ticks: {
-                                    display: true,
-                                    beginAtZero: true,
-                                    fontSize: 13,
-                                    padding: 10
-                                }
-                            }],
-                            yAxes: [{
-                                categoryPercentage: 0.35,
-                                barPercentage: 0.70,
-                                display: true,
-                                scaleLabel: {
-                                    display: false,
-                                    labelString: 'Value'
-                                },
-                                gridLines: {
-                                    drawBorder: false,
-                                    offsetGridLines: false,
-                                    drawTicks: false,
-                                    borderDash: [3, 4],
-                                    zeroLineWidth: 1,
-                                    zeroLineBorderDash: [3, 4]
-                                },
-                                ticks: {
-                                    max: 20,
-                                    stepSize: 4,
-                                    display: true,
-                                    beginAtZero: true,
-                                    fontSize: 13,
-                                    padding: 10
-                                }
-                            }]
-                        }
-                    }
-                });
-            });
-
-        });
-
-
-    </script>
-
-@endsection --}}
->>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02

@@ -15,11 +15,7 @@ class BookingController extends Controller
 {
     public function index(){
         $now = Carbon::now();
-<<<<<<< HEAD
         $waktu_booking = WaktuBooking::where('status_waktu', 1)->where('jam_akhir','>=',$now)->orderBY('jam_awal','ASC')->get();
-=======
-        $waktu_booking = WaktuBooking::where('status_waktu', 1)->where('jam_awal','>=',$now)->orderBY('jam_awal','ASC')->get();
->>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
         $total_wb = WaktuBooking::where('status_waktu', 1)->count();
         //dd($waktu_booking);
 

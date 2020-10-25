@@ -74,11 +74,8 @@
                         render: function(data,type,full,meta) {
                             if (full.status == 'Dibatalkan')
                                 return'<button href="#" type="button" data-id="'+data+'" id="batal" class="btn btn-danger waves-effect waves-light btn-xs" title="Batal" disabled>Batal </button>';
-<<<<<<< HEAD
                             else if (full.status == 'Datang')
                                 return'<button href="#" type="button" data-id="'+data+'" id="batal" class="btn btn-danger waves-effect waves-light btn-xs" title="Batal" disabled>Batal </button>';
-=======
->>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
                             else
                             return'<button href="#" type="button" data-id="'+data+'" id="batal" class="btn btn-danger waves-effect waves-light btn-xs" title="Batal">Batal </button>';
                         }
