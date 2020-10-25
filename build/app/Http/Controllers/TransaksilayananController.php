@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Layanan;
+use App\Penyakit;
+use App\RiwayatPemeriksaan;
 use App\TransaksiLayanan;
-use App\Transaksi;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
 
@@ -12,13 +13,13 @@ use Illuminate\Http\Request;
 class TransaksilayananController extends Controller
 {
     public function index(){
-        $transaksi = Transaksi::orderBY('waktu','DESC')->first();
+        $transaksi = RiwayatPemeriksaan::orderBY('clinical_sign','DESC')->first();
         return view('dokterlayanan', compact('transaksi'));
     }
 
     public function dataLayanan()
     {
-        $layanan = Layanan::all();
+        $layanan = Layanan::with('Penyakit')->get();
         return DataTables::of($layanan)
         ->editColumn('harga', function ($layanan) {
             return 'Rp. '.format_uang($layanan->harga);
@@ -28,9 +29,9 @@ class TransaksilayananController extends Controller
 
     public function dataKeranjang()
     {
-        $transaksi = Transaksi::orderBY('waktu','DESC')->first();
+        $transaksi = RiwayatPemeriksaan::orderBY('clinical_sign','DESC')->first();
         $layananKeranjang = TransaksiLayanan::with('layanan')
-        ->where('kode_transaksi',$transaksi->kode_transaksi)->get();
+        ->where('kode_transaksi',$transaksi->transaksi_pemeriksaan_id)->get();
 
         return DataTables::of($layananKeranjang)->toJson();
     }
@@ -49,7 +50,7 @@ class TransaksilayananController extends Controller
     }
 
     public function update(Request $request){
-        $transaksilayanan = Transaksi::where('kode_transaksi',$request->kodetransaksi)->first();
+        $transaksilayanan = RiwayatPemeriksaan::where('transaksi_pemeriksaan_id',$request->kodetransaksi)->first();
         $transaksilayanan->total_harga = $request->total;
         $transaksilayanan->update();
 

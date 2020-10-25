@@ -16,7 +16,7 @@ class TransaksiLainnya extends Model
 
     public $timestamps = false;
 
-    public function transaksi() {
-        return $this->belongsTo('App\Transaksi', 'kode_transaksi', 'kode_transaksi');
+    public function riwayat_pemeriksaan() {
+        return $this->belongsTo('App\RiwayatPemeriksaan', 'kode_transaksi', 'transaksi_pemeriksaan_id');
     }
 }

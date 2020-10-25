@@ -258,11 +258,11 @@
                 "ajax": "{{ url('/transaksilainnya/data') }}",
                 "order": [[ 2, "desc" ]],
                 "columns": [
-                    { "data": "kode_transaksi",
+                    { "data": "transaksi_pemeriksaan_id",
                         sClass: 'text-center' },
                     { "data": "hewan.nama_hewan",
                         sClass: 'text-center'},
-                    { "data": "waktu",
+                    { "data": "clinical_sign",
                         sClass: 'text-center'},
                     { "data": "layanan",
                         sClass: 'text-center'},
@@ -323,7 +323,7 @@
             document.getElementById('div_kodelainnya').style.display = 'none';
             //document.getElementById('div_kodepenyakit').style.display = 'block';
             $('#kode_lainnya').val(idmodal).change();
-            $('#kode_transaksi').val(data.kode_transaksi).change();
+            $('#kode_transaksi').val(data.transaksi_pemeriksaan_id).change();
             $('#formtransaksilainnya').attr('action', '{{ url('transaksilainnya/create') }}');
         });
 
@@ -369,10 +369,10 @@
         $(document).on('click', '#detail', function() {
             var data = $('#ttransaksilainnya').DataTable().row($(this).parents('tr')).data();
             $('#mdtransaksilainnya').modal('show');
-            $('#dkodetransaksi').text(data.kode_transaksi);
+            $('#dkodetransaksi').text(data.transaksi_pemeriksaan_id);
             $('#dnamadokter').text(data.users.nama);
             $('#dnamahewan').text(data.hewan.nama_hewan);
-            $('#dwaktu').text(data.waktu);
+            $('#dwaktu').text(data.clinical_sign);
             $('#dtotal').text(data.total_harga);
         });
 
@@ -425,11 +425,11 @@
                 "ajax": "{{ url('/transaksilainnya/data') }}",
                 "order": [[ 2, "desc" ]],
                 "columns": [
-                    { "data": "kode_transaksi",
+                    { "data": "transaksi_pemeriksaan_id",
                         sClass: 'text-center' },
                     { "data": "hewan.nama_hewan",
                         sClass: 'text-center'},
-                    { "data": "waktu",
+                    { "data": "clinical_sign",
                         sClass: 'text-center'},
                     { "data": "layanan",
                         sClass: 'text-center'},
@@ -530,7 +530,7 @@
 
         $(document).on('click', '#cetak', function() {
             var data = $('#ttransaksilainnya').DataTable().row($(this).parents('tr')).data();
-            window.location.href = '{{ url('transaksilainnya/cetak') }}/'+data.kode_transaksi ;
+            window.location.href = '{{ url('transaksilainnya/cetak') }}/'+data.transaksi_pemeriksaan_id ;
         });
 
         $(document).on('click', '#delete', function() {

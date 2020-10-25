@@ -61,9 +61,13 @@
                         <label for="jenis">Jenis Obat</label>
                         <select class="form-control" id="jenis" name="jenis">
                             <option value="">Pilih Jenis Obat</option>
-                            <option value="Tablet">Tablet</option>
-                            <option value="Kapsul">Kapsul</option>
-                            <option value="Sirup">Sirup</option>
+                            <option value="Vaksin">Vaksin</option>
+                            <option value="Antibiotik">Antibiotik</option>
+                            <option value="Antiparasit">Antiparasit</option>
+                            <option value="Vitamin & Mineral">Vitamin & Mineral</option>
+                            <option value="Hormon">Hormon</option>
+                            <option value="Anastesi">Anastesi</option>
+                            <option value="Lain-lain">Lain-lain</option>
                         </select>
                         <span class="text-danger" id="jenisError"></span>
                     </div>

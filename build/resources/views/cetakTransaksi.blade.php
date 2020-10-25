@@ -76,7 +76,7 @@
      </tr>
      ____________________________________________________________
     <br>
-    <h3>No. {{ $transaksi->kode_transaksi }}</h3>
+    <h3>No. {{ $transaksi->transaksi_pemeriksaan_id }}</h3>
 
     <h3>
         <strong><u>NOTA PEMBAYARAN</u></strong>

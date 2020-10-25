@@ -74,6 +74,8 @@
                         render: function(data,type,full,meta) {
                             if (full.status == 'Dibatalkan')
                                 return'<button href="#" type="button" data-id="'+data+'" id="batal" class="btn btn-danger waves-effect waves-light btn-xs" title="Batal" disabled>Batal </button>';
+                            else if (full.status == 'Datang')
+                                return'<button href="#" type="button" data-id="'+data+'" id="batal" class="btn btn-danger waves-effect waves-light btn-xs" title="Batal" disabled>Batal </button>';
                             else
                             return'<button href="#" type="button" data-id="'+data+'" id="batal" class="btn btn-danger waves-effect waves-light btn-xs" title="Batal">Batal </button>';
                         }

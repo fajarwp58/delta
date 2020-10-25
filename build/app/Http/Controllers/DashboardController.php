@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Booking;
 use App\Hewan;
+use App\JenisHewan;
 use App\Layanan;
 use App\Message;
 use App\User;
-use App\Transaksi;
+use App\RiwayatPemeriksaan;
+use Illuminate\Support\Facades\DB;
 use App\TransaksiLayanan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -27,7 +29,7 @@ class DashboardController extends Controller
       while(strtotime($tanggal) <= strtotime($akhir)){
         $data_tanggal[] = (int)substr($tanggal,8,2);
 
-        $pendapatan = Transaksi::where('waktu', 'LIKE', "$tanggal%")->sum('total_harga');
+        $pendapatan = RiwayatPemeriksaan::where('clinical_sign', 'LIKE', "$tanggal%")->sum('total_harga');
 
         $data_pendapatan[] = (int) $pendapatan;
 
@@ -40,10 +42,28 @@ class DashboardController extends Controller
         $layanan = Layanan::all()->count();
         $totalbookinghariini = Booking::whereDate('tanggal_booking', Carbon::today())->count();
 
-        $totaltransaksihariini = Transaksi::whereDate('waktu', Carbon::today())->sum('total_harga');
+        $totaltransaksihariini = RiwayatPemeriksaan::whereDate('clinical_sign', Carbon::today())->sum('total_harga');
         $totalchat = Message::where('to',Auth::user()->user_id)->where('read',0)->count();
         $hewan_saya = Hewan::where('user_id',Auth::user()->user_id)->count();
         $hewan = Hewan::all()->count();
+
+        $now = Carbon::now()->year;
+        $kucing = DB::table('transaksi_pemeriksaan AS a')
+        ->join('hewan AS b', 'a.kode_hewan', '=', 'b.kode')
+        ->where('b.jenis_hewan_id', '=', 'JH001')
+        ->count();
+        $anjing = DB::table('transaksi_pemeriksaan AS a')
+        ->join('hewan AS b', 'a.kode_hewan', '=', 'b.kode')
+        ->where('b.jenis_hewan_id', '=', 'JH002')
+        ->count();
+        $oranghutan = DB::table('transaksi_pemeriksaan AS a')
+        ->join('hewan AS b', 'a.kode_hewan', '=', 'b.kode')
+        ->where('b.jenis_hewan_id', '=', 'JH003')
+        ->count();
+        $kelinci = DB::table('transaksi_pemeriksaan AS a')
+        ->join('hewan AS b', 'a.kode_hewan', '=', 'b.kode')
+        ->where('b.jenis_hewan_id', '=', 'JH004')
+        ->count();
 
         return view('home',[
             'user'=>$user,
@@ -57,6 +77,11 @@ class DashboardController extends Controller
             'layanan'=>$layanan,
             'hewan_saya'=>$hewan_saya,
             'totalchat'=>$totalchat,
+            'kucing'=>$kucing,
+            'anjing'=>$anjing,
+            'oranghutan'=>$oranghutan,
+            'kelinci'=>$kelinci,
+            'now'=>$now,
         ]);
     }
 
@@ -71,4 +96,5 @@ class DashboardController extends Controller
     //     return $jumlah_jenis;
 
     // }
+
 }

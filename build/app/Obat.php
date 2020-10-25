@@ -16,8 +16,8 @@ class Obat extends Model
 
     public $timestamps = false;
 
-    public function transaksi()
+    public function riwayat_pemeriksaan()
     {
-        return $this->belongsToMany('App\Transaksi','transaksi_obat','kode_obat','kode_transaksi');
+        return $this->belongsToMany('App\RiwayatPemeriksaan','transaksi_obat','kode_obat','kode_transaksi');
     }
 }

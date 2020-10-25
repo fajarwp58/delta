@@ -20,7 +20,7 @@
             <div class="card-body">
                 <form class="form form-horizontal form-layanan" method="post">
                     {{ csrf_field() }}
-                    <h3 class="card-title">NO Transaksi : <b>{{ $transaksi->kode_transaksi }}</b></h3>
+                    <h3 class="card-title">NO Transaksi : <b>{{ $transaksi->transaksi_pemeriksaan_id }}</b></h3>
                       <input type="hidden" name="kode_transaksi" value="{{ $transaksi->kode_transaksi }}">
                       <div class="form-group row mb-3 col-md-12">
                           <label for="kode_layanan" class="col-2 col-form-label">Kode Layanan</label>
@@ -56,7 +56,7 @@
                         <div class="form-group row mb- col-md-12">
                             <label for="total" class="col-8 col-form-label"></label>
                             <div class="col-4">
-                                <input type="text" id="kodetransaksi" name="kodetransaksi" value="{{ $transaksi->kode_transaksi }}" hidden>
+                                <input type="text" id="kodetransaksi" name="kodetransaksi" value="{{ $transaksi->transaksi_pemeriksaan_id }}" hidden>
                                 <input type="text" id="total" name="total" value="" hidden>
                             </div>
                         </div>
@@ -77,13 +77,14 @@
             <div class="modal-body">
                 <form method="post" id="form-addlayanan">
                     {{ csrf_field() }}
-                    <input type="hidden" name="kode_transaksi" value="{{ $transaksi->kode_transaksi }}">
+                    <input type="hidden" name="kode_transaksi" value="{{ $transaksi->transaksi_pemeriksaan_id }}">
                 <table id="tlayanan" class="table table-striped tabel-layanan">
                     <thead style="display: none">
                         <tr>
                             <th></th>
                             <th>Kode Layanan</th>
                             <th>Nama Layanan</th>
+                            <th>Penyakit</th>
                             <th>Harga</th>
                         </tr>
                     </thead>
@@ -128,6 +129,8 @@ $(document).ready(function() {
                         sClass: 'text-center' },
                     { "data": "nama",
                         sClass: 'text-center'},
+                    { "data": "penyakit.nama",
+                        sClass: 'text-center'},
                     { "data": "harga",
                         sClass: 'text-center'}
                 ],
@@ -147,6 +150,10 @@ $(document).ready(function() {
                     {
                         width: "100px",
                         targets: [3]
+                    },
+                    {
+                        width: "100px",
+                        targets: [4]
                     },
                 ],
                 scrollX: true,

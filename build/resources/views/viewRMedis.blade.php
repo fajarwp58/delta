@@ -115,37 +115,27 @@
 		<tr>
 			<td>
                 <ul>
-                    @foreach($r->riwayat_pemeriksaan as $rp)
-                    <li style="list-style-type: none"> {{ $rp->berat_badan }} </li>
-                    @endforeach
+                    <li style="list-style-type: none"> {{ $r->berat_badan }} </li>
                 </ul>
             </td>
 			<td>
                 <ul>
-                    @foreach($r->riwayat_pemeriksaan as $rp)
-                    <li style="list-style-type: none"> {{ $rp->anamnesa }} </li>
-                    @endforeach
+                    <li style="list-style-type: none"> {{ $r->anamnesa }} </li>
                 </ul>
             </td>
 			<td>
                 <ul>
-                    @foreach($r->riwayat_pemeriksaan as $rp)
-                    <li style="list-style-type: none"> {{ $rp->clinical_sign }} </li>
-                    @endforeach
+                    <li style="list-style-type: none"> {{ $r->clinical_sign }} </li>
                 </ul>
             </td>
             <td>
                 <ul>
-                    @foreach($r->riwayat_pemeriksaan as $rp)
-                    <li style="list-style-type: none"> {{ $rp->diagnosa }} </li>
-                    @endforeach
+                    <li style="list-style-type: none"> {{ $r->diagnosa }} </li>
                 </ul>
             </td>
             <td>
                 <ul>
-                    @foreach($r->riwayat_pemeriksaan as $rp)
-                    <li style="list-style-type: none"> {{ $rp->pragnosa }} </li>
-                    @endforeach
+                    <li style="list-style-type: none"> {{ $r->pragnosa }} </li>
                 </ul>
             </td>
             <td>
@@ -164,9 +154,7 @@
             </td>
             <td>
                 <ul>
-                    @foreach($r->riwayat_pemeriksaan as $rp)
-                    <li style="list-style-type: none"> {{ $rp->terapi }} </li>
-                    @endforeach
+                    <li style="list-style-type: none"> {{ $r->terapi }} </li>
                 </ul>
             </td>
 		</tr>

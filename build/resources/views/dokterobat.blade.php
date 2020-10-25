@@ -20,7 +20,7 @@
             <div class="card-body">
                 <form class="form form-horizontal form-obat" method="post">
                     {{ csrf_field() }}
-                    <h3 class="card-title">NO Transaksi : <b>{{ $transaksi->kode_transaksi }}</b></h3>
+                    <h3 class="card-title">NO Transaksi : <b>{{ $transaksi->transaksi_pemeriksaan_id }}</b></h3>
                       <input type="hidden" name="kode_transaksi" value="{{ $transaksi->kode_transaksi }}">
                       <div class="form-group row mb-3 col-md-12">
                           <label for="kode_obat" class="col-2 col-form-label">Kode Obat</label>
@@ -61,7 +61,7 @@
                         <div class="form-group row mb- col-md-12">
                             <label for="total" class="col-8 col-form-label"></label>
                             <div class="col-4">
-                                <input type="text" id="kodetransaksi" name="kodetransaksi" value="{{ $transaksi->kode_transaksi }}" hidden>
+                                <input type="text" id="kodetransaksi" name="kodetransaksi" value="{{ $transaksi->transaksi_pemeriksaan_id }}" hidden>
                                 <input type="text" id="total" name="total" value="" hidden>
                                 <input type="text" id="totallayanan" name="totallayanan" value="{{ $transaksi->total_harga }}" hidden>
                             </div>
@@ -124,7 +124,7 @@
             <div class="modal-body">
                 <form method="post" id="form-addobat">
                     {{ csrf_field() }}
-                    <input type="hidden" name="kode_transaksi" value="{{ $transaksi->kode_transaksi }}">
+                    <input type="hidden" name="kode_transaksi" value="{{ $transaksi->transaksi_pemeriksaan_id }}">
                 <table id="tobat" class="table table-striped tabel-obat">
                     <thead style="display: none">
                         <tr>

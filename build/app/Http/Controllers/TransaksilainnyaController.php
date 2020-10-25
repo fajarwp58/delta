@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Transaksi;
+use App\RiwayatPemeriksaan;
 use App\TransaksiLainnya;
 use App\TransaksiLayanan;
 use App\TransaksiObat;
@@ -41,7 +41,7 @@ class TransaksilainnyaController extends Controller
           $tanggal = $awal;
           $awal = date('Y-m-d', strtotime("+1 day", strtotime($awal)));
 
-          $pendapatan = Transaksi::where('waktu', 'LIKE', "$tanggal%")->sum('total_harga');
+          $pendapatan = RiwayatPemeriksaan::where('clinical_sign', 'LIKE', "$tanggal%")->sum('total_harga');
 
           //$pendapatan = $total_penjualan - $total_pembelian - $total_pengeluaran;
           $total_pendapatan += $pendapatan;
@@ -86,7 +86,7 @@ class TransaksilainnyaController extends Controller
 
     public function data()
     {
-        $transaksi = Transaksi::with(['users','hewan','obat','layanan'])->orderBY('waktu','DESC')->get();
+        $transaksi = RiwayatPemeriksaan::with(['users','hewan','obat','layanan'])->orderBY('clinical_sign','DESC')->get();
         return DataTables::of($transaksi)
         ->editColumn('total_harga', function ($transaksi) {
             return 'Rp. '.format_uang($transaksi->total_harga);
@@ -100,7 +100,7 @@ class TransaksilainnyaController extends Controller
       TransaksiObat::where('kode_transaksi', $id)->delete();
       TransaksiLainnya::where('kode_transaksi', $id)->delete();
       TransaksiLayanan::where('kode_transaksi', $id)->delete();
-      Transaksi::where('kode_transaksi', $id)->delete();
+      RiwayatPemeriksaan::where('transaksi_pemeriksaan_id', $id)->delete();
 
     }
 
@@ -114,7 +114,7 @@ class TransaksilainnyaController extends Controller
 
         $transaksilainnya->save();
 
-        $transaksi = Transaksi::where('kode_transaksi',$request->kode_transaksi)->first();
+        $transaksi = RiwayatPemeriksaan::where('transaksi_pemeriksaan_id',$request->kode_transaksi)->first();
         $transaksi->total_harga = $transaksi->total_harga + $request->harga;
 
         $transaksi->update();
@@ -124,25 +124,25 @@ class TransaksilainnyaController extends Controller
 
     public function cetak($id)
     {
-        $transaksi = Transaksi::with('users','hewan','obat','layanan','transaksi_lainnya')->where('kode_transaksi',$id)->first();
-        $pemilik = DB::table('transaksi')
-        ->join('hewan','hewan.kode','=','transaksi.kode_hewan')
+        $transaksi = RiwayatPemeriksaan::with('users','hewan','obat','layanan')->where('transaksi_pemeriksaan_id',$id)->first();
+        $pemilik = DB::table('transaksi_pemeriksaan')
+        ->join('hewan','hewan.kode','=','transaksi_pemeriksaan.kode_hewan')
         ->join('users','users.user_id','=','hewan.user_id')
-        ->where('kode_transaksi','=',$transaksi->kode_transaksi)
+        ->where('transaksi_pemeriksaan_id','=',$transaksi->transaksi_pemeriksaan_id)
         ->get();
         $layanan = DB::table('transaksi_layanan')
         ->join('layanan','layanan.kode_layanan','=','transaksi_layanan.kode_layanan')
-        ->where('transaksi_layanan.kode_transaksi','=',$transaksi->kode_transaksi)
+        ->where('transaksi_layanan.kode_transaksi','=',$transaksi->transaksi_pemeriksaan_id)
         ->get();
         $obat = DB::table('transaksi_obat')
         ->join('obat','obat.kode_obat','=','transaksi_obat.kode_obat')
-        ->where('transaksi_obat.kode_transaksi','=',$transaksi->kode_transaksi)
+        ->where('transaksi_obat.kode_transaksi','=',$transaksi->transaksi_pemeriksaan_id)
         ->get();
         $lainlain = DB::table('transaksi_lainnya')
-        ->join('transaksi','transaksi.kode_transaksi','=','transaksi_lainnya.kode_transaksi')
-        ->where('transaksi_lainnya.kode_transaksi','=',$transaksi->kode_transaksi)
+        ->join('transaksi_pemeriksaan','transaksi_pemeriksaan.transaksi_pemeriksaan_id','=','transaksi_lainnya.kode_transaksi')
+        ->where('transaksi_lainnya.kode_transaksi','=',$transaksi->transaksi_pemeriksaan_id)
         ->get();
-        $tgltransaksi = Carbon::parse($transaksi->waktu)->format('d/m/Y');
+        $tgltransaksi = Carbon::parse($transaksi->clinical_sign)->format('d/m/Y');
         //dd($pemilik);
 
         return view('cetakTransaksi', compact('transaksi','pemilik','layanan','obat','lainlain','tgltransaksi'));

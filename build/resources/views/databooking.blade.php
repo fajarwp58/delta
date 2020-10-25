@@ -266,7 +266,7 @@
             $('#dbookingid').text(data.booking_id);
             $('#dnama').text(data.nama);
             $('#dnamahewan').text(data.nama_hewan);
-            $('#dwaktubookingid').text(data.jam);
+            $('#dwaktubookingid').text(data.jam_awal);
             $('#dtanggalbooking').text(data.tanggal_booking);
             $('#dstatus').text(data.status);
         });
