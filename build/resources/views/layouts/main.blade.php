@@ -92,10 +92,7 @@
         <!-- Plugins js-->
         <script src="{{ asset('assets/libs/flatpickr/flatpickr.min.js') }}"></script>
         <script src="{{ asset('assets/js/chartjs/Chart.min.js') }}"></script>
-<<<<<<< HEAD
         <script src="{{ asset('assets/js/chartjs/echarts.min.js') }}"></script>
-=======
->>>>>>> 472800579a9eea82fa5da9437a7217f686dc5c02
         <script src="{{ asset('assets/vendors/datepicker/bootstrap-datepicker.js') }}"></script>
         {{-- <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script> --}}
 

@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 24 Jul 2020 pada 16.39
--- Versi server: 10.4.6-MariaDB
--- Versi PHP: 7.3.9
+-- Waktu pembuatan: 25 Okt 2020 pada 15.50
+-- Versi server: 10.4.14-MariaDB
+-- Versi PHP: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -41,7 +40,10 @@ CREATE TABLE `booking` (
 --
 
 INSERT INTO `booking` (`booking_id`, `kode_hewan`, `waktu_booking_id`, `tanggal_booking`, `status`) VALUES
-('BKG-2795Z', 'REG9553846', 'WB-6Y2', '2020-07-17', 2);
+('BKG-579A7', 'REG3527882', 'WB-T16', '2020-10-25', 3),
+('BKG-70C43', 'REG1735808', 'WB-79S', '2020-10-02', 3),
+('BKG-7Z899', 'REG9780652', 'WB-34A', '2020-10-03', 3),
+('BKG-966R3', 'REG3562384', 'WB-T16', '2020-10-24', 3);
 
 -- --------------------------------------------------------
 
@@ -63,9 +65,10 @@ CREATE TABLE `hewan` (
 --
 
 INSERT INTO `hewan` (`kode`, `user_id`, `jenis_hewan_id`, `nama_hewan`, `jenis_kelamin`, `ket`) VALUES
-('REG9432897', 'US-5592K', 'JH001', 'sadas', 2, 'asdd'),
-('REG9553846', 'US-45X73', 'JH001', 'miu', 1, 'persia himalaya'),
-('REG9597541', 'US-45X73', 'JH002', 'adung', 2, 'aaa');
+('REG1735808', 'US-45X73', 'JH001', 'Candice', 2, 'Persia'),
+('REG3527882', 'US-69F97', 'JH003', 'rose', 2, 'mixdom'),
+('REG3562384', 'US-249A6', 'JH002', 'bagong', 1, NULL),
+('REG9780652', 'US-8L867', 'JH001', 'Tity', 2, 'Persia');
 
 -- --------------------------------------------------------
 
@@ -104,49 +107,9 @@ CREATE TABLE `jenis_penyakit` (
 --
 
 INSERT INTO `jenis_penyakit` (`jenis_penyakit_id`, `nama`) VALUES
-('JP01', 'Kulit'),
-('JP02', 'Virus'),
-('JP03', 'Bakteri'),
-('JP04', 'Fungi'),
-('JP05', 'Cacing'),
-('JP06', 'Protozoa'),
-('JP07', 'Artropoda');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `kandang`
---
-
-CREATE TABLE `kandang` (
-  `id` int(11) NOT NULL,
-  `kode_kandang` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data untuk tabel `kandang`
---
-
-INSERT INTO `kandang` (`id`, `kode_kandang`) VALUES
-(4, 'KANDANG-5W0119I'),
-(5, 'KANDANG-2P22P46'),
-(6, 'KANDANG-2P22P46'),
-(7, 'KANDANG-520VI77'),
-(8, 'KANDANG-520VI77');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `kandang_hewan`
---
-
-CREATE TABLE `kandang_hewan` (
-  `id` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `kandang_id` int(11) NOT NULL,
-  `kode_hewan` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tgl_masuk` date NOT NULL,
-  `tgl_keluar` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+('JP001', 'Kulit'),
+('JP002', 'Virus'),
+('JP003', 'Lain-lain');
 
 -- --------------------------------------------------------
 
@@ -166,8 +129,18 @@ CREATE TABLE `layanan` (
 --
 
 INSERT INTO `layanan` (`kode_layanan`, `kode_penyakit`, `nama`, `harga`) VALUES
-('LYN-6Q51', 'PNY-5L34', 'potong', 2000),
-('LYN-9Y61', 'PNY-5L34', 'operasi', 50000);
+('LYN-07N0', 'PNY-42X9', 'Pasang Kateter', 85000),
+('LYN-1B11', 'PNY-42X9', 'CheckUp', 50000),
+('LYN-2M24', 'PNY-7R48', 'Operasi Kastrasi', 235000),
+('LYN-357K', 'PNY-42X9', 'Konsultasi KB', 50000),
+('LYN-742L', 'PNY-K765', 'Vaksinasi', 200000),
+('LYN-91V7', 'PNY-R068', 'Vaksinasi', 180000),
+('LYN-92P8', 'PNY-51D9', 'Operasi O.H', 220000),
+('LYN-96R5', 'PNY-2J90', 'Vaksinasi', 200000),
+('LYN-995N', 'PNY-29F7', 'Vaksinasi', 200000),
+('LYN-E343', 'PNY-6F78', 'Vaksinasi', 200000),
+('LYN-K159', 'PNY-42X9', 'Konsultasi Kebuntingan', 50000),
+('LYN-S505', 'PNY-42X9', 'Pemberian Multivitamin', 35000);
 
 -- --------------------------------------------------------
 
@@ -231,6 +204,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE `obat` (
   `kode_obat` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nama` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jenis` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jumlah` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `harga` bigint(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -238,9 +213,38 @@ CREATE TABLE `obat` (
 -- Dumping data untuk tabel `obat`
 --
 
-INSERT INTO `obat` (`kode_obat`, `nama`, `harga`) VALUES
-('OBT-31H3', 'amoxilin', 20000),
-('OBT-90A9', 'bodrex', 15000);
+INSERT INTO `obat` (`kode_obat`, `nama`, `jenis`, `jumlah`, `harga`) VALUES
+('OBT-046H', 'Biosalamin', 'Vitamin & Mineral', '50ml', 54000),
+('OBT-04E0', 'Ivomec Super', 'Antiparasit', '50ml', 435000),
+('OBT-0S89', 'Potahormon', 'Hormon', '20ml', 150000),
+('OBT-1M68', 'Rabisin', 'Vaksin', '10 dosis', 89000),
+('OBT-1W21', 'Roxine inj', 'Antibiotik', '50ml', 36500),
+('OBT-21E0', 'Colibact inj', 'Antibiotik', '100ml', 140000),
+('OBT-21E9', 'Penstrep 4:0,5', 'Antibiotik', '4,5gr', 135000),
+('OBT-2H19', 'Calcidex Plus', 'Vitamin & Mineral', '100ml', 61500),
+('OBT-2K73', 'Biocan R', 'Vaksin', '10 dosis', 34500),
+('OBT-31O2', 'Dovenix', 'Antiparasit', '50ml', 250000),
+('OBT-369N', 'VET-OXY SB', 'Antibiotik', '50ml', 40000),
+('OBT-44P0', 'Vitamin B 12', 'Vitamin & Mineral', '100ml', 115000),
+('OBT-4S61', 'Oxytocin', 'Hormon', '50ml', 74500),
+('OBT-517B', 'VET-OXY SB', 'Antibiotik', '100ml', 80000),
+('OBT-539S', 'Vitamin B 6', 'Vitamin & Mineral', '50ml', 63000),
+('OBT-582T', 'Introvit-E-Selen', 'Vitamin & Mineral', '100ml', 77000),
+('OBT-58K6', 'Testohormon', 'Hormon', '30ml', 149000),
+('OBT-59B6', 'Primadex', 'Lain-lain', '10ml', 17500),
+('OBT-65R3', 'Injectamin', 'Vitamin & Mineral', '50ml', 63000),
+('OBT-79Q2', 'XYLA', 'Anastesi', '50ml', 350000),
+('OBT-7V16', 'Provestin', 'Hormon', '50ml', 95000),
+('OBT-849C', 'Genta-100', 'Antibiotik', '100ml', 118000),
+('OBT-93P3', 'Aquaprim', 'Antibiotik', '100ml', 37500),
+('OBT-957Y', 'B-Sanplex', 'Vitamin & Mineral', '50ml', 23000),
+('OBT-A684', 'Ovalumon', 'Hormon', '20ml', 85000),
+('OBT-E098', 'Hematopan B 12', 'Vitamin & Mineral', '50ml', 137500),
+('OBT-I546', 'Ketamine 10% Inj', 'Anastesi', '50ml', 40000),
+('OBT-K783', 'Folgen Ascarex', 'Antiparasit', '1dosis', 37000),
+('OBT-M956', 'Defensor 3', 'Vaksin', '1 dosis', 140000),
+('OBT-R744', 'Caprivac AI-K', 'Vaksin', '100 dosis', 256000),
+('OBT-W409', 'FEL-O-CELL 3', 'Vaksin', '1 dosis', 175000);
 
 -- --------------------------------------------------------
 
@@ -259,34 +263,29 @@ CREATE TABLE `penyakit` (
 --
 
 INSERT INTO `penyakit` (`kode_penyakit`, `jenis_penyakit_id`, `nama`) VALUES
-('PNY-5L34', 'JP01', 'jamur');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `riwayat_pemeriksaan`
---
-
-CREATE TABLE `riwayat_pemeriksaan` (
-  `riwayat_pemeriksaan_id` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `no_reg` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `suhu` float NOT NULL,
-  `berat_badan` float NOT NULL,
-  `anamnesa` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `clinical_sign` date NOT NULL,
-  `diagnosa` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pragnosa` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `terapi` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data untuk tabel `riwayat_pemeriksaan`
---
-
-INSERT INTO `riwayat_pemeriksaan` (`riwayat_pemeriksaan_id`, `no_reg`, `suhu`, `berat_badan`, `anamnesa`, `clinical_sign`, `diagnosa`, `pragnosa`, `terapi`) VALUES
-('RM-3X0032H', 'REG9553846', 17, 34, 'asdsa', '2020-07-21', 'sdadsa', 'adsdsa', 'dsadsa'),
-('RM-694NW59', 'REG9597541', 12, 34, 'asds', '2020-07-17', 'aaaaa', 'addas', NULL),
-('RM-L6I1230', 'REG9553846', 11, 8, 'flu', '2020-06-24', 'demam', 'sakit biasa', NULL);
+('PNY-0G69', 'JP003', 'Hepatitis'),
+('PNY-1J25', 'JP003', 'Konjungtur'),
+('PNY-20O8', 'JP001', 'Dermatitis'),
+('PNY-24Z8', 'JP003', 'Abses'),
+('PNY-29F7', 'JP002', 'Rhinotracheitis'),
+('PNY-2J90', 'JP002', 'Panleukopenia'),
+('PNY-42X9', 'JP003', 'lainnya'),
+('PNY-4S03', 'JP003', 'Pneumonia'),
+('PNY-51D9', 'JP003', 'Steril Kucing Betina'),
+('PNY-65T1', 'JP003', 'Cat Flu'),
+('PNY-6F78', 'JP002', 'Calicivirus'),
+('PNY-7R48', 'JP003', 'Steril Kucing Jantan'),
+('PNY-933Q', 'JP003', 'Helminthiasis'),
+('PNY-9F84', 'JP003', 'Enteritis'),
+('PNY-9L85', 'JP001', 'Alergi Pakan'),
+('PNY-A463', 'JP003', 'Ear Mites / Otitis'),
+('PNY-E745', 'JP003', 'Skabies'),
+('PNY-G012', 'JP003', 'Bronchitis'),
+('PNY-H529', 'JP001', 'Ringworm'),
+('PNY-J587', 'JP001', 'Jamur'),
+('PNY-K765', 'JP002', 'Distemper'),
+('PNY-R068', 'JP002', 'Leptospirosis'),
+('PNY-U313', 'JP003', 'Ascites');
 
 -- --------------------------------------------------------
 
@@ -311,29 +310,6 @@ INSERT INTO `role` (`role_id`, `nama`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `transaksi`
---
-
-CREATE TABLE `transaksi` (
-  `kode_transaksi` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dokter_id` varchar(17) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `kode_hewan` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `waktu` timestamp NULL DEFAULT NULL,
-  `total_harga` bigint(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data untuk tabel `transaksi`
---
-
-INSERT INTO `transaksi` (`kode_transaksi`, `dokter_id`, `kode_hewan`, `waktu`, `total_harga`) VALUES
-('INV-14798', 'US-533A7', 'REG9597541', '2020-07-17 05:31:23', 50000),
-('INV-17294', 'US-533A7', 'REG9553846', '2020-06-24 07:28:52', 67000),
-('INV-92407', 'US-533A7', 'REG9553846', '2020-07-21 09:29:34', 0);
-
--- --------------------------------------------------------
-
---
 -- Struktur dari tabel `transaksi_lainnya`
 --
 
@@ -343,6 +319,13 @@ CREATE TABLE `transaksi_lainnya` (
   `nama` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `harga` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `transaksi_lainnya`
+--
+
+INSERT INTO `transaksi_lainnya` (`kode_lainnya`, `kode_transaksi`, `nama`, `harga`) VALUES
+('TLAIN-56T82', 'INV-2N195P8', 'kateter', 30000);
 
 -- --------------------------------------------------------
 
@@ -360,9 +343,11 @@ CREATE TABLE `transaksi_layanan` (
 --
 
 INSERT INTO `transaksi_layanan` (`kode_transaksi`, `kode_layanan`) VALUES
-('INV-17294', 'LYN-6Q51'),
-('INV-17294', 'LYN-9Y61'),
-('INV-14798', 'LYN-9Y61');
+('INV-E9W9353', 'LYN-1B11'),
+('INV-1S57M14', 'LYN-1B11'),
+('INV-2N195P8', 'LYN-1B11'),
+('INV-Z4721I5', 'LYN-1B11'),
+('INV-Z4721I5', 'LYN-742L');
 
 -- --------------------------------------------------------
 
@@ -372,15 +357,51 @@ INSERT INTO `transaksi_layanan` (`kode_transaksi`, `kode_layanan`) VALUES
 
 CREATE TABLE `transaksi_obat` (
   `kode_transaksi` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `kode_obat` varchar(12) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `kode_obat` varchar(12) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cara_pakai` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data untuk tabel `transaksi_obat`
 --
 
-INSERT INTO `transaksi_obat` (`kode_transaksi`, `kode_obat`) VALUES
-('INV-17294', 'OBT-90A9');
+INSERT INTO `transaksi_obat` (`kode_transaksi`, `kode_obat`, `cara_pakai`) VALUES
+('INV-E9W9353', 'OBT-93P3', 'suntik'),
+('INV-E9W9353', 'OBT-2K73', 'suntik'),
+('INV-1S57M14', 'OBT-K783', '1x minum'),
+('INV-1S57M14', 'OBT-59B6', 'suntik'),
+('INV-2N195P8', 'OBT-21E9', '1x minum'),
+('INV-Z4721I5', 'OBT-04E0', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `transaksi_pemeriksaan`
+--
+
+CREATE TABLE `transaksi_pemeriksaan` (
+  `transaksi_pemeriksaan_id` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dokter_id` varchar(17) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kode_hewan` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `suhu` float NOT NULL,
+  `berat_badan` float NOT NULL,
+  `anamnesa` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `clinical_sign` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `diagnosa` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pragnosa` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `terapi` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `total_harga` bigint(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `transaksi_pemeriksaan`
+--
+
+INSERT INTO `transaksi_pemeriksaan` (`transaksi_pemeriksaan_id`, `dokter_id`, `kode_hewan`, `suhu`, `berat_badan`, `anamnesa`, `clinical_sign`, `diagnosa`, `pragnosa`, `terapi`, `total_harga`) VALUES
+('INV-1S57M14', 'US-533A7', 'REG9780652', 40, 0.8, 'Diare, nafsu makan berkurang,alopecia pada telinga, lesu', '2020-10-03 07:09:08', 'Enteritis', '1 obat cacing folgen dan primadex 10 ml', NULL, 104500),
+('INV-2N195P8', 'US-533A7', 'REG3527882', 30, 1.2, 'bersin bersin', '2020-10-25 14:35:07', 'flu', 'obat flu', 'terapi pernafasan', 215000),
+('INV-E9W9353', 'US-533A7', 'REG1735808', 38.6, 2.9, '1 minggu mencret, ada jamur sering garuk bulu rontok, dan 2 hari muntah', '2020-10-02 03:15:03', 'Endoparasit + Enteriris', 'Inj Aquaprim, Inj Biocan', NULL, 122000),
+('INV-Z4721I5', 'US-533A7', 'REG3562384', 29, 4.6, 'lesu, tidak bergerak', '2020-10-24 14:46:46', 'virus', 'suntik imun', NULL, 685000);
 
 -- --------------------------------------------------------
 
@@ -394,7 +415,6 @@ CREATE TABLE `users` (
   `nama` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(13) COLLATE utf8mb4_unicode_ci NOT NULL,
   `alamat` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `username` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -403,13 +423,13 @@ CREATE TABLE `users` (
 -- Dumping data untuk tabel `users`
 --
 
-INSERT INTO `users` (`user_id`, `role_id`, `nama`, `phone`, `alamat`, `email`, `username`, `password`) VALUES
-('US-43L93', 'R01', 'fajar wp', '082289407515', 'tunggul hitam', '', 'admin', '$2y$10$glvkxczmgB0ygVbvLFkjO..Gm1b9YfvfdjnKUIniaeFx46IVMCJPe'),
-('US-45X73', 'R03', 'ijayahnyoo', '087712345613', 'ulu gadut', 'fajarwp58@gmail.com', 'pasien', '$2y$10$BcOY9X3F.Ro4HCCYRZtRT.JRpk2sHjZJkl0i5b/aDsNdAZuhdXWpe'),
-('US-533A7', 'R02', 'dipa', '082289407515', 'sdsddsds', '', 'dokter', '$2y$10$C1pMwDWL/L5DPq2it.dnG.PEGPYIYN0QCDiPLXYbXn5azHRGzc/Oe'),
-('US-5592K', 'R03', 'pasien2', '83874623', 'sdhgshd', NULL, 'pasien2', '$2y$10$p/MPR8DRLaQj2ESKhOALOOGOoL2Om0.0iTqIWy0Jw9dcLwLb0GIQy'),
-('US-82M95', 'R03', 'fajar wirya putra', '082289407515', 'asddsadsa', '', 'fajarwp588', '$2y$10$7XJIUEelsIgRABriKNw3jee05eeLi3MZsJsQ0S3q7jeQgGH0rcnNa'),
-('US-J1792', 'R02', 'asaa', '087712345613', 'sdsss', '', 'ijay123', '$2y$10$fBpEg/94OsGx91Q1QVYcOeL.SvtvpuFEZ22vTN7djA68/r7hZWhgC');
+INSERT INTO `users` (`user_id`, `role_id`, `nama`, `phone`, `alamat`, `username`, `password`) VALUES
+('US-249A6', 'R03', 'sri sardina', '087795173363', 'parupuk tabing no 58a', 'sri58', '$2y$10$.MHkAyXm9EdSeMOMjdRqD.8TpjmfVzFW8Q/uuyKAk3RoQhaTttVc2'),
+('US-43L93', 'R01', 'Kurnia Fitri Yanti', '081334152778', 'jl. patenggangan no 128 air tawar', 'admin', '$2y$10$glvkxczmgB0ygVbvLFkjO..Gm1b9YfvfdjnKUIniaeFx46IVMCJPe'),
+('US-45X73', 'R03', 'Rosliani', '087712345613', 'jl. puruih kabun rt01/011', 'pasien', '$2y$10$BcOY9X3F.Ro4HCCYRZtRT.JRpk2sHjZJkl0i5b/aDsNdAZuhdXWpe'),
+('US-533A7', 'R02', 'Drh. Rara', '085263600516', 'jl. veteran no.34', 'dokter', '$2y$10$C1pMwDWL/L5DPq2it.dnG.PEGPYIYN0QCDiPLXYbXn5azHRGzc/Oe'),
+('US-69F97', 'R03', 'fajrul hadi', '082289407515', 'bungo mas tahap 1', 'fajrul58', '$2y$10$k6qsw.Yxw0VgwomCO0Ud7.ROVt3erfctYITNuFmxgYHXxueBMLasS'),
+('US-8L867', 'R03', 'Rhisma', '083898517711', 'Jl. Taman Siswa no.A11', 'pasien2', '$2y$10$rc7WzbPyywClM13FSnL0TeTvV2D.3M1QpMWjFFtlBHsSgtZ56vHJu');
 
 -- --------------------------------------------------------
 
@@ -419,7 +439,8 @@ INSERT INTO `users` (`user_id`, `role_id`, `nama`, `phone`, `alamat`, `email`, `
 
 CREATE TABLE `waktu_booking` (
   `waktu_booking_id` varchar(8) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `jam` time NOT NULL,
+  `jam_awal` time NOT NULL,
+  `jam_akhir` time NOT NULL,
   `status_waktu` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -427,14 +448,16 @@ CREATE TABLE `waktu_booking` (
 -- Dumping data untuk tabel `waktu_booking`
 --
 
-INSERT INTO `waktu_booking` (`waktu_booking_id`, `jam`, `status_waktu`) VALUES
-('WB-18B', '18:00:00', 1),
-('WB-34M', '09:00:00', 1),
-('WB-3B7', '10:30:00', 1),
-('WB-62A', '10:00:00', 2),
-('WB-6Y2', '08:00:00', 1),
-('WB-J23', '11:30:00', 1),
-('WB-Z20', '11:00:00', 1);
+INSERT INTO `waktu_booking` (`waktu_booking_id`, `jam_awal`, `jam_akhir`, `status_waktu`) VALUES
+('WB-34A', '14:00:00', '15:00:00', 1),
+('WB-3Z3', '09:00:00', '10:00:00', 1),
+('WB-41M', '20:00:00', '21:00:00', 1),
+('WB-44I', '19:00:00', '20:00:00', 1),
+('WB-79S', '10:00:00', '11:00:00', 1),
+('WB-R39', '15:00:00', '16:00:00', 1),
+('WB-T16', '21:00:00', '22:00:00', 1),
+('WB-T81', '16:00:00', '17:00:00', 1),
+('WB-V92', '11:00:00', '12:00:00', 1);
 
 --
 -- Indexes for dumped tables
@@ -467,20 +490,6 @@ ALTER TABLE `jenis_hewan`
 --
 ALTER TABLE `jenis_penyakit`
   ADD PRIMARY KEY (`jenis_penyakit_id`);
-
---
--- Indeks untuk tabel `kandang`
---
-ALTER TABLE `kandang`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `kandang_hewan`
---
-ALTER TABLE `kandang_hewan`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `kode_hewan` (`kode_hewan`),
-  ADD KEY `kandang_id` (`kandang_id`);
 
 --
 -- Indeks untuk tabel `layanan`
@@ -517,25 +526,10 @@ ALTER TABLE `penyakit`
   ADD KEY `jenis_penyakit_id` (`jenis_penyakit_id`);
 
 --
--- Indeks untuk tabel `riwayat_pemeriksaan`
---
-ALTER TABLE `riwayat_pemeriksaan`
-  ADD PRIMARY KEY (`riwayat_pemeriksaan_id`),
-  ADD KEY `no_reg` (`no_reg`);
-
---
 -- Indeks untuk tabel `role`
 --
 ALTER TABLE `role`
   ADD PRIMARY KEY (`role_id`);
-
---
--- Indeks untuk tabel `transaksi`
---
-ALTER TABLE `transaksi`
-  ADD PRIMARY KEY (`kode_transaksi`),
-  ADD KEY `dokter_id` (`dokter_id`),
-  ADD KEY `kode_hewan` (`kode_hewan`);
 
 --
 -- Indeks untuk tabel `transaksi_lainnya`
@@ -559,6 +553,14 @@ ALTER TABLE `transaksi_obat`
   ADD KEY `kode_transaksi` (`kode_transaksi`);
 
 --
+-- Indeks untuk tabel `transaksi_pemeriksaan`
+--
+ALTER TABLE `transaksi_pemeriksaan`
+  ADD PRIMARY KEY (`transaksi_pemeriksaan_id`),
+  ADD KEY `no_reg` (`kode_hewan`),
+  ADD KEY `dokter_id` (`dokter_id`);
+
+--
 -- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
@@ -577,16 +579,10 @@ ALTER TABLE `waktu_booking`
 --
 
 --
--- AUTO_INCREMENT untuk tabel `kandang`
---
-ALTER TABLE `kandang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
 -- AUTO_INCREMENT untuk tabel `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT untuk tabel `migrations`
@@ -613,13 +609,6 @@ ALTER TABLE `hewan`
   ADD CONSTRAINT `constraint_jenis_hewan` FOREIGN KEY (`jenis_hewan_id`) REFERENCES `jenis_hewan` (`jenis_hewan_id`);
 
 --
--- Ketidakleluasaan untuk tabel `kandang_hewan`
---
-ALTER TABLE `kandang_hewan`
-  ADD CONSTRAINT `constraint_hewan_kandang` FOREIGN KEY (`kode_hewan`) REFERENCES `hewan` (`kode`),
-  ADD CONSTRAINT `constraint_kandang` FOREIGN KEY (`kandang_id`) REFERENCES `kandang` (`id`);
-
---
 -- Ketidakleluasaan untuk tabel `layanan`
 --
 ALTER TABLE `layanan`
@@ -639,37 +628,31 @@ ALTER TABLE `penyakit`
   ADD CONSTRAINT `constraint_penyakit_jenis` FOREIGN KEY (`jenis_penyakit_id`) REFERENCES `jenis_penyakit` (`jenis_penyakit_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Ketidakleluasaan untuk tabel `riwayat_pemeriksaan`
---
-ALTER TABLE `riwayat_pemeriksaan`
-  ADD CONSTRAINT `constrain_noreg` FOREIGN KEY (`no_reg`) REFERENCES `hewan` (`kode`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Ketidakleluasaan untuk tabel `transaksi`
---
-ALTER TABLE `transaksi`
-  ADD CONSTRAINT `constraint_kodehewan` FOREIGN KEY (`kode_hewan`) REFERENCES `hewan` (`kode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `constraint_transaksi_dokter` FOREIGN KEY (`dokter_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Ketidakleluasaan untuk tabel `transaksi_lainnya`
 --
 ALTER TABLE `transaksi_lainnya`
-  ADD CONSTRAINT `constraint_lainnya_transaksi` FOREIGN KEY (`kode_transaksi`) REFERENCES `transaksi` (`kode_transaksi`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `constraint_transaksi` FOREIGN KEY (`kode_transaksi`) REFERENCES `transaksi_pemeriksaan` (`transaksi_pemeriksaan_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `transaksi_layanan`
 --
 ALTER TABLE `transaksi_layanan`
-  ADD CONSTRAINT `constraint_layanan` FOREIGN KEY (`kode_layanan`) REFERENCES `layanan` (`kode_layanan`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `constraint_layanan_transaksi` FOREIGN KEY (`kode_transaksi`) REFERENCES `transaksi` (`kode_transaksi`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `constrain_transaksi_layanan` FOREIGN KEY (`kode_transaksi`) REFERENCES `transaksi_pemeriksaan` (`transaksi_pemeriksaan_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `constraint_layanan` FOREIGN KEY (`kode_layanan`) REFERENCES `layanan` (`kode_layanan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `transaksi_obat`
 --
 ALTER TABLE `transaksi_obat`
-  ADD CONSTRAINT `constraint_obat_transaksi` FOREIGN KEY (`kode_transaksi`) REFERENCES `transaksi` (`kode_transaksi`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `constrain_transaksi_obat` FOREIGN KEY (`kode_transaksi`) REFERENCES `transaksi_pemeriksaan` (`transaksi_pemeriksaan_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `constraint_transaksi_obat` FOREIGN KEY (`kode_obat`) REFERENCES `obat` (`kode_obat`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `transaksi_pemeriksaan`
+--
+ALTER TABLE `transaksi_pemeriksaan`
+  ADD CONSTRAINT `constrain_dokter` FOREIGN KEY (`dokter_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `constrain_noreg` FOREIGN KEY (`kode_hewan`) REFERENCES `hewan` (`kode`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Ketidakleluasaan untuk tabel `users`

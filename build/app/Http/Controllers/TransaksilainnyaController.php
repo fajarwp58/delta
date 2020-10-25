@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Hewan;
 use App\RiwayatPemeriksaan;
 use App\TransaksiLainnya;
 use App\TransaksiLayanan;
@@ -10,6 +11,7 @@ use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 
 class TransaksilainnyaController extends Controller
@@ -87,6 +89,21 @@ class TransaksilainnyaController extends Controller
     public function data()
     {
         $transaksi = RiwayatPemeriksaan::with(['users','hewan','obat','layanan'])->orderBY('clinical_sign','DESC')->get();
+        return DataTables::of($transaksi)
+        ->editColumn('total_harga', function ($transaksi) {
+            return 'Rp. '.format_uang($transaksi->total_harga);
+        })
+        ->toJson();
+    }
+
+    public function dataHistory()
+    {
+        $transaksi = DB::table('transaksi_pemeriksaan')
+        ->join('hewan','hewan.kode','=','transaksi_pemeriksaan.kode_hewan')
+        ->join('users','users.user_id','=','hewan.user_id')
+        ->where('users.user_id','=',Auth()->user()->user_id)
+        ->orderBy('clinical_sign','desc')
+        ->get();
         return DataTables::of($transaksi)
         ->editColumn('total_harga', function ($transaksi) {
             return 'Rp. '.format_uang($transaksi->total_harga);

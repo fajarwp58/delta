@@ -19,7 +19,6 @@
                         <th>No Invoice</th>
                         <th>Nama Hewan</th>
                         <th>Tgl / Jam</th>
-                        <th>Nama Layanan</th>
                         <th>Total Bayar</th>
                         <th>Aksi</th>
                     </tr>
@@ -50,16 +49,14 @@
         });
         function loadData() {
             $('#ttransaksilainnya').dataTable({
-                "ajax": "{{ url('/transaksilainnya/data') }}",
+                "ajax": "{{ url('/transaksilainnya/dataHistory') }}",
                 "order": [[ 2, "desc" ]],
                 "columns": [
                     { "data": "transaksi_pemeriksaan_id",
                         sClass: 'text-center' },
-                    { "data": "hewan.nama_hewan",
+                    { "data": "nama_hewan",
                         sClass: 'text-center'},
                     { "data": "clinical_sign",
-                        sClass: 'text-center'},
-                    { "data": "layanan",
                         sClass: 'text-center'},
                     { "data": "total_harga",
                         sClass: 'text-center'},
@@ -85,22 +82,12 @@
                         targets: [2]
                     },
                     {
-                        width: "125px", targets: [3],
-                        render: function (data, type, full, meta) {
-                            var hasil = '';
-                            data.forEach((item, id)=>{
-                                hasil += '- '+item.nama+'<br>';
-                            });
-                            return hasil;
-                        }
-                    },
-                    {
                         width: "70px",
-                        targets: [4]
+                        targets: [3]
                     },
                     {
                         width: "150px",
-                        targets: [5]
+                        targets: [4]
                     },
                 ],
                 scrollX: true,

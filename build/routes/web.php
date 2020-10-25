@@ -185,6 +185,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['Admin','Dokter','P
         Route::get('download/laporan/data/{awal}/{akhir}', 'TransaksilainnyaController@listData')->name('laporan.data');
         Route::get('download/laporan/pdf/{awal}/{akhir}', 'TransaksilainnyaController@exportPDF');
         Route::get('data', 'TransaksilainnyaController@data');
+        Route::get('dataHistory', 'TransaksilainnyaController@dataHistory');
         Route::get('create', 'TransaksilainnyaController@create');
         Route::post('update/{id}', 'TransaksilainnyaController@update');
         Route::get('delete/{id}', 'TransaksilainnyaController@delete');
