@@ -329,7 +329,7 @@ if (pie_basic_element) {
             orient: 'horizontal',
             bottom: '0%',
             left: 'center',                   
-            data: ['Kucing', 'Anjing','Orang Hutan'],
+            data: ['Kucing', 'Anjing','Orang Hutan','Kelinci'],
             itemHeight: 8,
             itemWidth: 8
         },
@@ -348,7 +348,8 @@ if (pie_basic_element) {
             data: [
                 {value: {{$kucing}}, name: 'Kucing'},
                 {value: {{$anjing}}, name: 'Anjing'},
-                {value: {{$oranghutan}}, name: 'Orang Hutan'}
+                {value: {{$oranghutan}}, name: 'Orang Hutan'},
+                {value: {{$kelinci}}, name: 'Kelinci'}
             ]
         }]
     });

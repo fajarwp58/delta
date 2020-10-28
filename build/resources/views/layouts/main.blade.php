@@ -12,6 +12,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="https://coderthemes.com/ubold/layouts/assets/images/favicon.ico">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
         <!-- Plugins css -->
         <link href="{{ asset('assets/libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
@@ -107,6 +108,10 @@
         {{-- <script src="{{ asset('assets/js/pusher.min.js') }}"></script> --}}
 
         {{-- <script src="http://{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script> --}}
+
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://momentjs.com/downloads/moment.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
         @yield('js')
     </body>

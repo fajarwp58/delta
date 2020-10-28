@@ -43,7 +43,7 @@
 							<label>Tanggal / Waktu Booking</label>
 							<div class="row">
 								<div class="col-sm-6">
-									<input type="date" class="form-control text-center" name="tanggal_booking" value="{{ $now }}" />
+									<input type="text" class="form-control text-center" id="datepicker" name="tanggal_booking" value="{{ $now }}" />
 								</div>
 								<div class="col-sm-3">
                                     <input class="form-control text-center" name="waktu_awal" value="{{ date('G:i', strtotime( $waktu_booking->jam_awal )) }}" hidden />
@@ -93,6 +93,9 @@
         //     });
 
         // }
+        $( "#datepicker" ).datepicker({                  
+            minDate: moment().add('d', 0).toDate(),
+        });
 
     });
 
