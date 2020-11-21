@@ -95,21 +95,12 @@
         <script src="{{ asset('assets/js/chartjs/Chart.min.js') }}"></script>
         <script src="{{ asset('assets/js/chartjs/echarts.min.js') }}"></script>
         <script src="{{ asset('assets/vendors/datepicker/bootstrap-datepicker.js') }}"></script>
-        {{-- <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script> --}}
 
         <script src="{{ asset('assets/libs/selectize/js/standalone/selectize.min.js') }}"></script>
-
-        {{-- <!-- Dashboar 1 init js-->
-        <script src="{{ asset('assets/js/pages/dashboard-1.init.js') }}"></script> --}}
 
         <!-- App js-->
         <script src="{{ asset('assets/js/app.min.js') }}"></script>
 
-        {{-- <script src="{{ asset('assets/js/pusher.min.js') }}"></script> --}}
-
-        {{-- <script src="http://{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script> --}}
-
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://momentjs.com/downloads/moment.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 

@@ -93,7 +93,8 @@
         //     });
 
         // }
-        $( "#datepicker" ).datepicker({                  
+        $( "#datepicker" ).datepicker({  
+            dateFormat: 'yy-mm-dd',                
             minDate: moment().add('d', 0).toDate(),
         });
 
